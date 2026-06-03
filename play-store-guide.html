@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta content="false" name="linkedup-api-proxy"/>
+<meta content="" name="linkedup-api-url"/>
+<meta content="support@linkedup.app" name="linkedup-support-email"/>
+<title>Play Store Deployment Guide | LinkedUp Internal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "background": "#fef7ff",
+                    "primary-fixed-dim": "#d3bbff",
+                    "surface-bright": "#fef7ff",
+                    "inverse-surface": "#322f38",
+                    "on-tertiary": "#ffffff",
+                    "primary": "#420093",
+                    "secondary": "#7b5800",
+                    "surface-container-low": "#f9f1fd",
+                    "surface-container-lowest": "#ffffff",
+                    "on-surface-variant": "#4a4453",
+                    "tertiary-container": "#783600",
+                    "secondary-fixed-dim": "#f7bd48",
+                    "outline": "#7b7485",
+                    "primary-container": "#5b21b6",
+                    "secondary-fixed": "#ffdea6",
+                    "error": "#ba1a1a",
+                    "on-tertiary-fixed-variant": "#753400",
+                    "on-primary-fixed": "#250059",
+                    "surface-variant": "#e7e0ec",
+                    "on-primary-fixed-variant": "#581db3",
+                    "on-surface": "#1d1a23",
+                    "surface-tint": "#713dcc",
+                    "on-error": "#ffffff",
+                    "surface-container-highest": "#e7e0ec",
+                    "tertiary": "#552400",
+                    "on-tertiary-fixed": "#321300",
+                    "on-primary-container": "#c7aaff",
+                    "on-secondary-fixed-variant": "#5d4200",
+                    "on-secondary-container": "#715000",
+                    "secondary-container": "#fdc34d",
+                    "on-secondary-fixed": "#271900",
+                    "tertiary-fixed": "#ffdbc8",
+                    "primary-fixed": "#ebddff",
+                    "inverse-on-surface": "#f6eefb",
+                    "surface-container": "#f3ebf8",
+                    "on-primary": "#ffffff",
+                    "tertiary-fixed-dim": "#ffb68b",
+                    "on-background": "#1d1a23",
+                    "surface-dim": "#dfd7e4",
+                    "surface-container-high": "#ede5f2",
+                    "on-secondary": "#ffffff",
+                    "outline-variant": "#ccc3d6",
+                    "error-container": "#ffdad6",
+                    "on-error-container": "#93000a",
+                    "inverse-primary": "#d3bbff",
+                    "surface": "#fef7ff",
+                    "on-tertiary-container": "#ffa267"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "container-max": "1200px",
+                    "stack-lg": "2rem",
+                    "margin-desktop": "2.5rem",
+                    "stack-md": "1rem",
+                    "margin-mobile": "1rem",
+                    "gutter": "1.5rem",
+                    "stack-sm": "0.5rem"
+            },
+            "fontFamily": {
+                    "body-lg": ["Inter"],
+                    "body-md": ["Inter"],
+                    "headline-lg-mobile": ["Inter"],
+                    "headline-lg": ["Inter"],
+                    "headline-md": ["Inter"],
+                    "headline-xl": ["Inter"],
+                    "label-sm": ["Inter"],
+                    "label-md": ["Inter"]
+            },
+            "fontSize": {
+                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
+                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
+                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
+                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Inter', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        .scrollbar-hide::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="bg-background text-on-background min-h-screen">
+<!-- TopNavBar -->
+<header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-sm">
+<nav class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
+<div class="font-headline-md text-headline-md font-bold text-primary">LinkedUp</div>
+<div class="hidden md:flex items-center gap-8">
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="index.html">Home</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="faq.html">FAQ</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="safety.html">Safety</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="privacy.html">Privacy</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="contact.html">Contact</a>
+<div class="h-8 w-[1px] bg-outline-variant mx-2"></div>
+<div class="flex items-center gap-2 text-primary font-bold">
+<span class="material-symbols-outlined">admin_panel_settings</span>
+<span class="font-label-md text-label-md uppercase tracking-wider">Internal Guide</span>
+</div>
+</div>
+</nav>
+</header>
+<main class="pt-24 pb-20 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
+<!-- Hero Section -->
+<section class="mb-stack-lg" id="android">
+<h1 class="font-headline-xl text-headline-xl text-primary mb-2">Google Play Store Deployment Guide</h1>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Founders' technical manual for preparing, building, and publishing the LinkedUp mobile application to the Android ecosystem.</p>
+</section>
+<!-- Bento Grid Layout -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
+<!-- Quick Identity -->
+<div class="md:col-span-4 bg-primary-container text-on-primary-container p-6 rounded-xl shadow-lg flex flex-col justify-between">
+<div>
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">branding_watermark</span>
+<h3 class="font-headline-md text-headline-md">App Identity</h3>
+</div>
+<div class="space-y-4">
+<div>
+<p class="font-label-sm text-label-sm opacity-80 uppercase">App Name</p>
+<p class="font-headline-md text-headline-md font-bold">LinkedUp</p>
+</div>
+<div>
+<p class="font-label-sm text-label-sm opacity-80 uppercase">Package Name</p>
+<p class="font-body-md text-body-md font-mono">com.linkedup.mobile</p>
+</div>
+</div>
+</div>
+<button class="mt-8 bg-secondary-container text-on-secondary-container px-6 py-3 rounded-full font-label-md flex items-center justify-center gap-2 transition-transform active:scale-95" onclick="navigator.clipboard.writeText('com.linkedup.mobile')">
+<span class="material-symbols-outlined text-[18px]">content_copy</span>
+                    Copy Package ID
+                </button>
+</div>
+<!-- Build Steps -->
+<div class="md:col-span-8 bg-surface-container-lowest p-6 rounded-xl border border-outline-variant shadow-sm">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-primary">terminal</span>
+<h3 class="font-headline-md text-headline-md">Build &amp; Upload Flow</h3>
+</div>
+<div class="space-y-4">
+<div class="flex items-start gap-4 p-4 bg-surface-container rounded-lg">
+<span class="w-8 h-8 flex items-center justify-center bg-primary text-on-primary rounded-full font-bold flex-shrink-0">1</span>
+<div>
+<p class="font-label-md text-label-md text-primary">Prepare Production Build</p>
+<code class="block mt-2 font-mono text-sm bg-inverse-surface text-inverse-on-surface p-2 rounded">npm run build:android-release</code>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 bg-surface-container rounded-lg">
+<span class="w-8 h-8 flex items-center justify-center bg-primary text-on-primary rounded-full font-bold flex-shrink-0">2</span>
+<div>
+<p class="font-label-md text-label-md text-primary">Sign AAB (Android App Bundle)</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Ensure `keystore.jks` is present in `/android/app`. Use release credentials.</p>
+</div>
+</div>
+<div class="flex items-start gap-4 p-4 bg-surface-container rounded-lg">
+<span class="w-8 h-8 flex items-center justify-center bg-primary text-on-primary rounded-full font-bold flex-shrink-0">3</span>
+<div>
+<p class="font-label-md text-label-md text-primary">Console Upload</p>
+<p class="font-body-md text-body-md text-on-surface-variant">Production &gt; Create new release &gt; Upload the generated .aab file.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Graphics Specs Table -->
+<div class="md:col-span-12 bg-white p-8 rounded-xl shadow-sm border border-outline-variant">
+<div class="flex items-center justify-between mb-6">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary">image</span>
+<h3 class="font-headline-md text-headline-md">Graphics Specifications</h3>
+</div>
+<span class="bg-secondary-fixed text-on-secondary-fixed px-3 py-1 rounded-full text-label-sm font-bold">MANDATORY</span>
+</div>
+<div class="overflow-x-auto scrollbar-hide">
+<table class="w-full text-left border-collapse">
+<thead>
+<tr class="border-b border-outline-variant">
+<th class="py-4 px-2 font-label-md text-label-md text-on-surface-variant">Asset Type</th>
+<th class="py-4 px-2 font-label-md text-label-md text-on-surface-variant">Dimensions</th>
+<th class="py-4 px-2 font-label-md text-label-md text-on-surface-variant">Format</th>
+<th class="py-4 px-2 font-label-md text-label-md text-on-surface-variant">Context</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/30">
+<tr>
+<td class="py-4 px-2 font-body-md font-bold">App Icon</td>
+<td class="py-4 px-2 font-body-md">512 x 512 px</td>
+<td class="py-4 px-2 font-body-md">PNG (32-bit)</td>
+<td class="py-4 px-2 font-body-md text-on-surface-variant">Must have 100% opacity. No rounded corners.</td>
+</tr>
+<tr>
+<td class="py-4 px-2 font-body-md font-bold">Feature Graphic</td>
+<td class="py-4 px-2 font-body-md">1024 x 500 px</td>
+<td class="py-4 px-2 font-body-md">JPG or PNG</td>
+<td class="py-4 px-2 font-body-md text-on-surface-variant">Displayed at the top of your store listing.</td>
+</tr>
+<tr>
+<td class="py-4 px-2 font-body-md font-bold">Phone Screenshots</td>
+<td class="py-4 px-2 font-body-md">Min: 320px | Max: 3840px</td>
+<td class="py-4 px-2 font-body-md">PNG/JPG (2:1 Ratio)</td>
+<td class="py-4 px-2 font-body-md text-on-surface-variant">Min 2, Max 8 screenshots required.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<!-- Listing Copy -->
+<div class="md:col-span-7 bg-surface-container-high p-6 rounded-xl">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary">description</span>
+<h3 class="font-headline-md text-headline-md">Store Listing Copy</h3>
+</div>
+<div class="space-y-6">
+<div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant">
+<label class="font-label-sm text-label-sm text-primary uppercase block mb-2">Short Description (80 chars)</label>
+<p class="font-body-md text-body-md italic text-on-surface">The professional network for meaningful romantic connections.</p>
+</div>
+<div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant">
+<label class="font-label-sm text-label-sm text-primary uppercase block mb-2">Full Description (4000 chars)</label>
+<p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
+                            LinkedUp is the premier networking-first dating platform designed for ambitious professionals. We go beyond the swiping culture by verifying professional identities and facilitating high-intent dates in the executive community. Join an exclusive circle of verified singles where your career trajectory and personal values align.
+                        </p>
+</div>
+</div>
+</div>
+<!-- Backend & Firebase Info -->
+<div class="md:col-span-5 flex flex-col gap-gutter">
+<div class="bg-inverse-surface text-inverse-on-surface p-6 rounded-xl flex-1">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-primary-fixed-dim">settings_ethernet</span>
+<h3 class="font-headline-md text-headline-md">Environment Specs</h3>
+</div>
+<div class="space-y-3 font-mono text-sm opacity-90">
+<div class="flex justify-between border-b border-outline-variant/30 pb-2">
+<span>BACKEND_URL:</span>
+<span class="text-primary-fixed-dim">api.linkedup.io</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/30 pb-2">
+<span>FIREBASE_PKG:</span>
+<span class="text-primary-fixed-dim">google-services.json</span>
+</div>
+<div class="flex justify-between border-b border-outline-variant/30 pb-2">
+<span>ENV:</span>
+<span class="text-primary-fixed-dim">production</span>
+</div>
+</div>
+</div>
+<div class="bg-secondary-container p-6 rounded-xl">
+<div class="flex items-center gap-2 mb-4">
+<span class="material-symbols-outlined text-secondary">verified_user</span>
+<h3 class="font-headline-md text-headline-md">App Signing</h3>
+</div>
+<p class="font-body-md text-body-md text-on-secondary-container">
+                        The Google Play App Signing key is managed by Google. Local signing is done via the <span class="font-bold underline">linkedup-release-key.jks</span> file stored in the secure vault.
+                    </p>
+</div>
+</div>
+<!-- Data Safety Form Table -->
+<div class="md:col-span-12 bg-white p-8 rounded-xl shadow-sm border border-outline-variant">
+<div class="flex items-center gap-2 mb-6">
+<span class="material-symbols-outlined text-error">security</span>
+<h3 class="font-headline-md text-headline-md">Data Safety Form Answers</h3>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-4">
+<div class="flex items-center justify-between py-3 border-b border-outline-variant">
+<span class="font-body-md">Does app collect user data?</span>
+<span class="font-label-md text-label-md bg-primary-container text-on-primary-container px-3 py-1 rounded">YES</span>
+</div>
+<div class="flex items-center justify-between py-3 border-b border-outline-variant">
+<span class="font-body-md">Is data encrypted in transit?</span>
+<span class="font-label-md text-label-md bg-primary-container text-on-primary-container px-3 py-1 rounded">YES</span>
+</div>
+<div class="flex items-center justify-between py-3 border-b border-outline-variant">
+<span class="font-body-md">Data deletion request provided?</span>
+<span class="font-label-md text-label-md bg-primary-container text-on-primary-container px-3 py-1 rounded">YES</span>
+</div>
+<div class="flex items-center justify-between py-3 border-b border-outline-variant">
+<span class="font-body-md">Approximate Location collected?</span>
+<span class="font-label-md text-label-md bg-primary-container text-on-primary-container px-3 py-1 rounded">YES</span>
+</div>
+<div class="flex items-center justify-between py-3 border-b border-outline-variant">
+<span class="font-body-md">Personal Info (Email/Name)?</span>
+<span class="font-label-md text-label-md bg-primary-container text-on-primary-container px-3 py-1 rounded">YES</span>
+</div>
+<div class="flex items-center justify-between py-3 border-b border-outline-variant">
+<span class="font-body-md">Financial Info collected?</span>
+<span class="font-label-md text-label-md bg-surface-variant text-on-surface-variant px-3 py-1 rounded">NO</span>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Internal Footer -->
+<footer class="w-full py-12 bg-surface-container-lowest border-t border-outline-variant">
+<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
+<div class="col-span-2">
+<div class="font-headline-md text-headline-md font-bold text-primary mb-4">LinkedUp</div>
+<p class="font-body-md text-body-md text-on-surface-variant">Confidential Internal Resource. For founder and developer use only. Distributed under community guidelines for the LinkedUp build team.</p>
+<p class="mt-4 font-label-md text-label-md text-outline">Copyright 2026 LinkedUp</p>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="font-label-md text-label-md text-primary uppercase mb-2">Build Docs</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:underline" href="play-store-guide.html#android">Android Deployment</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:underline" href="privacy.html">Privacy &amp; Data</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:underline" href="community-guidelines.html">Auth &amp; Policies</a>
+</div>
+<div class="flex flex-col gap-2">
+<h4 class="font-label-md text-label-md text-primary uppercase mb-2">Support</h4>
+<a class="font-body-md text-body-md text-on-surface-variant hover:underline" href="contact.html">Reporting Bugs</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:underline" href="safety.html">System Status</a>
+<a class="font-body-md text-body-md text-on-surface-variant hover:underline" href="contact.html">Contact Dev</a>
+</div>
+</div>
+</footer>
+<!-- Verification Badge micro-interaction -->
+<div class="fixed bottom-6 right-6 z-50">
+<div class="bg-primary text-on-primary p-4 rounded-xl shadow-2xl flex items-center gap-3 animate-bounce hover:animate-none cursor-help transition-all group">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">stars</span>
+<div class="hidden group-hover:block transition-all pr-2">
+<p class="font-label-sm text-label-sm leading-tight">Founder Access</p>
+<p class="font-body-md text-xs opacity-80">v1.0.4-prod</p>
+</div>
+</div>
+</div>
+<script src="assets/js/config.js"></script>
+<script src="assets/js/api.js"></script>
+<script src="assets/js/site.js"></script>
+</body></html>

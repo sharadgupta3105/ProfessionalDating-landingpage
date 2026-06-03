@@ -1,0 +1,12 @@
+{
+  "name": "linkedup-website",
+  "private": true,
+  "description": "LinkedUp marketing & compliance static site",
+  "scripts": {
+    "build": "node scripts/netlify-build.js",
+    "prepare:netlify": "node scripts/netlify-build.js"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
