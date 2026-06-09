@@ -1,4 +1,4 @@
-/* MATCHEDIN lockup: heart mark + MATCH (purple) + IN (gold) */
+/* MATCHEDIN lockup: heart mark + MATCHED (purple) + IN (gold) */
 .brand-lockup {
   display: inline-flex;
   align-items: center;
@@ -18,7 +18,7 @@
   white-space: nowrap;
 }
 
-.brand-lockup__match {
+.brand-lockup__matched {
   color: #420093;
 }
 
