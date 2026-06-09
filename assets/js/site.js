@@ -1,5 +1,5 @@
 /**
- * LinkedUp marketing site — navigation, forms, and API-backed account actions.
+ * MATCHEDIN marketing site — navigation, forms, and API-backed account actions.
  */
 (function () {
   const PAGES = {
@@ -156,7 +156,7 @@
       const a = document.createElement('a');
       a.href = PAGES.home;
       a.className = el.className;
-      a.setAttribute('aria-label', 'LinkedUp Home');
+      a.setAttribute('aria-label', 'MATCHEDIN Home');
       el.parentNode.insertBefore(a, el);
       a.appendChild(el);
     });
@@ -238,7 +238,7 @@
         return;
       }
 
-      const subject = encodeURIComponent(`LinkedUp: ${topic || 'Support'}`);
+      const subject = encodeURIComponent(`MATCHEDIN: ${topic || 'Support'}`);
       const body = encodeURIComponent(
         `Name: ${name}\nEmail: ${email}\nTopic: ${topic || 'General'}\n\n${message}`,
       );
@@ -280,7 +280,7 @@
     sendOtpBtn?.addEventListener('click', async () => {
       const email = emailInput?.value?.trim().toLowerCase();
       if (!email?.includes('@')) {
-        showMessage(statusEl, 'Enter the email address registered on your LinkedUp account.', 'error');
+        showMessage(statusEl, 'Enter the email address registered on your MATCHEDIN account.', 'error');
         emailInput?.focus();
         return;
       }

@@ -6,9 +6,10 @@
 <meta content="false" name="linkedup-api-proxy"/>
 <meta content="" name="linkedup-api-url"/>
 <meta content="support@linkedup.app" name="linkedup-support-email"/>
-<title>Play Store Deployment Guide | LinkedUp Internal</title>
+<title>Play Store Deployment Guide | MATCHEDIN Internal</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/brand.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
@@ -122,7 +123,7 @@
 <!-- TopNavBar -->
 <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-sm">
 <nav class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
-<a href="index.html" aria-label="MatchedIn Home"><img alt="MatchedIn" class="h-10" src="assets/images/logo.png"/></a>
+<a href="index.html" aria-label="MATCHEDIN Home" class="brand-lockup brand-lockup--nav"><img alt="" class="brand-lockup__mark" src="assets/images/logo-heart.png" aria-hidden="true"/><span class="brand-lockup__wordmark"><span class="brand-lockup__match">MATCH</span><span class="brand-lockup__in">IN</span></span></a>
 <div class="hidden md:flex items-center gap-8">
 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="index.html">Home</a>
 <a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="faq.html">FAQ</a>
@@ -141,7 +142,7 @@
 <!-- Hero Section -->
 <section class="mb-stack-lg" id="android">
 <h1 class="font-headline-xl text-headline-xl text-primary mb-2">Google Play Store Deployment Guide</h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Founders' technical manual for preparing, building, and publishing the LinkedUp mobile application to the Android ecosystem.</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl">Founders' technical manual for preparing, building, and publishing the MATCHEDIN mobile application to the Android ecosystem.</p>
 </section>
 <!-- Bento Grid Layout -->
 <div class="grid grid-cols-1 md:grid-cols-12 gap-gutter">
@@ -155,7 +156,7 @@
 <div class="space-y-4">
 <div>
 <p class="font-label-sm text-label-sm opacity-80 uppercase">App Name</p>
-<p class="font-headline-md text-headline-md font-bold">LinkedUp</p>
+<p class="font-headline-md text-headline-md font-bold">MATCHEDIN</p>
 </div>
 <div>
 <p class="font-label-sm text-label-sm opacity-80 uppercase">Package Name</p>
@@ -254,7 +255,7 @@
 <div class="bg-surface-container-lowest p-4 rounded-lg border border-outline-variant">
 <label class="font-label-sm text-label-sm text-primary uppercase block mb-2">Full Description (4000 chars)</label>
 <p class="font-body-md text-body-md text-on-surface-variant leading-relaxed">
-                            LinkedUp is the premier networking-first dating platform designed for ambitious professionals. We go beyond the swiping culture by verifying professional identities and facilitating high-intent dates in the executive community. Join an exclusive circle of verified singles where your career trajectory and personal values align.
+                            MATCHEDIN is the premier networking-first dating platform designed for ambitious professionals. We go beyond the swiping culture by verifying professional identities and facilitating high-intent dates in the executive community. Join an exclusive circle of verified singles where your career trajectory and personal values align.
                         </p>
 </div>
 </div>
@@ -330,9 +331,9 @@
 <footer class="w-full py-12 bg-surface-container-lowest border-t border-outline-variant">
 <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
 <div class="col-span-2">
-<img alt="MatchedIn" class="h-8 mb-6" src="assets/images/logo.png"/>
-<p class="font-body-md text-body-md text-on-surface-variant">Confidential Internal Resource. For founder and developer use only. Distributed under community guidelines for the LinkedUp build team.</p>
-<p class="mt-4 font-label-md text-label-md text-outline">Copyright 2026 LinkedUp</p>
+<div class="brand-lockup brand-lockup--footer"><img alt="" class="brand-lockup__mark" src="assets/images/logo-heart.png" aria-hidden="true"/><span class="brand-lockup__wordmark"><span class="brand-lockup__match">MATCH</span><span class="brand-lockup__in">IN</span></span></div>
+<p class="font-body-md text-body-md text-on-surface-variant">Confidential Internal Resource. For founder and developer use only. Distributed under community guidelines for the MATCHEDIN build team.</p>
+<p class="mt-4 font-label-md text-label-md text-outline">Copyright 2026 MATCHEDIN</p>
 </div>
 <div class="flex flex-col gap-2">
 <h4 class="font-label-md text-label-md text-primary uppercase mb-2">Build Docs</h4>

@@ -6,9 +6,10 @@
 <meta content="false" name="linkedup-api-proxy"/>
 <meta content="" name="linkedup-api-url"/>
 <meta content="support@linkedup.app" name="linkedup-support-email"/>
-<title>Delete Account | LinkedUp</title>
+<title>Delete Account | MATCHEDIN</title>
 <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="assets/css/brand.css" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <script id="tailwind-config">
@@ -124,7 +125,7 @@
 <!-- TopNavBar -->
 <header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md dark:bg-inverse-surface/90 shadow-sm dark:shadow-none">
 <div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
-<a href="index.html" aria-label="MatchedIn Home"><img alt="MatchedIn" class="h-10" src="assets/images/logo.png"/></a>
+<a href="index.html" aria-label="MATCHEDIN Home" class="brand-lockup brand-lockup--nav"><img alt="" class="brand-lockup__mark" src="assets/images/logo-heart.png" aria-hidden="true"/><span class="brand-lockup__wordmark"><span class="brand-lockup__match">MATCH</span><span class="brand-lockup__in">IN</span></span></a>
 <nav class="hidden md:flex items-center gap-8">
 <a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200 hover:opacity-80 font-body-md text-body-md" href="index.html">Home</a>
 <a class="text-on-surface-variant dark:text-outline-variant hover:text-primary dark:hover:text-primary-fixed-dim transition-colors duration-200 hover:opacity-80 font-body-md text-body-md" href="faq.html">FAQ</a>
@@ -152,7 +153,7 @@
 <section class="mb-10">
 <h1 class="font-headline-xl text-headline-xl text-on-surface mb-4">We're sorry to see you go.</h1>
 <p class="text-on-surface-variant font-body-lg text-body-lg max-w-2xl">
-                Deleting your account is permanent and cannot be undone. All your connections, messages, and profile data will be permanently removed from the LinkedUp ecosystem.
+                Deleting your account is permanent and cannot be undone. All your connections, messages, and profile data will be permanently removed from the MATCHEDIN ecosystem.
             </p>
 </section>
 <!-- Warning Card -->
@@ -196,14 +197,14 @@
 <!-- In-app path (Google Play) -->
 <div class="mb-8 p-6 rounded-xl bg-primary-fixed/30 border border-primary-fixed-dim/40">
 <p class="font-label-md text-label-md text-on-primary-fixed mb-2">Fastest: delete in the app</p>
-<p class="text-on-surface-variant font-body-md">Open LinkedUp → <strong>Settings</strong> → <strong>Delete account</strong>. No email wait required.</p>
+<p class="text-on-surface-variant font-body-md">Open MATCHEDIN → <strong>Settings</strong> → <strong>Delete account</strong>. No email wait required.</p>
 </div>
 <!-- Action Section -->
 <section class="space-y-8">
 <form class="space-y-8" id="delete-account-form" novalidate="">
 <div class="bg-surface-container-low p-8 rounded-xl border border-outline-variant/50" id="delete-step-verify">
 <h3 class="font-headline-md text-headline-md mb-4">Verify your identity</h3>
-<p class="text-on-surface-variant mb-6">Enter the email on your LinkedUp account. We will send a one-time code (same sign-in flow as the app), then you can permanently delete your data.</p>
+<p class="text-on-surface-variant mb-6">Enter the email on your MATCHEDIN account. We will send a one-time code (same sign-in flow as the app), then you can permanently delete your data.</p>
 <div class="mb-4">
 <label class="block font-label-md text-label-md mb-2 text-on-surface" for="delete-email">Registered email</label>
 <input class="w-full max-w-md p-4 rounded-lg border border-outline bg-surface-bright focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all" id="delete-email" name="email" placeholder="you@email.com" required="" type="email"/>
@@ -238,7 +239,7 @@
 <div class="hidden p-8 rounded-xl bg-primary-container/20 border border-primary-container text-center" id="delete-success">
 <span class="material-symbols-outlined text-primary text-5xl mb-4">check_circle</span>
 <h3 class="font-headline-md text-headline-md text-on-surface mb-2">Account deleted</h3>
-<p class="text-on-surface-variant font-body-md">Your LinkedUp account and associated personal data have been removed.</p>
+<p class="text-on-surface-variant font-body-md">Your MATCHEDIN account and associated personal data have been removed.</p>
 <a class="inline-block mt-6 text-secondary font-label-md hover:underline" href="index.html">Return to home</a>
 </div>
 </form>
@@ -261,7 +262,7 @@
 <footer class="bg-surface-container-lowest dark:bg-inverse-surface w-full py-12">
 <div class="grid grid-cols-2 md:grid-cols-4 gap-gutter px-margin-desktop max-w-container-max mx-auto">
 <div class="col-span-2 md:col-span-1">
-<img alt="MatchedIn" class="h-8 mb-6" src="assets/images/logo.png"/>
+<div class="brand-lockup brand-lockup--footer"><img alt="" class="brand-lockup__mark" src="assets/images/logo-heart.png" aria-hidden="true"/><span class="brand-lockup__wordmark"><span class="brand-lockup__match">MATCH</span><span class="brand-lockup__in">IN</span></span></div>
 <p class="text-on-surface-variant font-label-md text-label-md opacity-70">Elevating connections for high-intent professionals.</p>
 </div>
 <div class="flex flex-col gap-3">
@@ -278,7 +279,7 @@
 <div class="flex flex-col gap-3">
 <span class="font-label-md text-label-md text-on-surface font-bold uppercase tracking-wider mb-2">Support</span>
 <a class="text-on-surface-variant dark:text-outline-variant hover:text-secondary dark:hover:text-secondary-fixed-dim hover:underline transition-all font-label-md text-label-md" href="contact.html">Contact</a>
-<p class="text-on-surface-variant font-label-md text-label-md mt-4 opacity-50">Copyright 2026 LinkedUp</p>
+<p class="text-on-surface-variant font-label-md text-label-md mt-4 opacity-50">Copyright 2026 MATCHEDIN</p>
 </div>
 </div>
 </footer>
