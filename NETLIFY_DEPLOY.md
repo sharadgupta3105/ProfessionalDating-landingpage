@@ -1,4 +1,4 @@
-# Deploy LinkedUp website on Netlify (free)
+# Deploy MatchedIn website on Netlify (free)
 
 ## Option A — GitHub (recommended)
 
@@ -14,15 +14,15 @@
    | Variable | Value |
    |----------|--------|
    | `LINKEDUP_API_URL` | `http://promatch-api-env.eba-rt5gymna.ap-south-1.elasticbeanstalk.com` (or your HTTPS API later) |
-   | `LINKEDUP_SUPPORT_EMAIL` | `support@linkedup.app` |
+   | `LINKEDUP_SUPPORT_EMAIL` | `help@matchedin.app` |
    | `LINKEDUP_API_PROXY` | `true` (default; routes `/auth` and `/users` through Netlify — required for delete-account on HTTPS) |
 
 6. Click **Deploy site**.
 7. After deploy, open `https://YOUR-SITE.netlify.app/delete-account.html` and test OTP delete flow.
 
-### Custom domain (e.g. linkedup.app)
+### Custom domain (e.g. matchedin.app)
 
-1. Netlify → **Domain management** → **Add domain** → enter `linkedup.app` and `www.linkedup.app`.
+1. Netlify → **Domain management** → **Add domain** → enter `matchedin.app` and `www.matchedin.app`.
 2. At your domain registrar, add the DNS records Netlify shows (usually ALIAS/ANAME or CNAME).
 3. Wait for HTTPS (automatic).
 
@@ -31,7 +31,7 @@
 On Elastic Beanstalk (or your API host), set:
 
 ```bash
-CORS_ORIGINS=https://YOUR-SITE.netlify.app,https://linkedup.app,https://www.linkedup.app
+CORS_ORIGINS=https://YOUR-SITE.netlify.app,https://matchedin.app,https://www.matchedin.app
 ```
 
 Or `*` while testing only.

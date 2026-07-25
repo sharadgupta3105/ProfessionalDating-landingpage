@@ -1,7 +1,7 @@
 {
-  "name": "linkedup-website",
+  "name": "matchedin-website",
   "private": true,
-  "description": "LinkedUp marketing & compliance static site",
+  "description": "MatchedIn marketing & compliance static site",
   "scripts": {
     "build": "node scripts/netlify-build.js",
     "prepare:netlify": "node scripts/netlify-build.js"

@@ -1,5 +1,5 @@
 ---
-name: LinkedUp
+name: MatchedIn
 colors:
   surface: '#fef7ff'
   surface-dim: '#dfd7e4'

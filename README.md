@@ -1,6 +1,6 @@
-# LinkedUp Marketing & Compliance Website
+# MatchedIn Marketing & Compliance Website
 
-Static multi-page site for LinkedUp (professional dating for Indian professionals). Wired to the same backend API as the mobile app for account deletion and OTP sign-in.
+Static multi-page site for MatchedIn (professional dating for Indian professionals). Wired to the same backend API as the mobile app for account deletion and OTP sign-in.
 
 ## Pages
 
@@ -62,7 +62,7 @@ website/
 ## Features
 
 - **Delete account (Google Play)** — Email OTP verification, then permanent deletion via `DELETE /users/me` (same as the app). In-app path documented on the page.
-- **Contact form** — Validates fields and opens the user’s email app with a pre-filled message to `support@linkedup.app`.
+- **Contact form** — Validates fields and opens the user’s email app with a pre-filled message to `help@matchedin.app`.
 - **Mobile menu** — Hamburger slide-out on small screens.
 - **FAQ accordions** — Expand/collapse on the FAQ page.
 - **Report a concern** — Safety / contact links with `?topic=report` pre-selects the report topic.

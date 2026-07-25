@@ -1,5 +1,5 @@
 /**
- * LinkedUp site configuration — override via <meta> tags in HTML head.
+ * MatchedIn site configuration — override via <meta> tags in HTML head.
  */
 (function (global) {
   const PRODUCTION_API =
@@ -33,7 +33,7 @@
 
   global.LinkedUpSite = {
     apiBaseUrl: resolveApiBaseUrl(),
-    supportEmail: metaContent('linkedup-support-email') || 'support@linkedup.app',
+    supportEmail: metaContent('linkedup-support-email') || 'help@matchedin.app',
     authTokenKey: 'linkedup_auth_token',
     authUserKey: 'linkedup_auth_user',
   };

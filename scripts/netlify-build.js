@@ -11,11 +11,12 @@ const DEFAULT_API =
   'http://promatch-api-env.eba-rt5gymna.ap-south-1.elasticbeanstalk.com';
 
 const apiUrl = (process.env.LINKEDUP_API_URL || DEFAULT_API).replace(/\/$/, '');
-const supportEmail = process.env.LINKEDUP_SUPPORT_EMAIL || 'support@linkedup.app';
+const supportEmail = process.env.LINKEDUP_SUPPORT_EMAIL || 'help@matchedin.app';
 const useProxy = process.env.LINKEDUP_API_PROXY !== 'false';
 
 const CLEAN_URLS = [
   ['privacy', 'privacy.html'],
+  ['terms', 'terms.html'],
   ['faq', 'faq.html'],
   ['safety', 'safety.html'],
   ['contact', 'contact.html'],

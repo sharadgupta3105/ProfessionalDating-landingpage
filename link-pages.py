@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Wire placeholder links across LinkedUp static pages."""
+"""Wire placeholder links across MatchedIn static pages."""
 
 import re
 from pathlib import Path
@@ -33,7 +33,7 @@ TEXT_TO_HREF = [
 
 SITE_META = (
     '<meta content="" name="linkedup-api-url"/>\n'
-    '<meta content="support@linkedup.app" name="linkedup-support-email"/>\n'
+    '<meta content="help@matchedin.app" name="linkedup-support-email"/>\n'
     '<meta content="false" name="linkedup-api-proxy"/>'
 )
 SITE_SCRIPTS = """<script src="assets/js/config.js"></script>
@@ -57,28 +57,28 @@ def fix_logo_home(html: str) -> str:
     if 'href="index.html"' in html[:8000]:
         return html
     html = re.sub(
-        r'(<div class="flex items-center gap-2">)\s*(<img alt="LinkedUp Logo")',
-        r'\1<a href="index.html" aria-label="LinkedUp Home">\2',
+        r'(<div class="flex items-center gap-2">)\s*(<img alt="MatchedIn Logo")',
+        r'\1<a href="index.html" aria-label="MatchedIn Home">\2',
         html,
         count=1,
     )
-    if '<a href="index.html" aria-label="LinkedUp Home"><img alt="LinkedUp Logo"' in html:
+    if '<a href="index.html" aria-label="MatchedIn Home"><img alt="MatchedIn Logo"' in html:
         html = html.replace(
-            '<img alt="LinkedUp Logo"',
-            '<img alt="LinkedUp Logo"',
+            '<img alt="MatchedIn Logo"',
+            '<img alt="MatchedIn Logo"',
             1,
         )
         # Close anchor after first logo img tag
         html = re.sub(
-            r'(<a href="index.html" aria-label="LinkedUp Home"><img alt="LinkedUp Logo"[^>]+/>)',
+            r'(<a href="index.html" aria-label="MatchedIn Home"><img alt="MatchedIn Logo"[^>]+/>)',
             r'\1</a>',
             html,
             count=1,
         )
     # Text logo headers
     html = re.sub(
-        r'<div class="font-headline-md text-headline-md font-bold text-primary">LinkedUp</div>',
-        r'<a href="index.html" class="font-headline-md text-headline-md font-bold text-primary">LinkedUp</a>',
+        r'<div class="font-headline-md text-headline-md font-bold text-primary">MatchedIn</div>',
+        r'<a href="index.html" class="font-headline-md text-headline-md font-bold text-primary">MatchedIn</a>',
         html,
     )
     return html

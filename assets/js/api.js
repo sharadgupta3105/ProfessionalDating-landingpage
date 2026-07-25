@@ -1,5 +1,5 @@
 /**
- * LinkedUp API client for the marketing / compliance web portal.
+ * MatchedIn API client for the marketing / compliance web portal.
  */
 (function (global) {
   const { apiBaseUrl, authTokenKey, authUserKey } = global.LinkedUpSite || {};

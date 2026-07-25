@@ -22,7 +22,7 @@
   ];
 
   const supportEmail = () =>
-    (window.LinkedUpSite && window.LinkedUpSite.supportEmail) || 'support@linkedup.app';
+    (window.LinkedUpSite && window.LinkedUpSite.supportEmail) || 'help@matchedin.app';
 
   function currentPageKey() {
     const path = window.location.pathname.split('/').pop() || 'index.html';
@@ -176,8 +176,15 @@
   function initSupportMailtoLinks() {
     const email = supportEmail();
     document.querySelectorAll('a[href^="mailto:"]').forEach((a) => {
-      if (a.href.includes('linkedup.com') || a.href === 'mailto:support@linkedup.com') {
-        a.href = `mailto:${email}`;
+      const href = a.getAttribute('href') || '';
+      if (
+        href.includes('linkedup.') ||
+        href.includes('support@') ||
+        href.includes('infomatchedin@gmail.com') ||
+        href.includes('help@matchedin.app')
+      ) {
+        const query = href.includes('?') ? href.slice(href.indexOf('?')) : '';
+        a.href = `mailto:${email}${query}`;
       }
     });
   }
