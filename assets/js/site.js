@@ -11,6 +11,8 @@
     guidelines: 'community-guidelines.html',
     deleteAccount: 'delete-account.html',
     playStore: 'play-store-guide.html',
+    /** Live listing — https://play.google.com/store/apps/details?id=com.linkedup.mobile */
+    playStoreApp: 'https://play.google.com/store/apps/details?id=com.linkedup.mobile',
   };
 
   const NAV_ITEMS = [
