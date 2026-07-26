@@ -20,7 +20,8 @@
 
     const host = window.location.hostname;
     if (host === 'localhost' || host === '127.0.0.1') {
-      return 'http://localhost:5000';
+      // Local backend defaults to PORT from backend/.env (often 5001)
+      return fromMeta || 'http://localhost:5001';
     }
 
     // Netlify build sets proxy meta — API calls go to same origin (/auth, /users)

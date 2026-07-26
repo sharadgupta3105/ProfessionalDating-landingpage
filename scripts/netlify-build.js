@@ -23,6 +23,7 @@ const CLEAN_URLS = [
   ['delete-account', 'delete-account.html'],
   ['community-guidelines', 'community-guidelines.html'],
   ['play-store-guide', 'play-store-guide.html'],
+  ['admin', 'admin.html'],
 ];
 
 const SKIP = new Set([
@@ -96,6 +97,8 @@ function writeRedirects() {
       '# Proxy API through Netlify (HTTPS site → HTTP backend, avoids mixed-content)',
       `/auth/*  ${apiUrl}/auth/:splat  200`,
       `/users/*  ${apiUrl}/users/:splat  200`,
+      `/admin/*  ${apiUrl}/admin/:splat  200`,
+      `/subscriptions/*  ${apiUrl}/subscriptions/:splat  200`,
       `/health  ${apiUrl}/health  200`,
       '',
     );
