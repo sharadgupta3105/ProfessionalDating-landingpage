@@ -132,6 +132,7 @@
 <a href="index.html" aria-label="MATCHEDIN Home" class="brand-lockup brand-lockup--nav"><img alt="" class="brand-lockup__mark" src="assets/images/logo-heart.png" aria-hidden="true"/><span class="brand-lockup__wordmark"><span class="brand-lockup__matched">MATCHED</span><span class="brand-lockup__in">IN</span></span></a>
 <div class="hidden md:flex items-center gap-8">
 <a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors duration-200" href="index.html">Home</a>
+<a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors duration-200" href="index.html#pricing">Pricing</a>
 <a class="font-body-md text-body-md text-secondary dark:text-secondary-fixed-dim font-bold border-b-2 border-secondary transition-colors duration-200" href="faq.html">FAQ</a>
 <a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors duration-200" href="safety.html">Safety</a>
 <a class="font-body-md text-body-md text-on-surface-variant dark:text-outline-variant hover:text-primary transition-colors duration-200" href="privacy.html">Privacy</a>
@@ -151,20 +152,20 @@
 <!-- FAQ Bento Grid / Accordion Area -->
 <div class="grid grid-cols-1 lg:grid-cols-12 gap-gutter">
 <!-- Sidebar Navigation -->
-<aside class="lg:col-span-3 hidden lg:block">
-<div class="sticky top-24 space-y-4">
-<h3 class="font-label-md text-label-md uppercase tracking-wider text-outline mb-6">Categories</h3>
-<nav class="flex flex-col gap-2">
-<button class="flex items-center gap-3 p-3 rounded-xl bg-primary-container text-on-primary-container font-label-md">
+<aside class="lg:col-span-3">
+<div class="lg:sticky lg:top-24 space-y-4">
+<h3 class="font-label-md text-label-md uppercase tracking-wider text-outline mb-4 lg:mb-6">Categories</h3>
+<nav id="faq-category-nav" class="flex lg:flex-col gap-2 overflow-x-auto pb-1 lg:pb-0 -mx-1 px-1" role="tablist" aria-label="FAQ categories">
+<button type="button" role="tab" aria-selected="true" data-faq-category="general" class="faq-cat-btn flex items-center gap-3 p-3 rounded-xl whitespace-nowrap bg-primary-container text-on-primary-container font-label-md">
 <span class="material-symbols-outlined">help_center</span> General
                         </button>
-<button class="flex items-center gap-3 p-3 rounded-xl hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-md">
+<button type="button" role="tab" aria-selected="false" data-faq-category="account" class="faq-cat-btn flex items-center gap-3 p-3 rounded-xl whitespace-nowrap hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-md">
 <span class="material-symbols-outlined">account_circle</span> Account
                         </button>
-<button class="flex items-center gap-3 p-3 rounded-xl hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-md">
+<button type="button" role="tab" aria-selected="false" data-faq-category="safety" class="faq-cat-btn flex items-center gap-3 p-3 rounded-xl whitespace-nowrap hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-md">
 <span class="material-symbols-outlined">verified_user</span> Safety
                         </button>
-<button class="flex items-center gap-3 p-3 rounded-xl hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-md">
+<button type="button" role="tab" aria-selected="false" data-faq-category="billing" class="faq-cat-btn flex items-center gap-3 p-3 rounded-xl whitespace-nowrap hover:bg-surface-container-high transition-colors text-on-surface-variant font-label-md">
 <span class="material-symbols-outlined">payments</span> Billing
                         </button>
 </nav>
@@ -172,10 +173,10 @@
 </aside>
 <!-- Accordion Section -->
 <section class="lg:col-span-9">
-<div class="space-y-4">
-<!-- 1. What is MATCHEDIN -->
-<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden">
-<button class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
+<div id="faq-list" class="space-y-4">
+<!-- General -->
+<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden" data-faq-category="general">
+<button type="button" class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
 <span class="font-headline-md text-headline-md text-on-surface">What is MATCHEDIN?</span>
 <span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
 </button>
@@ -183,9 +184,8 @@
 <p class="text-on-surface-variant font-body-md">MATCHEDIN is a premium networking-style dating platform designed for professionals seeking intentional, high-quality connections. Unlike typical apps, we focus on career backgrounds and verified identities to ensure a sophisticated environment.</p>
 </div>
 </div>
-<!-- 2. 18+ join -->
-<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden">
-<button class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
+<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden" data-faq-category="general">
+<button type="button" class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
 <span class="font-headline-md text-headline-md text-on-surface">Who can join? (18+)</span>
 <span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
 </button>
@@ -193,19 +193,8 @@
 <p class="text-on-surface-variant font-body-md">All members must be at least 18 years old. We use a verification process to maintain an exclusive community of motivated individuals seeking professional and romantic synergy.</p>
 </div>
 </div>
-<!-- 3. Sign in methods -->
-<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden">
-<button class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
-<span class="font-headline-md text-headline-md text-on-surface">What are the available sign-in methods?</span>
-<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
-</button>
-<div class="accordion-content px-6">
-<p class="text-on-surface-variant font-body-md">You can securely sign in using your professional LinkedIn account, Google account, or verified email address. We recommend LinkedIn for the most seamless profile integration.</p>
-</div>
-</div>
-<!-- 4. Location usage -->
-<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden">
-<button class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
+<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden" data-faq-category="general">
+<button type="button" class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
 <span class="font-headline-md text-headline-md text-on-surface">How is my location used?</span>
 <span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
 </button>
@@ -213,96 +202,137 @@
 <p class="text-on-surface-variant font-body-md">MATCHEDIN uses your location to suggest matches within your preferred networking radius. We never share your exact coordinates; we only display your city and approximate distance to matches.</p>
 </div>
 </div>
-<!-- 5. Photos count -->
-<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden">
-<button class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
-<span class="font-headline-md text-headline-md text-on-surface">How many photos can I upload?</span>
-<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
-</button>
-<div class="accordion-content px-6">
-<p class="text-on-surface-variant font-body-md">You can upload up to 6 high-resolution photos. We recommend a mix of professional headshots and lifestyle photos that showcase your personality in social or professional settings.</p>
-</div>
-</div>
-<!-- 6. Matching logic -->
-<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden">
-<button class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
+<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden" data-faq-category="general">
+<button type="button" class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
 <span class="font-headline-md text-headline-md text-on-surface">How does the matching logic work?</span>
 <span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
 </button>
 <div class="accordion-content px-6">
-<p class="text-on-surface-variant font-body-md">Our proprietary algorithm balances your professional industry, educational background, and shared personal interests with your specified relationship preferences.</p>
+<p class="text-on-surface-variant font-body-md">Our matching balances your profession, preferences (age, distance, show-me), and optional Premium filters like verified-only and minimum match score — so you see more relevant professionals.</p>
 </div>
 </div>
-<!-- 7. Push issues -->
-<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden">
-<button class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
-<span class="font-headline-md text-headline-md text-on-surface">I'm not receiving push notifications.</span>
-<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
-</button>
-<div class="accordion-content px-6">
-<p class="text-on-surface-variant font-body-md">Ensure notifications are enabled in both the MATCHEDIN app settings and your phone's system settings. Check if 'Do Not Disturb' or 'Focus' modes are active.</p>
-</div>
-</div>
-<!-- 8. Delete account -->
-<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden">
-<button class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
-<span class="font-headline-md text-headline-md text-on-surface">How do I delete my account?</span>
-<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
-</button>
-<div class="accordion-content px-6">
-<p class="text-on-surface-variant font-body-md">In the app: <strong>Settings → Delete account</strong>. On the web: use our <a class="text-secondary hover:underline font-label-md" href="delete-account.html">Delete Account</a> page (verify with email OTP, then confirm). This action is permanent and removes your profile, matches, and messages.</p>
-</div>
-</div>
-<!-- 9. Data safety -->
-<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden">
-<button class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
-<span class="font-headline-md text-headline-md text-on-surface">How is my data kept safe?</span>
-<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
-</button>
-<div class="accordion-content px-6">
-<p class="text-on-surface-variant font-body-md">We use industry-standard encryption for all data storage and transmission. We never sell your personal information to third parties. Your privacy is our highest priority.</p>
-</div>
-</div>
-<!-- 10. Reporting -->
-<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden">
-<button class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
-<span class="font-headline-md text-headline-md text-on-surface">How do I report a user?</span>
-<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
-</button>
-<div class="accordion-content px-6">
-<p class="text-on-surface-variant font-body-md">To report a profile, click the three dots on the top right of their profile or message screen and select 'Report'. Our moderation team reviews all reports within 24 hours.</p>
-</div>
-</div>
-<!-- 11. Pricing -->
-<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden">
-<button class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
-<span class="font-headline-md text-headline-md text-on-surface">Is MATCHEDIN free to use?</span>
-<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
-</button>
-<div class="accordion-content px-6">
-<p class="text-on-surface-variant font-body-md">MATCHEDIN offers a robust free tier. We also offer MATCHEDIN Premium which includes unlimited likes, profile boosts, and the ability to see who liked you first.</p>
-</div>
-</div>
-<!-- 12. Support -->
-<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden">
-<button class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
+<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden" data-faq-category="general">
+<button type="button" class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
 <span class="font-headline-md text-headline-md text-on-surface">How can I contact support?</span>
 <span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
 </button>
 <div class="accordion-content px-6">
-<p class="text-on-surface-variant font-body-md">You can reach our dedicated support team via the 'Contact' page or by emailing help@matchedin.app. We aim to respond to all inquiries within one business day.</p>
+<p class="text-on-surface-variant font-body-md">Use our <a class="text-secondary hover:underline font-label-md" href="contact.html">Contact</a> page or email help@matchedin.app. We aim to respond within one business day.</p>
 </div>
 </div>
+<!-- Account -->
+<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden hidden" data-faq-category="account">
+<button type="button" class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
+<span class="font-headline-md text-headline-md text-on-surface">What are the available sign-in methods?</span>
+<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
+</button>
+<div class="accordion-content px-6">
+<p class="text-on-surface-variant font-body-md">Sign in with email OTP or Continue with LinkedIn. LinkedIn helps verify your professional profile more easily.</p>
+</div>
+</div>
+<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden hidden" data-faq-category="account">
+<button type="button" class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
+<span class="font-headline-md text-headline-md text-on-surface">How many photos can I upload?</span>
+<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
+</button>
+<div class="accordion-content px-6">
+<p class="text-on-surface-variant font-body-md">You can upload up to 6 high-resolution photos. We recommend a mix of professional headshots and lifestyle photos that showcase your personality.</p>
+</div>
+</div>
+<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden hidden" data-faq-category="account">
+<button type="button" class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
+<span class="font-headline-md text-headline-md text-on-surface">I'm not receiving push notifications.</span>
+<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
+</button>
+<div class="accordion-content px-6">
+<p class="text-on-surface-variant font-body-md">Enable notifications in both the MATCHEDIN app and your phone’s system settings. Check if Do Not Disturb or Focus modes are on.</p>
+</div>
+</div>
+<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden hidden" data-faq-category="account">
+<button type="button" class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
+<span class="font-headline-md text-headline-md text-on-surface">How do I delete my account?</span>
+<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
+</button>
+<div class="accordion-content px-6">
+<p class="text-on-surface-variant font-body-md">In the app: <strong>Settings → Delete account</strong>. On the web: use our <a class="text-secondary hover:underline font-label-md" href="delete-account.html">Delete Account</a> page (verify with email OTP, then confirm). This is permanent and removes your profile, matches, and messages.</p>
+</div>
+</div>
+<!-- Safety -->
+<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden hidden" data-faq-category="safety">
+<button type="button" class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
+<span class="font-headline-md text-headline-md text-on-surface">How is my data kept safe?</span>
+<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
+</button>
+<div class="accordion-content px-6">
+<p class="text-on-surface-variant font-body-md">We use industry-standard encryption for data in transit. We do not sell your personal information. See our <a class="text-secondary hover:underline font-label-md" href="privacy.html">Privacy Policy</a> for details.</p>
+</div>
+</div>
+<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden hidden" data-faq-category="safety">
+<button type="button" class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
+<span class="font-headline-md text-headline-md text-on-surface">How do I report a user?</span>
+<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
+</button>
+<div class="accordion-content px-6">
+<p class="text-on-surface-variant font-body-md">On a profile or chat, open safety options and choose <strong>Report</strong>. You can also block someone so you no longer see each other. Learn more in our <a class="text-secondary hover:underline font-label-md" href="safety.html">Safety Center</a>.</p>
+</div>
+</div>
+<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden hidden" data-faq-category="safety">
+<button type="button" class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
+<span class="font-headline-md text-headline-md text-on-surface">Is LinkedIn verification required?</span>
+<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
+</button>
+<div class="accordion-content px-6">
+<p class="text-on-surface-variant font-body-md">Verification is encouraged and helps trust. Premium members can also turn on <strong>Verified only</strong> in preferences to see LinkedIn-verified profiles in Discover.</p>
+</div>
+</div>
+<!-- Billing -->
+<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden hidden" data-faq-category="billing">
+<button type="button" class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
+<span class="font-headline-md text-headline-md text-on-surface">Is MATCHEDIN free to use?</span>
+<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
+</button>
+<div class="accordion-content px-6">
+<p class="text-on-surface-variant font-body-md">Yes — you can use MATCHEDIN on a free plan with daily swipe limits. MATCHEDIN Premium unlocks unlimited likes, see who liked you, intro notes, verified-only Discover, advanced career filters, minimum match score, and weekly curated picks.</p>
+</div>
+</div>
+<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden hidden" data-faq-category="billing">
+<button type="button" class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
+<span class="font-headline-md text-headline-md text-on-surface">What Premium packages are available?</span>
+<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
+</button>
+<div class="accordion-content px-6">
+<p class="text-on-surface-variant font-body-md">All plans unlock the same Premium features while active: Day Pass (₹49), Weekly (₹149), Monthly (₹249 — most popular), and Yearly (₹1,499, ~₹125/month). See full details on our <a class="text-primary underline" href="index.html#pricing">packages &amp; features</a> page.</p>
+</div>
+</div>
+<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden hidden" data-faq-category="billing">
+<button type="button" class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
+<span class="font-headline-md text-headline-md text-on-surface">How do I subscribe to Premium?</span>
+<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
+</button>
+<div class="accordion-content px-6">
+<p class="text-on-surface-variant font-body-md">In the app, open <strong>Premium</strong> (or Settings → MatchedIn Premium) and choose a plan. Purchases go through Google Play Billing on Android.</p>
+</div>
+</div>
+<div class="accordion-item bg-surface-container-lowest rounded-xl border border-outline-variant shadow-sm transition-all duration-300 overflow-hidden hidden" data-faq-category="billing">
+<button type="button" class="w-full flex items-center justify-between p-6 text-left" onclick="toggleAccordion(this)">
+<span class="font-headline-md text-headline-md text-on-surface">How do I cancel or manage billing?</span>
+<span class="material-symbols-outlined rotate-icon transition-transform duration-300 text-primary">expand_more</span>
+</button>
+<div class="accordion-content px-6">
+<p class="text-on-surface-variant font-body-md">Manage or cancel subscriptions in the Google Play Store: <strong>Payments &amp; subscriptions → Subscriptions</strong>, then select MATCHEDIN. Refunds follow Google Play’s policies.</p>
+</div>
+</div>
+<p id="faq-empty" class="hidden text-on-surface-variant font-body-md text-center py-10">No questions in this category yet.</p>
 </div>
 </section>
 </div>
 <!-- Call to Action -->
 <section class="mt-24 bg-primary-container rounded-3xl p-12 text-center text-on-primary-container">
 <h2 class="font-headline-lg text-headline-lg mb-6">Still have questions?</h2>
-<p class="font-body-lg mb-10 opacity-90">Our team is available 24/7 to help you make the most of your MATCHEDIN experience.</p>
+<p class="font-body-lg mb-10 opacity-90">Our team is available to help you make the most of your MATCHEDIN experience.</p>
 <div class="flex flex-col md:flex-row justify-center gap-4">
-<button class="px-8 py-4 bg-secondary-container text-on-secondary-container font-label-md rounded-full hover:shadow-lg transition-all active:scale-95">Contact Support</button>
-<button class="px-8 py-4 bg-surface text-primary font-label-md rounded-full hover:bg-opacity-90 transition-all active:scale-95 border border-primary-container">Visit Community Forum</button>
+<a class="px-8 py-4 bg-secondary-container text-on-secondary-container font-label-md rounded-full hover:shadow-lg transition-all active:scale-95 inline-block" href="contact.html">Contact Support</a>
+<a class="px-8 py-4 bg-surface text-primary font-label-md rounded-full hover:bg-opacity-90 transition-all active:scale-95 border border-primary-container inline-block" href="https://play.google.com/store/apps/details?id=com.linkedup.mobile" target="_blank" rel="noopener noreferrer">Get the app</a>
 </div>
 </section>
 </main>
@@ -322,8 +352,8 @@
 <h4 class="font-label-md text-label-md text-primary mb-4">Product</h4>
 <ul class="space-y-3">
 <li><a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary hover:underline transition-all" href="index.html">Home</a></li>
-<li><a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary hover:underline transition-all" href="index.html">Features</a></li>
-<li><a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary hover:underline transition-all" href="faq.html">Premium</a></li>
+<li><a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary hover:underline transition-all" href="index.html#pricing">Packages &amp; features</a></li>
+<li><a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary hover:underline transition-all" href="index.html#pricing">Premium pricing</a></li>
 </ul>
 </div>
 <div>
@@ -353,21 +383,52 @@
 </footer>
 <script>
         function toggleAccordion(element) {
-            const parent = element.parentElement;
+            const parent = element.closest('.accordion-item');
+            if (!parent || parent.classList.contains('hidden')) return;
             const isActive = parent.classList.contains('active');
-            
-            // Close all items
-            document.querySelectorAll('.accordion-item').forEach(item => {
+
+            document.querySelectorAll('.accordion-item').forEach((item) => {
                 item.classList.remove('active');
                 item.classList.remove('bg-surface-container-high');
             });
 
-            // If it wasn't active, open it
             if (!isActive) {
                 parent.classList.add('active');
                 parent.classList.add('bg-surface-container-high');
             }
         }
+
+        function setFaqCategory(category) {
+            const cat = category || 'general';
+            let visible = 0;
+
+            document.querySelectorAll('.faq-cat-btn').forEach((btn) => {
+                const active = btn.getAttribute('data-faq-category') === cat;
+                btn.setAttribute('aria-selected', active ? 'true' : 'false');
+                btn.classList.toggle('bg-primary-container', active);
+                btn.classList.toggle('text-on-primary-container', active);
+                btn.classList.toggle('text-on-surface-variant', !active);
+                btn.classList.toggle('hover:bg-surface-container-high', !active);
+            });
+
+            document.querySelectorAll('#faq-list .accordion-item').forEach((item) => {
+                const match = item.getAttribute('data-faq-category') === cat;
+                item.classList.toggle('hidden', !match);
+                item.classList.remove('active', 'bg-surface-container-high');
+                if (match) visible += 1;
+            });
+
+            const empty = document.getElementById('faq-empty');
+            if (empty) empty.classList.toggle('hidden', visible > 0);
+        }
+
+        document.getElementById('faq-category-nav')?.addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-faq-category]');
+            if (!btn) return;
+            setFaqCategory(btn.getAttribute('data-faq-category'));
+        });
+
+        setFaqCategory('general');
     </script>
 <script src="assets/js/config.js"></script>
 <script src="assets/js/api.js"></script>
