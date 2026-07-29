@@ -67,6 +67,35 @@
     }
   }
 
+  async function initDynamicPricing() {
+    const priceNodes = document.querySelectorAll('[data-plan-price]');
+    const monthlyNodes = document.querySelectorAll('[data-year-monthly]');
+    if (!priceNodes.length && !monthlyNodes.length) return;
+    try {
+      const apiBase = (window.LinkedUpSite?.apiBaseUrl || '').replace(/\/$/, '');
+      const res = await fetch(`${apiBase}/subscriptions/plans`, {
+        headers: { Accept: 'application/json' },
+      });
+      if (!res.ok) return;
+      const data = await res.json();
+      const plans = Array.isArray(data?.plans) ? data.plans : [];
+      const byId = new Map(plans.map((plan) => [plan.id, plan]));
+      priceNodes.forEach((node) => {
+        const plan = byId.get(node.dataset.planPrice);
+        if (plan?.priceLabel) node.textContent = plan.priceLabel;
+      });
+      const yearly = byId.get('year');
+      if (Number(yearly?.priceInr) > 0) {
+        const perMonth = Math.round(Number(yearly.priceInr) / 12).toLocaleString('en-IN');
+        monthlyNodes.forEach((node) => {
+          node.textContent = `~₹${perMonth}/month`;
+        });
+      }
+    } catch (_) {
+      // Static HTML prices remain as the offline/API failure fallback.
+    }
+  }
+
   function initMobileNav() {
     const panel = document.getElementById('mobile-nav-panel');
     const backdrop = document.getElementById('mobile-nav-backdrop');
@@ -388,6 +417,7 @@
     initLogoLinks();
     initReportButtons();
     initSupportMailtoLinks();
+    initDynamicPricing();
     initFaqAccordion();
     initContactForm();
     initDeleteAccountFlow();

@@ -84,6 +84,40 @@
     <!-- Stats -->
     <div id="stats-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3"></div>
 
+    <!-- Display pricing -->
+    <div class="bg-white rounded-2xl border border-stone-200 shadow-sm">
+      <div class="p-4 md:p-5 border-b border-stone-100 flex flex-col md:flex-row md:items-center gap-3 justify-between">
+        <div>
+          <h2 class="text-lg font-semibold">Premium display pricing</h2>
+          <p class="text-sm text-stone-500">Updates fallback prices in the app and prices shown on the website.</p>
+        </div>
+        <div class="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 max-w-md">
+          Google Play and RevenueCat control the actual checkout charge. Keep these display values in sync with your store products.
+        </div>
+      </div>
+      <form id="pricing-form">
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Plan</th>
+                <th>Product ID</th>
+                <th>Display price (INR)</th>
+                <th>Preview</th>
+              </tr>
+            </thead>
+            <tbody id="pricing-tbody">
+              <tr><td colspan="4" class="text-stone-400 py-6 text-center">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="p-4 flex items-center justify-between gap-3 border-t border-stone-100">
+          <span id="pricing-updated" class="text-xs text-stone-500"></span>
+          <button type="submit" id="btn-save-pricing" class="btn btn-primary px-4 py-2">Save display prices</button>
+        </div>
+      </form>
+    </div>
+
     <!-- Users -->
     <div class="bg-white rounded-2xl border border-stone-200 shadow-sm">
       <div class="p-4 md:p-5 border-b border-stone-100 flex flex-col md:flex-row md:items-center gap-3 justify-between">

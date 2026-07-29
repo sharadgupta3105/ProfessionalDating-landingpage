@@ -85,6 +85,12 @@
       request('/admin/login', { method: 'POST', json: { username, password } }),
     credentialsHint: () => request('/admin/credentials-hint'),
     stats: () => request('/admin/stats'),
+    pricing: () => request('/admin/pricing'),
+    updatePricing: (plans) =>
+      request('/admin/pricing', {
+        method: 'PUT',
+        json: { plans },
+      }),
     users: (params = {}) => {
       const q = new URLSearchParams();
       Object.entries(params).forEach(([k, v]) => {

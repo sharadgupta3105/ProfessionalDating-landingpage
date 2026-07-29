@@ -82,6 +82,45 @@
       .join('');
   }
 
+  async function loadPricing() {
+    const data = await api.pricing();
+    const plans = Array.isArray(data?.plans) ? data.plans : [];
+    const tbody = document.getElementById('pricing-tbody');
+    if (!plans.length) {
+      tbody.innerHTML =
+        '<tr><td colspan="4" class="text-stone-400 py-6 text-center">No pricing plans found</td></tr>';
+      return;
+    }
+    tbody.innerHTML = plans
+      .map(
+        (plan) => `<tr data-plan-id="${escapeHtml(plan.id)}">
+          <td>
+            <div class="font-medium">${escapeHtml(plan.title)}</div>
+            <div class="text-xs text-stone-500">${escapeHtml(plan.periodLabel)}</div>
+          </td>
+          <td><code class="text-xs text-stone-500">${escapeHtml(plan.productId)}</code></td>
+          <td>
+            <label class="sr-only" for="price-${escapeHtml(plan.id)}">${escapeHtml(plan.title)} price</label>
+            <div class="flex items-center gap-2">
+              <span class="text-stone-500">₹</span>
+              <input id="price-${escapeHtml(plan.id)}" data-price-input type="number" min="1" max="1000000" step="1"
+                value="${Number(plan.priceInr) || ''}" class="w-32" required/>
+            </div>
+          </td>
+          <td data-price-preview class="font-semibold">${escapeHtml(plan.priceLabel)}</td>
+        </tr>`,
+      )
+      .join('');
+    const latest = plans
+      .map((plan) => plan.updatedAt)
+      .filter(Boolean)
+      .sort()
+      .pop();
+    document.getElementById('pricing-updated').textContent = latest
+      ? `Last updated ${fmtDate(latest)}`
+      : 'Using default display prices';
+  }
+
   async function loadUsers() {
     const q = document.getElementById('user-q').value.trim();
     const filter = document.getElementById('user-filter').value;
@@ -169,7 +208,7 @@
   }
 
   async function refreshAll() {
-    await Promise.all([loadStats(), loadUsers(), loadReports()]);
+    await Promise.all([loadStats(), loadPricing(), loadUsers(), loadReports()]);
   }
 
   loginForm.addEventListener('submit', async (e) => {
@@ -197,6 +236,35 @@
 
   document.getElementById('btn-refresh').addEventListener('click', () => {
     refreshAll().then(() => toast('Refreshed')).catch((e) => toast(e.message));
+  });
+  document.getElementById('pricing-tbody').addEventListener('input', (e) => {
+    const input = e.target.closest('[data-price-input]');
+    if (!input) return;
+    const preview = input.closest('tr')?.querySelector('[data-price-preview]');
+    const value = Number(input.value);
+    if (preview) {
+      preview.textContent = Number.isFinite(value) && value > 0
+        ? `₹${value.toLocaleString('en-IN')}`
+        : '—';
+    }
+  });
+  document.getElementById('pricing-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const button = document.getElementById('btn-save-pricing');
+    const plans = [...document.querySelectorAll('#pricing-tbody tr[data-plan-id]')].map((row) => ({
+      id: row.dataset.planId,
+      priceInr: Number(row.querySelector('[data-price-input]')?.value),
+    }));
+    try {
+      button.disabled = true;
+      await api.updatePricing(plans);
+      await loadPricing();
+      toast('Display prices updated');
+    } catch (err) {
+      toast(err.message || 'Could not update pricing');
+    } finally {
+      button.disabled = false;
+    }
   });
   document.getElementById('btn-reports').addEventListener('click', () => {
     loadReports().catch((e) => toast(e.message));
