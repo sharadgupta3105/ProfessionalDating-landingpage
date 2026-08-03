@@ -3,19 +3,18 @@
 <head>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="robots" content="noindex, nofollow"/>
 <meta content="false" name="linkedup-api-proxy"/>
-<meta content="http://localhost:5001" name="linkedup-api-url"/>
 <meta content="help@matchedin.app" name="linkedup-support-email"/>
 <title>Admin Dashboard | MATCHEDIN</title>
 <link rel="icon" type="image/png" href="assets/images/favicon.png"/>
 <script src="https://cdn.tailwindcss.com"></script>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&amp;display=swap" rel="stylesheet"/>
 <link href="assets/css/brand.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
 <style>
   body { font-family: "DM Sans", system-ui, sans-serif; background: #f4f1ec; color: #1c1917; }
-  .material-symbols-outlined { font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24; }
   .stat-card { background: #fff; border: 1px solid rgba(28,25,23,.08); border-radius: 1rem; }
+  .panel { background: #fff; border: 1px solid rgba(28,25,23,.08); border-radius: 1rem; box-shadow: 0 1px 2px rgba(28,25,23,.04); }
   .table-wrap { overflow-x: auto; }
   table { border-collapse: collapse; width: 100%; }
   th { text-align: left; font-size: 11px; text-transform: uppercase; letter-spacing: .06em; color: #78716c; padding: 10px 12px; border-bottom: 1px solid #e7e5e4; }
@@ -26,14 +25,30 @@
   .badge-warn { background: #fef3c7; color: #92400e; }
   .badge-bad { background: #fee2e2; color: #991b1b; }
   .badge-muted { background: #f5f5f4; color: #57534e; }
+  .badge-gold { background: #fef9c3; color: #854d0e; }
   .btn { border-radius: 8px; padding: 6px 10px; font-size: 12px; font-weight: 600; border: 1px solid transparent; cursor: pointer; }
   .btn:disabled { opacity: .5; cursor: not-allowed; }
   .btn-primary { background: #1c1917; color: #fff; }
   .btn-ghost { background: #fff; border-color: #d6d3d1; color: #1c1917; }
   .btn-danger { background: #fff; border-color: #fecaca; color: #b91c1c; }
   .btn-gold { background: #c9a227; color: #1c1917; }
-  input, select { border: 1px solid #d6d3d1; border-radius: 10px; padding: 10px 12px; background: #fff; }
-  #toast { position: fixed; bottom: 24px; right: 24px; z-index: 50; display: none; }
+  input, select, textarea { border: 1px solid #d6d3d1; border-radius: 10px; padding: 10px 12px; background: #fff; }
+  .nav-tab { padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; color: #78716c; border: 1px solid transparent; }
+  .nav-tab:hover { color: #1c1917; background: #f5f5f4; }
+  .nav-tab.is-active { background: #1c1917; color: #fff; }
+  .panel-section { display: none; }
+  .panel-section.is-active { display: block; }
+  #toast { position: fixed; bottom: 24px; right: 24px; z-index: 60; display: none; }
+  .drawer-backdrop { position: fixed; inset: 0; background: rgba(28,25,23,.4); z-index: 40; display: none; }
+  .drawer-backdrop.open { display: block; }
+  .drawer { position: fixed; top: 0; right: 0; height: 100%; width: min(420px, 100%); background: #fff; z-index: 50; transform: translateX(100%); transition: transform .2s ease; box-shadow: -8px 0 24px rgba(0,0,0,.08); overflow-y: auto; }
+  .drawer.open { transform: translateX(0); }
+  .modal-backdrop { position: fixed; inset: 0; background: rgba(28,25,23,.45); z-index: 55; display: none; align-items: center; justify-content: center; padding: 16px; }
+  .modal-backdrop.open { display: flex; }
+  .toggle { position: relative; width: 44px; height: 26px; border-radius: 999px; background: #d6d3d1; border: none; cursor: pointer; transition: background .15s; }
+  .toggle.on { background: #166534; }
+  .toggle::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; border-radius: 50%; background: #fff; transition: transform .15s; }
+  .toggle.on::after { transform: translateX(18px); }
 </style>
 </head>
 <body>
@@ -45,11 +60,11 @@
       <span class="brand-lockup__wordmark"><span class="brand-lockup__matched">MATCHED</span><span class="brand-lockup__in">IN</span></span>
     </div>
     <h1 class="text-2xl font-semibold text-center mb-1">Admin Dashboard</h1>
-    <p class="text-sm text-stone-500 text-center mb-6">Manage users, Premium, bans, and reports</p>
+    <p class="text-sm text-stone-500 text-center mb-6">Users, launch offer, pricing, and safety</p>
     <form id="login-form" class="space-y-4">
       <div>
         <label class="block text-xs font-semibold uppercase tracking-wide text-stone-500 mb-1">Username</label>
-        <input id="login-user" type="text" autocomplete="username" class="w-full" value="admin" required/>
+        <input id="login-user" type="text" autocomplete="username" class="w-full" required/>
       </div>
       <div>
         <label class="block text-xs font-semibold uppercase tracking-wide text-stone-500 mb-1">Password</label>
@@ -65,130 +80,250 @@
 <!-- Dashboard -->
 <section id="dash-view" class="hidden min-h-screen">
   <header class="sticky top-0 z-20 bg-white/90 backdrop-blur border-b border-stone-200">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between gap-4">
-      <div class="flex items-center gap-3">
-        <div class="brand-lockup brand-lockup--nav">
-          <img alt="" class="brand-lockup__mark" src="assets/images/logo-heart.png" aria-hidden="true"/>
-          <span class="brand-lockup__wordmark"><span class="brand-lockup__matched">MATCHED</span><span class="brand-lockup__in">IN</span></span>
+    <div class="max-w-7xl mx-auto px-4 py-3 flex flex-col gap-3">
+      <div class="flex items-center justify-between gap-4">
+        <div class="flex items-center gap-3">
+          <div class="brand-lockup brand-lockup--nav">
+            <img alt="" class="brand-lockup__mark" src="assets/images/logo-heart.png" aria-hidden="true"/>
+            <span class="brand-lockup__wordmark"><span class="brand-lockup__matched">MATCHED</span><span class="brand-lockup__in">IN</span></span>
+          </div>
+          <span class="text-xs font-semibold uppercase tracking-widest text-stone-400">Admin</span>
         </div>
-        <span class="text-xs font-semibold uppercase tracking-widest text-stone-400">Admin</span>
+        <div class="flex items-center gap-3">
+          <button type="button" id="btn-refresh-all" class="btn btn-ghost">Refresh</button>
+          <span id="admin-name" class="text-sm text-stone-600 hidden sm:inline"></span>
+          <button type="button" id="btn-logout" class="btn btn-ghost">Log out</button>
+        </div>
       </div>
-      <div class="flex items-center gap-3">
-        <span id="admin-name" class="text-sm text-stone-600"></span>
-        <button type="button" id="btn-logout" class="btn btn-ghost">Log out</button>
-      </div>
+      <nav id="dash-nav" class="flex flex-wrap gap-2" aria-label="Admin sections">
+        <button type="button" class="nav-tab is-active" data-tab="overview">Overview</button>
+        <button type="button" class="nav-tab" data-tab="launch">Launch offer</button>
+        <button type="button" class="nav-tab" data-tab="users">Users</button>
+        <button type="button" class="nav-tab" data-tab="pricing">Pricing</button>
+        <button type="button" class="nav-tab" data-tab="safety">Safety</button>
+      </nav>
     </div>
   </header>
 
-  <main class="max-w-7xl mx-auto px-4 py-8 space-y-8">
-    <!-- Stats -->
-    <div id="stats-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3"></div>
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Overview -->
+    <section id="panel-overview" class="panel-section is-active space-y-6">
+      <div>
+        <h2 class="text-xl font-semibold">Overview</h2>
+        <p class="text-sm text-stone-500 mt-1">Live snapshot of MatchedIn. Use the tabs above for day-to-day ops.</p>
+      </div>
+      <div id="stats-grid" class="grid grid-cols-2 md:grid-cols-4 gap-3"></div>
+      <div id="overview-promo-card" class="panel p-5"></div>
+      <div class="grid md:grid-cols-3 gap-3">
+        <button type="button" class="panel p-4 text-left hover:border-stone-300" data-goto="launch">
+          <div class="text-sm font-semibold">Launch offer</div>
+          <div class="text-xs text-stone-500 mt-1">Turn free Premium on/off and set dates</div>
+        </button>
+        <button type="button" class="panel p-4 text-left hover:border-stone-300" data-goto="users">
+          <div class="text-sm font-semibold">Users</div>
+          <div class="text-xs text-stone-500 mt-1">Search, grant Premium, ban, delete</div>
+        </button>
+        <button type="button" class="panel p-4 text-left hover:border-stone-300" data-goto="safety">
+          <div class="text-sm font-semibold">Safety</div>
+          <div class="text-xs text-stone-500 mt-1">Review reports and take action</div>
+        </button>
+      </div>
+    </section>
 
-    <!-- Display pricing -->
-    <div class="bg-white rounded-2xl border border-stone-200 shadow-sm">
-      <div class="p-4 md:p-5 border-b border-stone-100 flex flex-col md:flex-row md:items-center gap-3 justify-between">
+    <!-- Launch offer -->
+    <section id="panel-launch" class="panel-section space-y-6">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-3">
         <div>
-          <h2 class="text-lg font-semibold">Premium display pricing</h2>
-          <p class="text-sm text-stone-500">Updates fallback prices in the app and prices shown on the website.</p>
+          <h2 class="text-xl font-semibold">Launch offer</h2>
+          <p class="text-sm text-stone-500 mt-1">New signups during the window automatically get <strong>30 days Premium</strong>.</p>
         </div>
-        <div class="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 max-w-md">
-          Google Play and RevenueCat control the actual checkout charge. Keep these display values in sync with your store products.
+        <div id="launch-status-badge"></div>
+      </div>
+
+      <div class="panel p-5 md:p-6 space-y-6">
+        <div class="flex items-center justify-between gap-4">
+          <div>
+            <div class="font-semibold">Offer enabled</div>
+            <div class="text-sm text-stone-500">When on and inside the date window, every new account gets a free month.</div>
+          </div>
+          <button type="button" id="promo-enabled" class="toggle" aria-pressed="false" title="Toggle launch offer"></button>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wide text-stone-500 mb-1" for="promo-start">Starts</label>
+            <input id="promo-start" type="datetime-local" class="w-full"/>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wide text-stone-500 mb-1" for="promo-end">Ends</label>
+            <input id="promo-end" type="datetime-local" class="w-full"/>
+          </div>
+        </div>
+
+        <div id="launch-meta" class="text-xs text-stone-500"></div>
+
+        <div class="flex flex-wrap gap-2">
+          <button type="button" id="btn-save-promo" class="btn btn-primary px-4 py-2">Save launch offer</button>
+          <button type="button" id="btn-view-promo-users" class="btn btn-ghost px-4 py-2">View promo users</button>
         </div>
       </div>
-      <form id="pricing-form">
+
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-3" id="launch-stats"></div>
+
+      <div class="panel p-5 text-sm text-stone-600 space-y-2">
+        <div class="font-semibold text-stone-800">How it works</div>
+        <ul class="list-disc pl-5 space-y-1">
+          <li>Applies only to <em>new</em> signups (email OTP or LinkedIn).</li>
+          <li>Existing users who already have Premium are skipped.</li>
+          <li>Saving here stores settings in the database (overrides env vars).</li>
+          <li>Users see this as “Launch offer” in their plan details.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- Users -->
+    <section id="panel-users" class="panel-section">
+      <div class="panel">
+        <div class="p-4 md:p-5 border-b border-stone-100 flex flex-col md:flex-row md:items-center gap-3 justify-between">
+          <div>
+            <h2 class="text-lg font-semibold">Users</h2>
+            <p class="text-sm text-stone-500">Search, open details, grant Premium, ban, or delete</p>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <input id="user-q" type="search" placeholder="Search email, name, city…" class="min-w-[200px]"/>
+            <select id="user-filter">
+              <option value="all">All</option>
+              <option value="premium">Premium</option>
+              <option value="promo">Launch offer</option>
+              <option value="banned">Banned</option>
+              <option value="incomplete">Incomplete onboarding</option>
+            </select>
+            <button type="button" id="btn-refresh-users" class="btn btn-ghost">Refresh</button>
+          </div>
+        </div>
         <div class="table-wrap">
           <table>
             <thead>
               <tr>
-                <th>Plan</th>
-                <th>Product ID</th>
-                <th>Display price (INR)</th>
-                <th>Preview</th>
+                <th>User</th>
+                <th>City</th>
+                <th>Status</th>
+                <th>Premium</th>
+                <th>Joined</th>
+                <th>Actions</th>
               </tr>
             </thead>
-            <tbody id="pricing-tbody">
-              <tr><td colspan="4" class="text-stone-400 py-6 text-center">Loading…</td></tr>
+            <tbody id="users-tbody">
+              <tr><td colspan="6" class="text-stone-400 py-8 text-center">Loading…</td></tr>
             </tbody>
           </table>
         </div>
-        <div class="p-4 flex items-center justify-between gap-3 border-t border-stone-100">
-          <span id="pricing-updated" class="text-xs text-stone-500"></span>
-          <button type="submit" id="btn-save-pricing" class="btn btn-primary px-4 py-2">Save display prices</button>
+        <div class="p-4 flex items-center justify-between text-sm text-stone-500">
+          <span id="users-meta"></span>
+          <div class="flex gap-2">
+            <button type="button" id="btn-prev" class="btn btn-ghost" disabled>Prev</button>
+            <button type="button" id="btn-next" class="btn btn-ghost" disabled>Next</button>
+          </div>
         </div>
-      </form>
-    </div>
+      </div>
+    </section>
 
-    <!-- Users -->
-    <div class="bg-white rounded-2xl border border-stone-200 shadow-sm">
-      <div class="p-4 md:p-5 border-b border-stone-100 flex flex-col md:flex-row md:items-center gap-3 justify-between">
-        <div>
-          <h2 class="text-lg font-semibold">Users</h2>
-          <p class="text-sm text-stone-500">Search, grant Premium, ban, or delete</p>
+    <!-- Pricing -->
+    <section id="panel-pricing" class="panel-section">
+      <div class="panel">
+        <div class="p-4 md:p-5 border-b border-stone-100 flex flex-col md:flex-row md:items-center gap-3 justify-between">
+          <div>
+            <h2 class="text-lg font-semibold">Premium display pricing</h2>
+            <p class="text-sm text-stone-500">Fallback prices shown in the app and on the website.</p>
+          </div>
+          <div class="text-xs text-amber-800 bg-amber-50 border border-amber-200 rounded-xl px-3 py-2 max-w-md">
+            Google Play / App Store / RevenueCat control the real checkout charge. Keep these in sync.
+          </div>
         </div>
-        <div class="flex flex-wrap gap-2">
-          <input id="user-q" type="search" placeholder="Search email, name, city…" class="min-w-[200px]"/>
-          <select id="user-filter">
-            <option value="all">All</option>
-            <option value="premium">Premium</option>
-            <option value="banned">Banned</option>
-            <option value="incomplete">Incomplete onboarding</option>
-          </select>
-          <button type="button" id="btn-refresh" class="btn btn-ghost">Refresh</button>
-        </div>
+        <form id="pricing-form">
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Plan</th>
+                  <th>Product ID</th>
+                  <th>Display price (INR)</th>
+                  <th>Preview</th>
+                </tr>
+              </thead>
+              <tbody id="pricing-tbody">
+                <tr><td colspan="4" class="text-stone-400 py-6 text-center">Loading…</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="p-4 flex items-center justify-between gap-3 border-t border-stone-100">
+            <span id="pricing-updated" class="text-xs text-stone-500"></span>
+            <button type="submit" id="btn-save-pricing" class="btn btn-primary px-4 py-2">Save display prices</button>
+          </div>
+        </form>
       </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>User</th>
-              <th>City</th>
-              <th>Status</th>
-              <th>Premium</th>
-              <th>Joined</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody id="users-tbody">
-            <tr><td colspan="6" class="text-stone-400 py-8 text-center">Loading…</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <div class="p-4 flex items-center justify-between text-sm text-stone-500">
-        <span id="users-meta"></span>
-        <div class="flex gap-2">
-          <button type="button" id="btn-prev" class="btn btn-ghost" disabled>Prev</button>
-          <button type="button" id="btn-next" class="btn btn-ghost" disabled>Next</button>
-        </div>
-      </div>
-    </div>
+    </section>
 
-    <!-- Reports -->
-    <div class="bg-white rounded-2xl border border-stone-200 shadow-sm">
-      <div class="p-4 md:p-5 border-b border-stone-100 flex items-center justify-between">
-        <div>
-          <h2 class="text-lg font-semibold">Reports</h2>
-          <p class="text-sm text-stone-500">Latest user reports</p>
+    <!-- Safety -->
+    <section id="panel-safety" class="panel-section">
+      <div class="panel">
+        <div class="p-4 md:p-5 border-b border-stone-100 flex items-center justify-between gap-3">
+          <div>
+            <h2 class="text-lg font-semibold">Safety reports</h2>
+            <p class="text-sm text-stone-500">Latest reports — ban the reported user when needed</p>
+          </div>
+          <button type="button" id="btn-reports" class="btn btn-ghost">Reload</button>
         </div>
-        <button type="button" id="btn-reports" class="btn btn-ghost">Reload</button>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>When</th>
+                <th>Reporter</th>
+                <th>Reported</th>
+                <th>Reason</th>
+                <th>Details</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="reports-tbody">
+              <tr><td colspan="6" class="text-stone-400 py-6 text-center">—</td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
-      <div class="table-wrap">
-        <table>
-          <thead>
-            <tr>
-              <th>When</th>
-              <th>Reporter</th>
-              <th>Reported</th>
-              <th>Reason</th>
-            </tr>
-          </thead>
-          <tbody id="reports-tbody">
-            <tr><td colspan="4" class="text-stone-400 py-6 text-center">—</td></tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
+    </section>
   </main>
 </section>
+
+<!-- User detail drawer -->
+<div id="drawer-backdrop" class="drawer-backdrop"></div>
+<aside id="user-drawer" class="drawer" aria-hidden="true">
+  <div class="p-5 border-b border-stone-100 flex items-center justify-between">
+    <h3 class="font-semibold">User details</h3>
+    <button type="button" id="btn-close-drawer" class="btn btn-ghost">Close</button>
+  </div>
+  <div id="user-drawer-body" class="p-5 text-sm text-stone-600">Loading…</div>
+</aside>
+
+<!-- Grant premium modal -->
+<div id="premium-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="premium-modal-title">
+  <div class="bg-white rounded-2xl shadow-xl w-full max-w-sm p-6">
+    <h3 id="premium-modal-title" class="text-lg font-semibold mb-1">Grant Premium</h3>
+    <p id="premium-modal-user" class="text-sm text-stone-500 mb-4"></p>
+    <label class="block text-xs font-semibold uppercase tracking-wide text-stone-500 mb-1" for="premium-plan">Plan</label>
+    <select id="premium-plan" class="w-full mb-5">
+      <option value="day">Day (24 hours)</option>
+      <option value="week">Week</option>
+      <option value="month" selected>Month</option>
+      <option value="year">Year</option>
+    </select>
+    <div class="flex justify-end gap-2">
+      <button type="button" id="btn-premium-cancel" class="btn btn-ghost">Cancel</button>
+      <button type="button" id="btn-premium-confirm" class="btn btn-gold">Grant</button>
+    </div>
+  </div>
+</div>
 
 <div id="toast" class="bg-stone-900 text-white px-4 py-3 rounded-xl shadow-lg text-sm"></div>
 

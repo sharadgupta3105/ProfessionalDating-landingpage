@@ -12,7 +12,7 @@
 
   function getToken() {
     try {
-      return localStorage.getItem(TOKEN_KEY);
+      return sessionStorage.getItem(TOKEN_KEY);
     } catch (_) {
       return null;
     }
@@ -20,8 +20,10 @@
 
   function setSession(token, admin) {
     try {
-      if (token) localStorage.setItem(TOKEN_KEY, token);
-      if (admin) localStorage.setItem(USER_KEY, JSON.stringify(admin));
+      localStorage.removeItem(TOKEN_KEY);
+      localStorage.removeItem(USER_KEY);
+      if (token) sessionStorage.setItem(TOKEN_KEY, token);
+      if (admin) sessionStorage.setItem(USER_KEY, JSON.stringify(admin));
     } catch (_) {
       /* ignore */
     }
@@ -29,6 +31,8 @@
 
   function clearSession() {
     try {
+      sessionStorage.removeItem(TOKEN_KEY);
+      sessionStorage.removeItem(USER_KEY);
       localStorage.removeItem(TOKEN_KEY);
       localStorage.removeItem(USER_KEY);
     } catch (_) {
@@ -38,7 +42,7 @@
 
   function getAdmin() {
     try {
-      const raw = localStorage.getItem(USER_KEY);
+      const raw = sessionStorage.getItem(USER_KEY);
       return raw ? JSON.parse(raw) : null;
     } catch (_) {
       return null;
@@ -68,6 +72,7 @@
     }
 
     if (!res.ok) {
+      if (res.status === 401 && path !== '/admin/login') clearSession();
       const err = new Error(data?.message || res.statusText || 'Request failed');
       err.status = res.status;
       err.data = data;
@@ -83,6 +88,7 @@
     clearSession,
     login: (username, password) =>
       request('/admin/login', { method: 'POST', json: { username, password } }),
+    logout: () => request('/admin/logout', { method: 'POST' }),
     credentialsHint: () => request('/admin/credentials-hint'),
     stats: () => request('/admin/stats'),
     pricing: () => request('/admin/pricing'),
@@ -114,5 +120,11 @@
     deleteUser: (id) =>
       request(`/admin/users/${encodeURIComponent(id)}`, { method: 'DELETE' }),
     reports: () => request('/admin/reports'),
+    launchPromo: () => request('/admin/launch-promo'),
+    updateLaunchPromo: (payload) =>
+      request('/admin/launch-promo', {
+        method: 'PUT',
+        json: payload,
+      }),
   };
 })(window);

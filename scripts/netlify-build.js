@@ -7,8 +7,7 @@ const path = require('path');
 
 const ROOT = path.join(__dirname, '..');
 const DIST = path.join(ROOT, 'dist');
-const DEFAULT_API =
-  'http://promatch-api-env.eba-rt5gymna.ap-south-1.elasticbeanstalk.com';
+const DEFAULT_API = 'https://api.matchedin.app';
 
 const apiUrl = (process.env.LINKEDUP_API_URL || DEFAULT_API).replace(/\/$/, '');
 const supportEmail = process.env.LINKEDUP_SUPPORT_EMAIL || 'help@matchedin.app';
@@ -24,6 +23,10 @@ const CLEAN_URLS = [
   ['community-guidelines', 'community-guidelines.html'],
   ['play-store-guide', 'play-store-guide.html'],
   ['admin', 'admin.html'],
+  ['blog', 'blog/index.html'],
+  ['blog/dating-tips-for-professionals', 'blog/dating-tips-for-professionals.html'],
+  ['blog/conversation-starters', 'blog/conversation-starters.html'],
+  ['blog/green-flags-red-flags', 'blog/green-flags-red-flags.html'],
 ];
 
 const SKIP = new Set([

@@ -13,7 +13,7 @@
 
    | Variable | Value |
    |----------|--------|
-   | `LINKEDUP_API_URL` | `http://promatch-api-env.eba-rt5gymna.ap-south-1.elasticbeanstalk.com` (or your HTTPS API later) |
+   | `LINKEDUP_API_URL` | `https://api.matchedin.app` |
    | `LINKEDUP_SUPPORT_EMAIL` | `help@matchedin.app` |
    | `LINKEDUP_API_PROXY` | `true` (default; routes `/auth` and `/users` through Netlify — required for delete-account on HTTPS) |
 

@@ -2,8 +2,7 @@
  * MatchedIn site configuration — override via <meta> tags in HTML head.
  */
 (function (global) {
-  const PRODUCTION_API =
-    'http://promatch-api-env.eba-rt5gymna.ap-south-1.elasticbeanstalk.com';
+  const PRODUCTION_API = 'https://api.matchedin.app';
 
   function metaContent(name) {
     const el = document.querySelector(`meta[name="${name}"]`);

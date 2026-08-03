@@ -1,489 +1,671 @@
 <!DOCTYPE html>
-
-<html class="scroll-smooth" lang="en"><head>
+<html class="scroll-smooth" lang="en">
+<head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
-<meta content="false" name="linkedup-api-proxy"/>
-<meta content="" name="linkedup-api-url"/>
-<meta content="help@matchedin.app" name="linkedup-support-email"/>
-<title>MATCHEDIN | Professional Dating for Indians</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="linkedup-api-proxy" content="false"/>
+<meta name="linkedup-api-url" content=""/>
+<meta name="linkedup-support-email" content="help@matchedin.app"/>
+<title>MatchedIn — Dating App for Indian Professionals | Meaningful Relationships</title>
+<meta name="description" content="MatchedIn is the professional dating app for India. Meet verified engineers, doctors, consultants &amp; entrepreneurs. Compatibility matching beyond photos — meaningful relationships in Delhi, Gurgaon, Bengaluru &amp; 150+ cities."/>
+<meta name="keywords" content="Indian Dating App, Dating App for Professionals, Professional Dating App India, Meet Singles India, Dating App Gurgaon, Dating App Delhi, Verified Dating App, Meaningful Relationships, Dating for Engineers, Dating for Doctors"/>
+<meta name="author" content="MatchedIn"/>
+<meta name="theme-color" content="#4F46E5"/>
+<link rel="canonical" href="https://matchedin.app/"/>
 <link rel="icon" type="image/png" href="assets/images/favicon.png"/>
 <link rel="apple-touch-icon" href="assets/images/favicon.png"/>
-<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
-<link href="assets/css/brand.css" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
-<script id="tailwind-config">
-      tailwind.config = {
-        darkMode: "class",
-        theme: {
-          extend: {
-            "colors": {
-                    "background": "#fef7ff",
-                    "primary-fixed-dim": "#d3bbff",
-                    "surface-bright": "#fef7ff",
-                    "inverse-surface": "#322f38",
-                    "on-tertiary": "#ffffff",
-                    "primary": "#420093",
-                    "secondary": "#7b5800",
-                    "surface-container-low": "#f9f1fd",
-                    "surface-container-lowest": "#ffffff",
-                    "on-surface-variant": "#4a4453",
-                    "tertiary-container": "#783600",
-                    "secondary-fixed-dim": "#f7bd48",
-                    "outline": "#7b7485",
-                    "primary-container": "#5b21b6",
-                    "secondary-fixed": "#ffdea6",
-                    "error": "#ba1a1a",
-                    "on-tertiary-fixed-variant": "#753400",
-                    "on-primary-fixed": "#250059",
-                    "surface-variant": "#e7e0ec",
-                    "on-primary-fixed-variant": "#581db3",
-                    "on-surface": "#1d1a23",
-                    "surface-tint": "#713dcc",
-                    "on-error": "#ffffff",
-                    "surface-container-highest": "#e7e0ec",
-                    "tertiary": "#552400",
-                    "on-tertiary-fixed": "#321300",
-                    "on-primary-container": "#c7aaff",
-                    "on-secondary-fixed-variant": "#5d4200",
-                    "on-secondary-container": "#715000",
-                    "secondary-container": "#fdc34d",
-                    "on-secondary-fixed": "#271900",
-                    "tertiary-fixed": "#ffdbc8",
-                    "primary-fixed": "#ebddff",
-                    "inverse-on-surface": "#f6eefb",
-                    "surface-container": "#f3ebf8",
-                    "on-primary": "#ffffff",
-                    "tertiary-fixed-dim": "#ffb68b",
-                    "on-background": "#1d1a23",
-                    "surface-dim": "#dfd7e4",
-                    "surface-container-high": "#ede5f2",
-                    "on-secondary": "#ffffff",
-                    "outline-variant": "#ccc3d6",
-                    "error-container": "#ffdad6",
-                    "on-error-container": "#93000a",
-                    "inverse-primary": "#d3bbff",
-                    "surface": "#fef7ff",
-                    "on-tertiary-container": "#ffa267"
-            },
-            "borderRadius": {
-                    "DEFAULT": "0.25rem",
-                    "lg": "0.5rem",
-                    "xl": "0.75rem",
-                    "full": "9999px"
-            },
-            "spacing": {
-                    "container-max": "1200px",
-                    "stack-lg": "2rem",
-                    "margin-desktop": "2.5rem",
-                    "stack-md": "1rem",
-                    "margin-mobile": "1rem",
-                    "gutter": "1.5rem",
-                    "stack-sm": "0.5rem"
-            },
-            "fontFamily": {
-                    "body-lg": ["Inter"],
-                    "body-md": ["Inter"],
-                    "headline-lg-mobile": ["Inter"],
-                    "headline-lg": ["Inter"],
-                    "headline-md": ["Inter"],
-                    "headline-xl": ["Inter"],
-                    "label-sm": ["Inter"],
-                    "label-md": ["Inter"]
-            },
-            "fontSize": {
-                    "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
-                    "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
-                    "headline-lg-mobile": ["28px", {"lineHeight": "34px", "fontWeight": "700"}],
-                    "headline-lg": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "headline-md": ["24px", {"lineHeight": "32px", "fontWeight": "600"}],
-                    "headline-xl": ["40px", {"lineHeight": "48px", "letterSpacing": "-0.02em", "fontWeight": "700"}],
-                    "label-sm": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "500"}],
-                    "label-md": ["14px", {"lineHeight": "20px", "letterSpacing": "0.01em", "fontWeight": "600"}]
-            }
-          },
-        },
+
+<meta property="og:type" content="website"/>
+<meta property="og:site_name" content="MatchedIn"/>
+<meta property="og:url" content="https://matchedin.app/"/>
+<meta property="og:title" content="MatchedIn — Meaningful Dating for Indian Professionals"/>
+<meta property="og:description" content="Meet verified professionals. Match on profession, lifestyle &amp; goals — not just photos. Download MatchedIn."/>
+<meta property="og:image" content="https://matchedin.app/assets/images/app-icon.png"/>
+<meta property="og:locale" content="en_IN"/>
+
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="MatchedIn — Meaningful Dating for Indian Professionals"/>
+<meta name="twitter:description" content="The dating app built for Indian professionals. Verified profiles. Compatibility matching. Real relationships."/>
+<meta name="twitter:image" content="https://matchedin.app/assets/images/app-icon.png"/>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "name": "MatchedIn",
+      "url": "https://matchedin.app",
+      "logo": "https://matchedin.app/assets/images/logo-heart.png",
+      "email": "help@matchedin.app",
+      "sameAs": ["https://play.google.com/store/apps/details?id=com.linkedup.mobile"]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "MatchedIn",
+      "operatingSystem": "Android, iOS",
+      "applicationCategory": "LifestyleApplication",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "INR"
+      },
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "ratingCount": "120"
+      },
+      "description": "Professional dating app for Indian professionals with compatibility matching and verified profiles."
+    },
+    {
+      "@type": "WebSite",
+      "name": "MatchedIn",
+      "url": "https://matchedin.app/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://matchedin.app/faq.html",
+        "query-input": "required name=search_term_string"
       }
-    </script>
-<style>
-        body { background-color: #fef7ff; font-family: 'Inter', sans-serif; }
-        .material-symbols-outlined { font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24; }
-        .gold-glow { box-shadow: 0 10px 30px rgba(184, 134, 11, 0.15); }
-        .premium-card { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
-        .premium-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(28, 25, 23, 0.08); }
-    </style>
-</head>
-<body class="text-on-surface">
-<!-- TopNavBar -->
-<header class="fixed top-0 w-full z-50 bg-surface/90 backdrop-blur-md shadow-sm">
-<div class="flex justify-between items-center px-margin-desktop py-4 max-w-container-max mx-auto">
-<div class="flex items-center gap-2"><a href="index.html" aria-label="MATCHEDIN Home" class="brand-lockup brand-lockup--nav"><img alt="" class="brand-lockup__mark" src="assets/images/logo-heart.png" aria-hidden="true"/><span class="brand-lockup__wordmark"><span class="brand-lockup__matched">MATCHED</span><span class="brand-lockup__in">IN</span></span></a>
-</div>
-<nav class="hidden md:flex items-center gap-8">
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="index.html">Home</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="index.html#pricing">Pricing</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="faq.html">FAQ</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="safety.html">Safety</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="privacy.html">Privacy</a>
-<a class="font-body-md text-body-md text-on-surface-variant hover:text-primary transition-colors duration-200" href="contact.html">Contact</a>
-</nav>
-<div class="flex items-center gap-4">
-<button class="md:hidden text-primary">
-<span class="material-symbols-outlined">menu</span>
-</button>
-</div>
-</div>
-</header>
-<main class="pt-24">
-<!-- Hero Section -->
-<section class="relative px-margin-mobile md:px-margin-desktop py-16 md:py-32 max-w-container-max mx-auto overflow-hidden">
-<div class="grid md:grid-cols-2 gap-gutter items-center">
-<div class="z-10">
-<div class="inline-flex items-center gap-2 bg-secondary-fixed text-on-secondary-fixed px-4 py-1.5 rounded-full mb-6">
-<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">verified</span>
-<span class="font-label-sm text-label-sm uppercase tracking-wider">LinkedIn Verified Profiles</span>
-</div>
-<h1 class="font-headline-xl text-headline-xl text-on-surface mb-6 leading-tight">
-                        Dating for <span class="text-primary italic">Indian Professionals</span>.
-                    </h1>
-<p class="font-body-lg text-body-lg text-on-surface-variant mb-10 max-w-lg">
-                        Authentic profiles, LinkedIn verification, and respectful connections for working adults seeking meaningful partnerships.
-                    </p>
-<div class="flex flex-col sm:flex-row gap-4">
-<a class="bg-secondary-container text-on-secondary-container px-8 py-4 rounded-xl font-label-md text-label-md gold-glow flex items-center justify-center gap-2 hover:brightness-105 transition-all" href="https://play.google.com/store/apps/details?id=com.linkedup.mobile" target="_blank" rel="noopener noreferrer" aria-label="Get MatchedIn on Google Play">
-<span class="material-symbols-outlined">shop</span>
-                            Get it on Google Play
-                        </a>
-<a class="border-2 border-primary text-primary px-8 py-4 rounded-xl font-label-md text-label-md flex items-center justify-center gap-2 hover:bg-primary/5 transition-all" href="contact.html">
-                            Contact Support
-                        </a>
-</div>
-</div>
-<div class="relative hidden md:block">
-<div class="absolute -top-20 -right-20 w-96 h-96 bg-primary/5 rounded-full blur-3xl"></div>
-<div class="relative z-10 grid grid-cols-2 gap-4">
-<div class="space-y-4 pt-12">
-<div class="rounded-2xl overflow-hidden shadow-xl aspect-[3/4] premium-card">
-<img class="w-full h-full object-cover" data-alt="A professional Indian woman in her early 30s, dressed in elegant business casual attire, smiling warmly in a high-end modern office setting with soft natural light. The photograph is editorial in style with a shallow depth of field, focusing on her friendly expression. The overall atmosphere is premium and trustworthy, reflecting a professional lifestyle." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANBRdYpJmfzFCqTkEbGdt7xC1nzUwSBSvj9xHzm6nIzXX5mbg8YCvEiLzPaPn_TfvzurVDd8crJTqW1U4xt2CytX_mfcdCuPt-b9Vfav_jDa0pRLwMLo7vNLah1cOInuSV7DfrepZnR_qcJOWtfS9ztB18zfpiqVIxIydIg7T2zoRKu1qYVqkuC3B-okr1qVYCQSwKI87_icrNWXcXuUfcA-c0HbpszCQkInAp67qNst4JDqG_vI9gFzENxWvNLpR5krQdE2Nrevkm"/>
-</div>
-</div>
-<div class="space-y-4">
-<div class="rounded-2xl overflow-hidden shadow-xl aspect-[3/4] premium-card">
-<img class="w-full h-full object-cover" data-alt="A handsome Indian man in his mid-30s wearing a tailored blazer, looking thoughtfully into the distance in a sophisticated urban cafe background. Soft evening lighting creates a warm, premium aesthetic. The image conveys a sense of ambition, maturity, and professional success, perfectly aligned with a high-intent networking and dating platform." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAq2oqmIsZ__6laUJAlFLFjFSGBrZtK_jtJ6gZJL0_9fB33F_s-Z3iJsIW06-AX__nDpD-VNPmNWjt2KNquJdC_Q6PjtcVnGv5rB3Vr4UUM4TVv62shvctSC4_tYKzQJUyi56v6O2uyfcemKAnzigETJfW6HqgyZj-IyFSsYBTy_8f5zU2IEL6ZeVxd2DuiRry_6_EOC_4SIqkNk5eLnhrOPCx7D99EREhpzcQreDAU10CHye2BXiug0ynaXWCZ_yvPq89kxvjK5rNK"/>
-</div>
-<div class="bg-primary-container p-6 rounded-2xl text-on-primary-container premium-card">
-<span class="material-symbols-outlined text-4xl mb-4">lock</span>
-<p class="font-headline-md text-headline-md leading-tight">Your data is safe with us.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- Trust Strip -->
-<div class="bg-surface-container-high py-6 px-margin-desktop overflow-hidden border-y border-outline-variant/30">
-<div class="max-w-container-max mx-auto flex flex-wrap justify-around items-center gap-8 opacity-70 grayscale hover:grayscale-0 transition-all">
-<div class="flex items-center gap-2 font-label-md text-label-md">
-<span class="material-symbols-outlined">18_up_rating</span>
-                    18+ ONLY
-                </div>
-<div class="flex items-center gap-2 font-label-md text-label-md">
-<span class="material-symbols-outlined">shield</span>
-                    PRIVACY-FIRST
-                </div>
-<div class="flex items-center gap-2 font-label-md text-label-md">
-<span class="material-symbols-outlined">delete_forever</span>
-                    DELETE ACCOUNT ANYTIME
-                </div>
-<div class="flex items-center gap-2 font-label-md text-label-md">
-<span class="material-symbols-outlined">check_circle</span>
-                    HUMAN MODERATED
-                </div>
-</div>
-</div>
-<!-- How it Works -->
-<section class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto">
-<div class="text-center mb-16">
-<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">How it works</h2>
-<div class="w-20 h-1 bg-secondary mx-auto rounded-full"></div>
-</div>
-<div class="grid md:grid-cols-3 gap-12">
-<div class="text-center group">
-<div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
-<span class="material-symbols-outlined text-4xl">person_add</span>
-</div>
-<h3 class="font-headline-md text-headline-md mb-2">1. Sign up</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">Quick onboarding with LinkedIn or Email. We prioritize your professional identity.</p>
-</div>
-<div class="text-center group">
-<div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
-<span class="material-symbols-outlined text-4xl">edit_note</span>
-</div>
-<h3 class="font-headline-md text-headline-md mb-2">2. Complete profile</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">Add details about your career, education, and lifestyle to find better matches.</p>
-</div>
-<div class="text-center group">
-<div class="w-20 h-20 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:bg-primary group-hover:text-on-primary transition-all duration-300">
-<span class="material-symbols-outlined text-4xl">forum</span>
-</div>
-<h3 class="font-headline-md text-headline-md mb-2">3. Match &amp; Chat</h3>
-<p class="font-body-md text-body-md text-on-surface-variant">Connect with like-minded professionals and start respectful conversations.</p>
-</div>
-</div>
-</section>
-<!-- Pricing & Premium -->
-<section id="pricing" class="py-24 px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto scroll-mt-28">
-<div class="text-center mb-12 md:mb-16">
-<div class="inline-flex items-center gap-2 bg-secondary-fixed/80 text-on-secondary-fixed px-4 py-1.5 rounded-full mb-5">
-<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">workspace_premium</span>
-<span class="font-label-sm text-label-sm uppercase tracking-wider">MatchedIn Premium</span>
-</div>
-<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Packages &amp; features</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">Start free with a daily swipe limit. Upgrade anytime for unlimited likes and professional matching tools — priced for India.</p>
-<div class="w-20 h-1 bg-secondary mx-auto rounded-full mt-6"></div>
-</div>
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {"@type":"Question","name":"Is MatchedIn free to use?","acceptedAnswer":{"@type":"Answer","text":"Yes. You can create a profile, discover professionals, and match for free. Premium unlocks unlimited swipes and advanced filters."}},
+        {"@type":"Question","name":"How does verification work?","acceptedAnswer":{"@type":"Answer","text":"MatchedIn supports LinkedIn verification and profile photo checks so you meet real professionals, not fake profiles."}},
+        {"@type":"Question","name":"Is my data private?","acceptedAnswer":{"@type":"Answer","text":"We never show your exact location on your profile. You control what you share, can block or report anyone, and can delete your account anytime."}},
+        {"@type":"Question","name":"How is matching different from Tinder?","acceptedAnswer":{"@type":"Answer","text":"We match on profession, lifestyle, relationship goals, education, interests, and preferences — not appearance alone."}},
+        {"@type":"Question","name":"Which cities is MatchedIn available in?","acceptedAnswer":{"@type":"Answer","text":"MatchedIn is available across India, including Delhi, Gurgaon, Noida, Mumbai, Bengaluru, Hyderabad, Pune, Chennai, and 150+ cities."}}
+      ]
+    }
+  ]
+}
+</script>
 
-<!-- Feature list -->
-<div class="mb-14 md:mb-16 bg-surface-container-lowest border border-outline-variant/25 rounded-3xl p-8 md:p-10 shadow-sm">
-<h3 class="font-headline-md text-headline-md text-on-surface mb-2 text-center md:text-left">Everything in Premium</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-8 text-center md:text-left">All paid plans unlock the same Premium features while your subscription is active.</p>
-<ul class="grid sm:grid-cols-2 gap-4 md:gap-5">
-<li class="flex items-start gap-3 font-body-md text-body-md text-on-surface">
-<span class="material-symbols-outlined text-secondary shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span>Unlimited likes &amp; passes while active</span>
-</li>
-<li class="flex items-start gap-3 font-body-md text-body-md text-on-surface">
-<span class="material-symbols-outlined text-secondary shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span>See who liked you</span>
-</li>
-<li class="flex items-start gap-3 font-body-md text-body-md text-on-surface">
-<span class="material-symbols-outlined text-secondary shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span>Intro notes on likes</span>
-</li>
-<li class="flex items-start gap-3 font-body-md text-body-md text-on-surface">
-<span class="material-symbols-outlined text-secondary shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span>Verified-only Discover</span>
-</li>
-<li class="flex items-start gap-3 font-body-md text-body-md text-on-surface">
-<span class="material-symbols-outlined text-secondary shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span>Advanced career filters</span>
-</li>
-<li class="flex items-start gap-3 font-body-md text-body-md text-on-surface">
-<span class="material-symbols-outlined text-secondary shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span>Minimum compatibility score filter</span>
-</li>
-<li class="flex items-start gap-3 font-body-md text-body-md text-on-surface">
-<span class="material-symbols-outlined text-secondary shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span>Weekly curated picks</span>
-</li>
-<li class="flex items-start gap-3 font-body-md text-body-md text-on-surface">
-<span class="material-symbols-outlined text-secondary shrink-0 mt-0.5" style="font-variation-settings: 'FILL' 1;">check_circle</span>
-<span>Premium badge on profile</span>
-</li>
-</ul>
-</div>
-
-<!-- Packages -->
-<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-5 md:gap-6">
-<!-- Day -->
-<article class="bg-surface-container-lowest border border-outline-variant/25 rounded-3xl p-6 md:p-7 flex flex-col premium-card shadow-sm">
-<p class="font-label-sm text-label-sm uppercase tracking-wider text-outline mb-2">Day Pass</p>
-<h3 class="font-headline-md text-headline-md text-on-surface mb-1" data-plan-price="day">₹49</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-5">per day · 24 hours unlimited</p>
-<ul class="space-y-2.5 mb-8 flex-1">
-<li class="flex gap-2 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px] text-primary">bolt</span> Unlimited swipes for 24 hours</li>
-<li class="flex gap-2 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px] text-primary">bolt</span> Full Premium feature set</li>
-<li class="flex gap-2 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px] text-primary">bolt</span> Try for less than a coffee</li>
-</ul>
-<a class="mt-auto block text-center rounded-xl border-2 border-primary text-primary px-4 py-3 font-label-md text-label-md hover:bg-primary/5 transition-all" href="https://play.google.com/store/apps/details?id=com.linkedup.mobile" target="_blank" rel="noopener noreferrer">Get on Play</a>
-</article>
-<!-- Week -->
-<article class="bg-surface-container-lowest border border-outline-variant/25 rounded-3xl p-6 md:p-7 flex flex-col premium-card shadow-sm">
-<p class="font-label-sm text-label-sm uppercase tracking-wider text-outline mb-2">Weekly</p>
-<h3 class="font-headline-md text-headline-md text-on-surface mb-1" data-plan-price="week">₹149</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-5">per week · swipe all week</p>
-<ul class="space-y-2.5 mb-8 flex-1">
-<li class="flex gap-2 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px] text-primary">bolt</span> Unlimited swipes for 7 days</li>
-<li class="flex gap-2 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px] text-primary">bolt</span> Full Premium feature set</li>
-<li class="flex gap-2 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px] text-primary">bolt</span> Cancel anytime in Play Store</li>
-</ul>
-<a class="mt-auto block text-center rounded-xl border-2 border-primary text-primary px-4 py-3 font-label-md text-label-md hover:bg-primary/5 transition-all" href="https://play.google.com/store/apps/details?id=com.linkedup.mobile" target="_blank" rel="noopener noreferrer">Get on Play</a>
-</article>
-<!-- Month -->
-<article class="relative bg-primary-container text-on-primary-container rounded-3xl p-6 md:p-7 flex flex-col premium-card shadow-lg border border-primary/20">
-<span class="absolute -top-3 left-1/2 -translate-x-1/2 bg-secondary-container text-on-secondary-container text-[11px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">Popular</span>
-<p class="font-label-sm text-label-sm uppercase tracking-wider opacity-80 mb-2 mt-2">Monthly</p>
-<h3 class="font-headline-md text-headline-md mb-1" data-plan-price="month">₹249</h3>
-<p class="font-body-md text-body-md opacity-90 mb-5">per month · most popular</p>
-<ul class="space-y-2.5 mb-8 flex-1">
-<li class="flex gap-2 text-sm opacity-95"><span class="material-symbols-outlined text-[18px]">bolt</span> Unlimited swipes all month</li>
-<li class="flex gap-2 text-sm opacity-95"><span class="material-symbols-outlined text-[18px]">bolt</span> Full Premium feature set</li>
-<li class="flex gap-2 text-sm opacity-95"><span class="material-symbols-outlined text-[18px]">bolt</span> Best balance of value and flexibility</li>
-</ul>
-<a class="mt-auto block text-center rounded-xl bg-secondary-container text-on-secondary-container px-4 py-3 font-label-md text-label-md gold-glow hover:brightness-105 transition-all" href="https://play.google.com/store/apps/details?id=com.linkedup.mobile" target="_blank" rel="noopener noreferrer">Get on Play</a>
-</article>
-<!-- Year -->
-<article class="bg-surface-container-lowest border border-outline-variant/25 rounded-3xl p-6 md:p-7 flex flex-col premium-card shadow-sm">
-<span class="inline-flex self-start mb-2 bg-secondary-fixed text-on-secondary-fixed text-[11px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full">Save 50%</span>
-<p class="font-label-sm text-label-sm uppercase tracking-wider text-outline mb-2">Yearly</p>
-<h3 class="font-headline-md text-headline-md text-on-surface mb-1" data-plan-price="year">₹1,499</h3>
-<p class="font-body-md text-body-md text-on-surface-variant mb-5">per year · <span data-year-monthly>~₹125/month</span></p>
-<ul class="space-y-2.5 mb-8 flex-1">
-<li class="flex gap-2 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px] text-primary">bolt</span> Unlimited swipes for 12 months</li>
-<li class="flex gap-2 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px] text-primary">bolt</span> Full Premium feature set</li>
-<li class="flex gap-2 text-sm text-on-surface-variant"><span class="material-symbols-outlined text-[18px] text-primary">bolt</span> Best value vs monthly</li>
-</ul>
-<a class="mt-auto block text-center rounded-xl border-2 border-primary text-primary px-4 py-3 font-label-md text-label-md hover:bg-primary/5 transition-all" href="https://play.google.com/store/apps/details?id=com.linkedup.mobile" target="_blank" rel="noopener noreferrer">Get on Play</a>
-</article>
-</div>
-<p class="mt-8 text-center font-body-md text-body-md text-on-surface-variant max-w-xl mx-auto">Prices shown in INR. Billing is handled securely through Google Play. Free users keep Discover, chat, and safety tools with a daily swipe limit.</p>
-</section>
-<!-- Feature Grid (Bento Style) -->
-<section class="py-24 bg-surface-container-low px-margin-mobile md:px-margin-desktop">
-<div class="max-w-container-max mx-auto">
-<div class="text-center mb-16">
-<h2 class="font-headline-lg text-headline-lg text-on-surface mb-4">Engineered for quality</h2>
-<p class="font-body-lg text-body-lg text-on-surface-variant max-w-2xl mx-auto">We've built a suite of features designed to maintain a premium and safe environment for all our members.</p>
-</div>
-<div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-6 h-auto md:h-[600px]">
-<!-- LinkedIn Card -->
-<div class="md:col-span-2 bg-surface-container-lowest p-8 rounded-3xl premium-card flex flex-col justify-between border border-outline-variant/20 shadow-sm">
-<div>
-<div class="flex items-center gap-3 mb-4">
-<div class="p-2 bg-primary/10 rounded-lg"><span class="material-symbols-outlined text-primary">link</span></div>
-<h4 class="font-headline-md text-headline-md">LinkedIn Verification</h4>
-</div>
-<p class="font-body-md text-body-md text-on-surface-variant max-w-md">Eliminate catfishing. Every profile is cross-referenced with LinkedIn to ensure authentic professional backgrounds and job titles.</p>
-</div>
-<div class="mt-8 flex gap-2">
-<div class="px-4 py-2 bg-primary/5 text-primary rounded-full text-xs font-bold uppercase tracking-widest">Trust Index: 99.8%</div>
-</div>
-</div>
-<!-- Smart Matching Card -->
-<div class="bg-primary-container text-on-primary-container p-8 rounded-3xl premium-card flex flex-col justify-between shadow-lg">
-<span class="material-symbols-outlined text-5xl opacity-50">auto_awesome</span>
-<div>
-<h4 class="font-headline-md text-headline-md mb-2">Smart matching</h4>
-<p class="font-body-md text-body-md opacity-90">AI-driven algorithms that understand your professional trajectory and relationship goals.</p>
-</div>
-</div>
-<!-- In-app Chat Card -->
-<div class="bg-secondary-fixed text-on-secondary-fixed p-8 rounded-3xl premium-card flex flex-col justify-between shadow-md">
-<span class="material-symbols-outlined text-5xl opacity-50">chat_bubble</span>
-<div>
-<h4 class="font-headline-md text-headline-md mb-2">Secure In-app chat</h4>
-<p class="font-body-md text-body-md opacity-90">Respectful, high-quality messaging without the need to exchange personal numbers early on.</p>
-</div>
-</div>
-<!-- Photos & Reporting Combined -->
-<div class="md:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
-<div class="bg-surface-container-lowest p-8 rounded-3xl premium-card border border-outline-variant/20 shadow-sm flex flex-col items-center text-center">
-<div class="relative w-24 h-24 mb-6">
-<div class="absolute inset-0 bg-secondary/10 rounded-full animate-ping"></div>
-<div class="relative z-10 w-24 h-24 bg-secondary/20 rounded-full flex items-center justify-center">
-<span class="material-symbols-outlined text-4xl text-secondary">photo_library</span>
-</div>
-</div>
-<h4 class="font-label-md text-label-md mb-2 uppercase tracking-widest">Curated Galleries</h4>
-<p class="font-body-md text-body-md text-on-surface-variant">Every profile requires at least 4 clear photos to ensure variety and transparency.</p>
-</div>
-<div class="bg-inverse-surface p-8 rounded-3xl premium-card shadow-xl flex flex-col justify-between">
-<div class="flex justify-between items-start">
-<span class="material-symbols-outlined text-error text-3xl">report</span>
-<div class="text-right">
-<span class="text-[10px] text-outline-variant font-bold uppercase tracking-widest">Safety System</span>
-</div>
-</div>
-<div>
-<h4 class="font-headline-md text-headline-md text-surface mb-2">Safety Reporting</h4>
-<p class="font-body-md text-body-md text-outline-variant">Instant 24/7 reporting and human review for any unprofessional behavior.</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<!-- CTA Final -->
-<section class="py-24 px-margin-mobile">
-<div class="max-w-4xl mx-auto bg-primary text-on-primary rounded-[3rem] p-12 md:p-20 text-center relative overflow-hidden shadow-2xl">
-<div class="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none" style="background-image: radial-gradient(circle at 2px 2px, white 1px, transparent 0); background-size: 40px 40px;"></div>
-<h2 class="font-headline-xl text-headline-xl mb-6 relative z-10">Start your next chapter today.</h2>
-<p class="font-body-lg text-body-lg opacity-80 mb-10 max-w-xl mx-auto relative z-10">Join thousands of verified professionals who have already found meaningful connections on MATCHEDIN.</p>
-<div class="flex flex-col sm:flex-row justify-center gap-6 relative z-10">
-<a class="bg-secondary-container text-on-secondary-container px-10 py-5 rounded-2xl font-headline-md text-headline-md gold-glow hover:scale-105 transition-all inline-block" href="https://play.google.com/store/apps/details?id=com.linkedup.mobile" target="_blank" rel="noopener noreferrer">Get it on Google Play</a>
-<a class="border-2 border-on-primary/40 text-on-primary px-10 py-5 rounded-2xl font-headline-md text-headline-md hover:bg-on-primary/10 transition-all inline-block" href="faq.html">Learn more</a>
-</div>
-</div>
-</section>
-</main>
-<!-- Footer -->
-<footer class="bg-surface-container-lowest border-t border-outline-variant/10">
-<div class="grid grid-cols-2 md:grid-cols-4 gap-gutter px-margin-desktop py-12 max-w-container-max mx-auto">
-<div class="col-span-2 md:col-span-1">
-<div class="brand-lockup brand-lockup--footer"><img alt="" class="brand-lockup__mark" src="assets/images/logo-heart.png" aria-hidden="true"/><span class="brand-lockup__wordmark"><span class="brand-lockup__matched">MATCHED</span><span class="brand-lockup__in">IN</span></span></div>
-<p class="font-body-md text-body-md text-on-surface-variant mb-4">Refining modern dating for India's ambitious workforce.</p>
-<p class="font-label-md text-label-md text-on-surface-variant">Copyright 2026 MATCHEDIN</p>
-</div>
-<div class="flex flex-col gap-3">
-<h5 class="font-label-md text-label-md text-primary uppercase tracking-widest mb-2">Legal</h5>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary hover:underline transition-all" href="terms.html">Terms</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary hover:underline transition-all" href="privacy.html">Privacy</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary hover:underline transition-all" href="delete-account.html">Delete Account</a>
-</div>
-<div class="flex flex-col gap-3">
-<h5 class="font-label-md text-label-md text-primary uppercase tracking-widest mb-2">Community</h5>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary hover:underline transition-all" href="community-guidelines.html">Community Guidelines</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary hover:underline transition-all" href="safety.html">Safety</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary hover:underline transition-all" href="index.html#pricing">Pricing</a>
-</div>
-<div class="flex flex-col gap-3">
-<h5 class="font-label-md text-label-md text-primary uppercase tracking-widest mb-2">Support</h5>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary hover:underline transition-all" href="contact.html">Contact</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary hover:underline transition-all" href="faq.html">FAQ</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary hover:underline transition-all" href="https://play.google.com/store/apps/details?id=com.linkedup.mobile" target="_blank" rel="noopener noreferrer">Google Play</a>
-<a class="font-label-md text-label-md text-on-surface-variant hover:text-secondary hover:underline transition-all" href="play-store-guide.html">Developer Guide</a>
-<div class="flex gap-4 mt-4">
-<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">brand_awareness</span>
-<span class="material-symbols-outlined text-on-surface-variant cursor-pointer hover:text-primary transition-colors">public</span>
-</div>
-</div>
-</div>
-</footer>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com"></script>
 <script>
-        // Simple scroll effect for header
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('shadow-md');
-                header.classList.remove('shadow-sm');
-            } else {
-                header.classList.remove('shadow-md');
-                header.classList.add('shadow-sm');
-            }
-        });
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          indigo: { 600: '#4F46E5', 700: '#4338CA' },
+          violet: { 600: '#7C3AED' },
+          navy: { DEFAULT: '#0F172A', soft: '#1E293B' }
+        },
+        fontFamily: {
+          sans: ['"Plus Jakarta Sans"', 'system-ui', 'sans-serif'],
+          display: ['Fraunces', 'Georgia', 'serif']
+        },
+        maxWidth: { site: '1120px' }
+      }
+    }
+  };
+</script>
+<link href="assets/css/brand.css" rel="stylesheet"/>
+<link href="assets/css/landing.css" rel="stylesheet"/>
+</head>
+<body class="landing antialiased bg-white text-navy">
+<a href="#main" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[100] focus:bg-white focus:px-4 focus:py-2 focus:rounded-lg">Skip to content</a>
 
-        // Intersection Observer for fade-in animations
-        const observerOptions = {
-            threshold: 0.1
-        };
+<!-- Nav -->
+<header id="landing-nav" class="landing-nav fixed inset-x-0 top-0 z-40">
+  <div class="mx-auto max-w-site px-4 sm:px-6 h-16 md:h-[4.25rem] flex items-center justify-between gap-4">
+    <a href="index.html" class="brand-lockup brand-lockup--nav" aria-label="MatchedIn home">
+      <img class="brand-lockup__mark" src="assets/images/logo-heart.png" width="36" height="36" alt=""/>
+      <span class="brand-lockup__wordmark"><span class="brand-lockup__matched">MATCHED</span><span class="brand-lockup__in">IN</span></span>
+    </a>
+    <nav class="hidden lg:flex items-center gap-7 text-sm font-semibold text-slate-600" aria-label="Primary">
+      <a class="hover:text-indigo-600 transition-colors" href="#why">Why MatchedIn</a>
+      <a class="hover:text-indigo-600 transition-colors" href="#how">How it works</a>
+      <a class="hover:text-indigo-600 transition-colors" href="#features">Features</a>
+      <a class="hover:text-indigo-600 transition-colors" href="#safety">Safety</a>
+      <a class="hover:text-indigo-600 transition-colors" href="#faq">FAQ</a>
+    </nav>
+    <div class="flex items-center gap-2">
+      <a data-play-store class="hidden sm:inline-flex btn-primary-cta !py-2.5 !px-4 !text-sm" href="https://play.google.com/store/apps/details?id=com.linkedup.mobile">Get the app</a>
+      <button type="button" data-landing-menu class="lg:hidden inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+</header>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('opacity-100', 'translate-y-0');
-                    entry.target.classList.remove('opacity-0', 'translate-y-10');
-                }
-            });
-        }, observerOptions);
+<div id="landing-mobile-backdrop" class="hidden fixed inset-0 z-40 bg-navy/40 lg:hidden" aria-hidden="true"></div>
+<aside id="landing-mobile-panel" class="fixed top-0 right-0 z-50 h-full w-72 max-w-[85vw] bg-white shadow-2xl translate-x-full transition-transform duration-300 lg:hidden pt-20 px-6" aria-hidden="true">
+  <nav class="flex flex-col gap-1 text-base font-semibold text-slate-700">
+    <a class="py-3" href="#why">Why MatchedIn</a>
+    <a class="py-3" href="#how">How it works</a>
+    <a class="py-3" href="#compatibility">Compatibility</a>
+    <a class="py-3" href="#features">Features</a>
+    <a class="py-3" href="#screenshots">App tour</a>
+    <a class="py-3" href="#safety">Safety</a>
+    <a class="py-3" href="#faq">FAQ</a>
+    <a class="py-3" href="privacy.html">Privacy</a>
+    <a class="py-3" href="contact.html">Contact</a>
+    <a data-play-store class="mt-4 btn-primary-cta" href="https://play.google.com/store/apps/details?id=com.linkedup.mobile">Download on Google Play</a>
+  </nav>
+</aside>
 
-        document.querySelectorAll('.premium-card').forEach(card => {
-            card.classList.add('opacity-0', 'translate-y-10', 'transition-all', 'duration-700');
-            observer.observe(card);
-        });
-    </script>
+<main id="main">
+  <!-- 1. Hero -->
+  <section id="hero" class="relative pt-28 md:pt-32 pb-16 md:pb-24 overflow-hidden">
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="absolute inset-0 grid-fade opacity-60" aria-hidden="true"></div>
+    <div class="relative mx-auto max-w-site px-4 sm:px-6 grid lg:grid-cols-2 gap-12 lg:gap-8 items-center">
+      <div>
+        <p class="section-eyebrow reveal">
+          <span class="inline-block h-1.5 w-1.5 rounded-full bg-indigo-600"></span>
+          Dating app for Indian professionals
+        </p>
+        <h1 class="section-title text-4xl sm:text-5xl lg:text-[3.35rem] reveal reveal-delay-1">
+          Meaningful Dating for<br class="hidden sm:block"/> Indian Professionals
+        </h1>
+        <p class="mt-5 section-lead reveal reveal-delay-2">
+          Meet verified professionals, discover genuine connections, and build meaningful relationships — matched on career, lifestyle, and intent.
+        </p>
+        <div class="mt-8 flex flex-wrap items-center gap-3 reveal reveal-delay-3">
+          <a data-play-store class="store-badge" href="https://play.google.com/store/apps/details?id=com.linkedup.mobile" aria-label="Download on Google Play">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.2 14.3 12 3.6 21.8A1.5 1.5 0 0 1 3 20.6V3.4a1.5 1.5 0 0 1 .6-1.2Zm12.1 9.1 2.4-1.4 3.2 1.8c.7.4.7 1.4 0 1.8l-3.2 1.8-2.4-1.4L13.5 12l2.2-.7ZM4.7 22.7l8.2-8.2 2.5 2.5-9.3 5.3a1.5 1.5 0 0 1-1.4.1Zm0-21.4a1.5 1.5 0 0 1 1.4.1l9.3 5.3-2.5 2.5L4.7 1.3Z"/></svg>
+            <span><span class="store-badge__label">GET IT ON</span><br/><span class="store-badge__name">Google Play</span></span>
+          </a>
+          <span class="store-badge is-soon" title="App Store coming soon" aria-label="App Store coming soon">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 13.2c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.7-1.3-.1-2.5.8-3.1.8-.7 0-1.7-.8-2.8-.7-1.4 0-2.8.9-3.5 2.2-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.1 1.1 0 1.5-.7 2.8-.7s1.6.7 2.8.7c1.2 0 1.9-1 2.6-2 .8-1.2 1.1-2.3 1.2-2.4-.3-.1-2-.8-2.1-3.7ZM14.5 6.6c.6-.7 1-1.7.9-2.6-.9 0-1.9.6-2.5 1.3-.6.6-1.1 1.6-.9 2.5 1 .1 1.9-.5 2.5-1.2Z"/></svg>
+            <span><span class="store-badge__label">COMING SOON</span><br/><span class="store-badge__name">App Store</span></span>
+          </span>
+          <a href="#screenshots" data-watch-demo class="btn-ghost-cta">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M8 5.1v13.8L19 12 8 5.1Z"/></svg>
+            Watch Demo
+          </a>
+        </div>
+        <p class="mt-6 text-sm text-slate-500 reveal reveal-delay-3">
+          Built for engineers, doctors, consultants, founders &amp; corporate professionals · Ages 23–35
+        </p>
+      </div>
+
+      <div class="relative flex justify-center lg:justify-end reveal reveal-delay-2">
+        <div class="relative">
+          <div class="phone-frame mx-auto">
+            <div class="phone-notch" aria-hidden="true"></div>
+            <div class="phone-frame__screen">
+              <img src="assets/images/app/03-discover.png" alt="MatchedIn discover screen showing professional profiles" width="390" height="844" fetchpriority="high"/>
+            </div>
+          </div>
+          <div class="float-card -left-6 sm:-left-16 top-16 hidden sm:block">
+            <div class="text-xs font-bold text-indigo-600">Verified</div>
+            <div class="text-sm font-semibold">LinkedIn linked</div>
+          </div>
+          <div class="float-card float-card--delay -right-4 sm:-right-14 bottom-28 hidden sm:block">
+            <div class="text-xs font-bold text-violet-600">92% match</div>
+            <div class="text-sm font-semibold">Lifestyle + goals</div>
+          </div>
+          <div class="float-card left-1/2 -translate-x-1/2 -bottom-4 sm:bottom-8 sm:left-auto sm:translate-x-0 sm:-left-10">
+            <div class="flex items-center gap-2">
+              <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
+              <span class="text-sm font-semibold">Safety-first community</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Social proof strip -->
+  <section class="border-y border-slate-100 bg-slate-50/80" aria-label="Who MatchedIn is for">
+    <div class="mx-auto max-w-site px-4 sm:px-6 py-5 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-semibold text-slate-500">
+      <span>Software Engineers</span>
+      <span class="text-slate-300">·</span>
+      <span>Doctors</span>
+      <span class="text-slate-300">·</span>
+      <span>Consultants</span>
+      <span class="text-slate-300">·</span>
+      <span>Founders</span>
+      <span class="text-slate-300">·</span>
+      <span>Designers</span>
+      <span class="text-slate-300">·</span>
+      <span>Finance &amp; MBA</span>
+    </div>
+  </section>
+
+  <!-- 2. Why MatchedIn -->
+  <section id="why" class="py-20 md:py-28">
+    <div class="mx-auto max-w-site px-4 sm:px-6">
+      <div class="max-w-2xl reveal">
+        <p class="section-eyebrow">Why MatchedIn</p>
+        <h2 class="section-title text-3xl sm:text-4xl">Not another swipe factory. A network of ambitious singles.</h2>
+        <p class="mt-4 section-lead">Tinder and Bumble optimize for attention. MatchedIn optimizes for compatibility — so conversations start with shared context, not small talk.</p>
+      </div>
+      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+        <article class="mi-card reveal">
+          <div class="mi-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.2 4.5L19 8.2l-3.5 3.4.8 4.9L12 14.3 7.7 16.5l.8-4.9L5 8.2l4.8-.7L12 3z"/></svg></div>
+          <h3 class="font-semibold text-lg">Verified Professionals</h3>
+          <p class="mt-2 text-sm text-slate-500 leading-relaxed">LinkedIn verification and photo checks so you meet real people with real careers.</p>
+        </article>
+        <article class="mi-card reveal reveal-delay-1">
+          <div class="mi-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg></div>
+          <h3 class="font-semibold text-lg">Smart Compatibility Matching</h3>
+          <p class="mt-2 text-sm text-slate-500 leading-relaxed">Profession, lifestyle, goals, and preferences — ranked for fit, not just face.</p>
+        </article>
+        <article class="mi-card reveal reveal-delay-2">
+          <div class="mi-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12a8.5 8.5 0 01-8.5 8.5H5l-2 2V12A8.5 8.5 0 1112.5 3.5"/></svg></div>
+          <h3 class="font-semibold text-lg">Meaningful Conversations</h3>
+          <p class="mt-2 text-sm text-slate-500 leading-relaxed">Prompts and shared ambition give you something real to talk about on day one.</p>
+        </article>
+        <article class="mi-card reveal">
+          <div class="mi-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="10" width="14" height="10" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg></div>
+          <h3 class="font-semibold text-lg">Privacy First</h3>
+          <p class="mt-2 text-sm text-slate-500 leading-relaxed">Exact location stays off your profile. You control visibility, blocks, and deletes.</p>
+        </article>
+        <article class="mi-card reveal reveal-delay-1">
+          <div class="mi-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 21s-7-4.5-7-10a7 7 0 0114 0c0 5.5-7 10-7 10z"/></svg></div>
+          <h3 class="font-semibold text-lg">Real Relationships</h3>
+          <p class="mt-2 text-sm text-slate-500 leading-relaxed">Built for people who want partnership — not endless weekends of empty matches.</p>
+        </article>
+        <article class="mi-card reveal reveal-delay-2">
+          <div class="mi-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19V5m0 14h16M8 17V9m5 8V7m5 10v-4"/></svg></div>
+          <h3 class="font-semibold text-lg">Career-focused Community</h3>
+          <p class="mt-2 text-sm text-slate-500 leading-relaxed">Engineers, doctors, consultants, founders — people who respect ambition.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. How matching works -->
+  <section id="how" class="py-20 md:py-28 bg-slate-50">
+    <div class="mx-auto max-w-site px-4 sm:px-6 grid lg:grid-cols-2 gap-14 items-start">
+      <div class="reveal">
+        <p class="section-eyebrow">How matching works</p>
+        <h2 class="section-title text-3xl sm:text-4xl">From profile to first coffee — in six clear steps.</h2>
+        <p class="mt-4 section-lead">No gimmicks. A simple flow designed for busy professionals who value their time.</p>
+        <a data-play-store class="btn-primary-cta mt-8" href="https://play.google.com/store/apps/details?id=com.linkedup.mobile">Start free on Android</a>
+      </div>
+      <ol class="space-y-6">
+        <li class="timeline-step reveal"><span class="timeline-dot">1</span><h3 class="font-semibold text-lg">Create your profile</h3><p class="text-sm text-slate-500 mt-1">Photos, profession, and what you’re looking for — in minutes.</p></li>
+        <li class="timeline-step reveal reveal-delay-1"><span class="timeline-dot">2</span><h3 class="font-semibold text-lg">Answer compatibility questions</h3><p class="text-sm text-slate-500 mt-1">Lifestyle, goals, habits, and preferences that actually matter.</p></li>
+        <li class="timeline-step reveal"><span class="timeline-dot">3</span><h3 class="font-semibold text-lg">Discover professionals</h3><p class="text-sm text-slate-500 mt-1">Browse curated profiles near you — engineers in Bengaluru, doctors in Delhi, and more.</p></li>
+        <li class="timeline-step reveal reveal-delay-1"><span class="timeline-dot">4</span><h3 class="font-semibold text-lg">Match</h3><p class="text-sm text-slate-500 mt-1">When interest is mutual, you unlock a conversation.</p></li>
+        <li class="timeline-step reveal"><span class="timeline-dot">5</span><h3 class="font-semibold text-lg">Chat</h3><p class="text-sm text-slate-500 mt-1">Real-time messaging with people who already share your context.</p></li>
+        <li class="timeline-step reveal reveal-delay-1"><span class="timeline-dot">6</span><h3 class="font-semibold text-lg">Meet safely</h3><p class="text-sm text-slate-500 mt-1">Take it offline with safety tools and tips built into the app.</p></li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- 4. Compatibility -->
+  <section id="compatibility" class="py-20 md:py-28">
+    <div class="mx-auto max-w-site px-4 sm:px-6">
+      <div class="glass-panel rounded-3xl p-8 md:p-12 border border-slate-100 bg-gradient-to-br from-indigo-50/80 via-white to-violet-50/60">
+        <div class="max-w-2xl reveal">
+          <p class="section-eyebrow">Compatibility matching</p>
+          <h2 class="section-title text-3xl sm:text-4xl">Matched on who you are — not just how you look.</h2>
+          <p class="mt-4 section-lead">Our matching weighs the signals that predict real-world chemistry for Indian professionals.</p>
+        </div>
+        <div class="mt-10 flex flex-wrap gap-3 reveal">
+          <span class="compat-chip">Profession</span>
+          <span class="compat-chip">Lifestyle</span>
+          <span class="compat-chip">Relationship Goals</span>
+          <span class="compat-chip">Education</span>
+          <span class="compat-chip">Interests</span>
+          <span class="compat-chip">Industry</span>
+          <span class="compat-chip">Workout</span>
+          <span class="compat-chip">Smoking</span>
+          <span class="compat-chip">Drinking</span>
+          <span class="compat-chip">Distance</span>
+        </div>
+        <p class="mt-8 text-sm md:text-base text-slate-600 max-w-3xl reveal">
+          Appearance still matters — but MatchedIn surfaces people you’re more likely to enjoy dinner with on a Tuesday after work. That’s the difference between a dating app and a professional dating network.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Features -->
+  <section id="features" class="py-20 md:py-28 bg-slate-50">
+    <div class="mx-auto max-w-site px-4 sm:px-6">
+      <div class="text-center max-w-2xl mx-auto reveal">
+        <p class="section-eyebrow justify-center">Features</p>
+        <h2 class="section-title text-3xl sm:text-4xl">Everything you need. Nothing that wastes your time.</h2>
+      </div>
+      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="mi-card reveal"><h3 class="font-semibold">Verified Profiles</h3><p class="mt-2 text-sm text-slate-500">Trust signals before you invest a conversation.</p></div>
+        <div class="mi-card reveal reveal-delay-1"><h3 class="font-semibold">Unlimited Chat</h3><p class="mt-2 text-sm text-slate-500">Talk freely once you match — no artificial caps.</p></div>
+        <div class="mi-card reveal reveal-delay-2"><h3 class="font-semibold">Nearby Matches</h3><p class="mt-2 text-sm text-slate-500">Discover professionals around your city and radius.</p></div>
+        <div class="mi-card reveal"><h3 class="font-semibold">Advanced Filters</h3><p class="mt-2 text-sm text-slate-500">Profession, distance, lifestyle — tune who you see.</p></div>
+        <div class="mi-card reveal reveal-delay-1"><h3 class="font-semibold">Photo Verification</h3><p class="mt-2 text-sm text-slate-500">Reduce catfishing with clearer profile standards.</p></div>
+        <div class="mi-card reveal reveal-delay-2"><h3 class="font-semibold">Profile Prompts</h3><p class="mt-2 text-sm text-slate-500">Show personality beyond a job title.</p></div>
+        <div class="mi-card reveal"><h3 class="font-semibold">Safe Reporting</h3><p class="mt-2 text-sm text-slate-500">Flag bad behavior in a couple of taps.</p></div>
+        <div class="mi-card reveal reveal-delay-1"><h3 class="font-semibold">Privacy Controls</h3><p class="mt-2 text-sm text-slate-500">Block, hide, and delete on your terms.</p></div>
+        <div class="mi-card reveal reveal-delay-2"><h3 class="font-semibold">Fast Performance</h3><p class="mt-2 text-sm text-slate-500">Built to feel snappy between meetings.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. Screenshots -->
+  <section id="screenshots" class="py-20 md:py-28">
+    <div class="mx-auto max-w-site px-4 sm:px-6">
+      <div class="max-w-2xl reveal">
+        <p class="section-eyebrow">Inside the app</p>
+        <h2 class="section-title text-3xl sm:text-4xl">Designed like a product you’d brag about — not apologize for.</h2>
+      </div>
+      <div class="mt-12 flex gap-8 overflow-x-auto pb-4 snap-x snap-mandatory" style="scrollbar-width: thin;">
+        <figure class="shot-card reveal">
+          <div class="phone-frame !w-[240px]"><div class="phone-frame__screen"><img loading="lazy" src="assets/images/app/03-discover.png" alt="Discover professionals on MatchedIn" width="390" height="844"/></div></div>
+          <figcaption class="shot-caption"><div class="font-semibold">Find genuine professionals</div><p class="text-sm text-slate-500 mt-1">Discover curated profiles near you</p></figcaption>
+        </figure>
+        <figure class="shot-card reveal reveal-delay-1">
+          <div class="phone-frame !w-[240px]"><div class="phone-frame__screen"><img loading="lazy" src="assets/images/app/02-verified.png" alt="Verified profiles on MatchedIn" width="390" height="844"/></div></div>
+          <figcaption class="shot-caption"><div class="font-semibold">Verified profiles</div><p class="text-sm text-slate-500 mt-1">Meet people who are who they say</p></figcaption>
+        </figure>
+        <figure class="shot-card reveal reveal-delay-2">
+          <div class="phone-frame !w-[240px]"><div class="phone-frame__screen"><img loading="lazy" src="assets/images/app/06-matches.png" alt="Compatible matches on MatchedIn" width="390" height="844"/></div></div>
+          <figcaption class="shot-caption"><div class="font-semibold">Compatible matches</div><p class="text-sm text-slate-500 mt-1">Aligned on lifestyle and goals</p></figcaption>
+        </figure>
+        <figure class="shot-card reveal">
+          <div class="phone-frame !w-[240px]"><div class="phone-frame__screen"><img loading="lazy" src="assets/images/app/07-chat.png" alt="Meaningful chat on MatchedIn" width="390" height="844"/></div></div>
+          <figcaption class="shot-caption"><div class="font-semibold">Meaningful conversations</div><p class="text-sm text-slate-500 mt-1">Chat with context from day one</p></figcaption>
+        </figure>
+        <figure class="shot-card reveal reveal-delay-1">
+          <div class="phone-frame !w-[240px]"><div class="phone-frame__screen"><img loading="lazy" src="assets/images/app/09-privacy.png" alt="Privacy controls on MatchedIn" width="390" height="844"/></div></div>
+          <figcaption class="shot-caption"><div class="font-semibold">Privacy &amp; control</div><p class="text-sm text-slate-500 mt-1">Your boundaries, respected</p></figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. Testimonials -->
+  <section id="testimonials" class="py-20 md:py-28 bg-slate-50 overflow-hidden">
+    <div class="mx-auto max-w-site px-4 sm:px-6">
+      <div class="flex items-end justify-between gap-4 reveal">
+        <div>
+          <p class="section-eyebrow">Social proof</p>
+          <h2 class="section-title text-3xl sm:text-4xl">Professionals already choosing intention over noise.</h2>
+        </div>
+        <div class="hidden sm:flex gap-2">
+          <button type="button" data-testimonial-prev class="h-10 w-10 rounded-full border border-slate-200 bg-white" aria-label="Previous testimonial">‹</button>
+          <button type="button" data-testimonial-next class="h-10 w-10 rounded-full border border-slate-200 bg-white" aria-label="Next testimonial">›</button>
+        </div>
+      </div>
+      <div class="mt-10 overflow-hidden">
+        <div id="testimonial-track" class="testimonial-track">
+          <blockquote class="testimonial-card">
+            <div class="flex items-center gap-3">
+              <div class="h-12 w-12 rounded-full bg-gradient-to-br from-indigo-500 to-violet-500 text-white grid place-items-center font-bold">A</div>
+              <div>
+                <div class="font-semibold">Ananya</div>
+                <div class="text-sm text-slate-500">Software Engineer · Gurgaon</div>
+              </div>
+            </div>
+            <div class="mt-3 text-amber-500 text-sm" aria-label="5 stars">★★★★★</div>
+            <p class="mt-3 text-slate-600 leading-relaxed">“Finally a dating app where people list their actual profession and goals. Conversations feel adult.”</p>
+          </blockquote>
+          <blockquote class="testimonial-card">
+            <div class="flex items-center gap-3">
+              <div class="h-12 w-12 rounded-full bg-gradient-to-br from-violet-500 to-fuchsia-500 text-white grid place-items-center font-bold">R</div>
+              <div>
+                <div class="font-semibold">Rohan</div>
+                <div class="text-sm text-slate-500">Consultant · Mumbai</div>
+              </div>
+            </div>
+            <div class="mt-3 text-amber-500 text-sm" aria-label="5 stars">★★★★★</div>
+            <p class="mt-3 text-slate-600 leading-relaxed">“I don’t have hours to swipe. MatchedIn’s filters and compatibility signals save me weekends.”</p>
+          </blockquote>
+          <blockquote class="testimonial-card">
+            <div class="flex items-center gap-3">
+              <div class="h-12 w-12 rounded-full bg-gradient-to-br from-sky-500 to-indigo-500 text-white grid place-items-center font-bold">S</div>
+              <div>
+                <div class="font-semibold">Shruti</div>
+                <div class="text-sm text-slate-500">Doctor · Bengaluru</div>
+              </div>
+            </div>
+            <div class="mt-3 text-amber-500 text-sm" aria-label="5 stars">★★★★★</div>
+            <p class="mt-3 text-slate-600 leading-relaxed">“Verification made me feel safer. The community feels closer to my world than generic apps.”</p>
+          </blockquote>
+          <blockquote class="testimonial-card">
+            <div class="flex items-center gap-3">
+              <div class="h-12 w-12 rounded-full bg-gradient-to-br from-emerald-500 to-teal-500 text-white grid place-items-center font-bold">K</div>
+              <div>
+                <div class="font-semibold">Kabir</div>
+                <div class="text-sm text-slate-500">Founder · Delhi</div>
+              </div>
+            </div>
+            <div class="mt-3 text-amber-500 text-sm" aria-label="5 stars">★★★★★</div>
+            <p class="mt-3 text-slate-600 leading-relaxed">“Dating for professionals shouldn’t feel unserious. MatchedIn gets the tone right.”</p>
+          </blockquote>
+        </div>
+      </div>
+      <div class="mt-6 flex justify-center gap-2">
+        <button type="button" data-testimonial-dot class="h-2.5 w-2.5 rounded-full bg-indigo-600" aria-label="Slide 1"></button>
+        <button type="button" data-testimonial-dot class="h-2.5 w-2.5 rounded-full bg-slate-300" aria-label="Slide 2"></button>
+        <button type="button" data-testimonial-dot class="h-2.5 w-2.5 rounded-full bg-slate-300" aria-label="Slide 3"></button>
+        <button type="button" data-testimonial-dot class="h-2.5 w-2.5 rounded-full bg-slate-300" aria-label="Slide 4"></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. Stats -->
+  <section id="stats" class="py-20 md:py-24">
+    <div class="mx-auto max-w-site px-4 sm:px-6">
+      <div class="rounded-3xl bg-navy text-white px-6 py-12 md:px-12 md:py-16">
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          <div class="reveal">
+            <div class="stat-num !text-transparent bg-clip-text" style="background-image:linear-gradient(135deg,#a5b4fc,#c4b5fd);-webkit-background-clip:text;"><span data-count="1000" data-suffix="+">0</span></div>
+            <div class="mt-2 text-sm text-slate-300 font-medium">Verified Professionals</div>
+          </div>
+          <div class="reveal reveal-delay-1">
+            <div class="stat-num" style="background-image:linear-gradient(135deg,#a5b4fc,#c4b5fd);-webkit-background-clip:text;color:transparent;"><span data-count="500" data-suffix="+">0</span></div>
+            <div class="mt-2 text-sm text-slate-300 font-medium">Matches</div>
+          </div>
+          <div class="reveal reveal-delay-2">
+            <div class="stat-num" style="background-image:linear-gradient(135deg,#a5b4fc,#c4b5fd);-webkit-background-clip:text;color:transparent;"><span data-count="150" data-suffix="+">0</span></div>
+            <div class="mt-2 text-sm text-slate-300 font-medium">Cities</div>
+          </div>
+          <div class="reveal reveal-delay-3">
+            <div class="stat-num" style="background-image:linear-gradient(135deg,#a5b4fc,#c4b5fd);-webkit-background-clip:text;color:transparent;">4.8★</div>
+            <div class="mt-2 text-sm text-slate-300 font-medium">User Rating</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. Safety -->
+  <section id="safety" class="py-20 md:py-28 bg-slate-50">
+    <div class="mx-auto max-w-site px-4 sm:px-6">
+      <div class="max-w-2xl reveal">
+        <p class="section-eyebrow">Safety</p>
+        <h2 class="section-title text-3xl sm:text-4xl">Trust is a feature — not a footnote.</h2>
+        <p class="mt-4 section-lead">Dating should feel exciting and safe. We built controls professionals expect.</p>
+      </div>
+      <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div class="mi-card reveal"><h3 class="font-semibold">Profile Verification</h3><p class="mt-2 text-sm text-slate-500">Signals that reduce fake and misleading accounts.</p></div>
+        <div class="mi-card reveal reveal-delay-1"><h3 class="font-semibold">Report Users</h3><p class="mt-2 text-sm text-slate-500">Flag harassment or spam for review.</p></div>
+        <div class="mi-card reveal reveal-delay-2"><h3 class="font-semibold">Block Users</h3><p class="mt-2 text-sm text-slate-500">Cut contact instantly — no drama required.</p></div>
+        <div class="mi-card reveal"><h3 class="font-semibold">Privacy Protection</h3><p class="mt-2 text-sm text-slate-500">Exact pins stay private; you share what you choose.</p></div>
+        <div class="mi-card reveal reveal-delay-1"><h3 class="font-semibold">Secure Chats</h3><p class="mt-2 text-sm text-slate-500">Conversations stay between you and your match.</p></div>
+        <div class="mi-card reveal reveal-delay-2"><h3 class="font-semibold">Safety Tips</h3><p class="mt-2 text-sm text-slate-500">Guidance for meeting offline thoughtfully. <a class="text-indigo-600 font-semibold" href="safety.html">Read more →</a></p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10. FAQ -->
+  <section id="faq" class="py-20 md:py-28">
+    <div class="mx-auto max-w-site px-4 sm:px-6 grid lg:grid-cols-2 gap-12">
+      <div class="reveal">
+        <p class="section-eyebrow">FAQ</p>
+        <h2 class="section-title text-3xl sm:text-4xl">Questions ambitious singles ask before downloading.</h2>
+        <p class="mt-4 section-lead">Still curious? Visit our full <a class="text-indigo-600 font-semibold" href="faq.html">FAQ page</a> or <a class="text-indigo-600 font-semibold" href="contact.html">contact us</a>.</p>
+      </div>
+      <div class="reveal">
+        <div class="faq-item is-open">
+          <button type="button" aria-expanded="true">Is MatchedIn free? <span class="faq-chevron">▾</span></button>
+          <div class="faq-panel"><p>Yes. Create a profile, discover professionals, and match for free. Premium unlocks unlimited swipes and stronger filters — pricing is shown in-app.</p></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" aria-expanded="false">How does verification work? <span class="faq-chevron">▾</span></button>
+          <div class="faq-panel"><p>You can verify via LinkedIn and keep photos accurate. Verification helps the community stay professional and trustworthy.</p></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" aria-expanded="false">Is my privacy protected? <span class="faq-chevron">▾</span></button>
+          <div class="faq-panel"><p>We don’t show your exact location on your profile. You control what you share, can block/report, and can delete your account anytime from the app or website.</p></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" aria-expanded="false">How is compatibility calculated? <span class="faq-chevron">▾</span></button>
+          <div class="faq-panel"><p>We weigh profession, lifestyle, relationship goals, education, interests, habits, and distance — not appearance alone.</p></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" aria-expanded="false">What do I get with Premium? <span class="faq-chevron">▾</span></button>
+          <div class="faq-panel"><p>Premium is designed for serious daters who want more reach — unlimited swipes, stronger discovery, and plan options from day passes to yearly.</p></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" aria-expanded="false">Which cities are supported? <span class="faq-chevron">▾</span></button>
+          <div class="faq-panel"><p>MatchedIn works across India — Delhi NCR, Mumbai, Bengaluru, Hyderabad, Pune, Chennai, and 150+ cities.</p></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" aria-expanded="false">How do you handle safety? <span class="faq-chevron">▾</span></button>
+          <div class="faq-panel"><p>Report and block tools, verification signals, and safety guidance. Read our <a href="safety.html" class="text-indigo-600 font-semibold">Safety Center</a>.</p></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" aria-expanded="false">Who can see my profile? <span class="faq-chevron">▾</span></button>
+          <div class="faq-panel"><p>People in your discovery pool based on preferences and filters. Blocked users can’t engage with you.</p></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" aria-expanded="false">How do refunds work? <span class="faq-chevron">▾</span></button>
+          <div class="faq-panel"><p>Purchases go through Google Play or the App Store. Refunds follow the store’s policies. Contact help@matchedin.app if you need help.</p></div>
+        </div>
+        <div class="faq-item">
+          <button type="button" aria-expanded="false">Is MatchedIn only for engineers &amp; doctors? <span class="faq-chevron">▾</span></button>
+          <div class="faq-panel"><p>No — it’s for Indian professionals broadly: tech, medicine, consulting, finance, design, entrepreneurship, and corporate careers.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11. Founder story -->
+  <section id="story" class="py-20 md:py-28">
+    <div class="mx-auto max-w-site px-4 sm:px-6">
+      <div class="rounded-3xl border border-slate-100 overflow-hidden grid lg:grid-cols-2">
+        <div class="bg-gradient-to-br from-indigo-600 to-violet-600 p-10 md:p-14 text-white reveal">
+          <p class="text-xs font-bold uppercase tracking-[0.14em] text-indigo-100">Founder story</p>
+          <h2 class="mt-4 font-display text-3xl md:text-4xl leading-tight">We built MatchedIn because endless swiping was breaking how professionals meet.</h2>
+        </div>
+        <div class="p-10 md:p-14 bg-white reveal reveal-delay-1">
+          <p class="text-slate-600 leading-relaxed text-lg">
+            In India’s cities, ambitious people work hard, move cities, and still struggle to meet someone aligned — not just attractive for a weekend.
+          </p>
+          <p class="mt-4 text-slate-600 leading-relaxed">
+            MatchedIn exists for meaningful relationships: verified professionals, compatibility that respects lifestyle and goals, and a product that treats your time as scarce.
+          </p>
+          <p class="mt-4 text-slate-600 leading-relaxed">
+            If you’ve ever thought “there has to be a better way for people like us” — this is it.
+          </p>
+          <a data-play-store class="btn-primary-cta mt-8" href="https://play.google.com/store/apps/details?id=com.linkedup.mobile">Join the community</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12. Blog preview -->
+  <section id="blog" class="py-20 md:py-28 bg-slate-50">
+    <div class="mx-auto max-w-site px-4 sm:px-6">
+      <div class="flex items-end justify-between gap-4 reveal">
+        <div>
+          <p class="section-eyebrow">Insights</p>
+          <h2 class="section-title text-3xl sm:text-4xl">Dating tips for professionals.</h2>
+        </div>
+        <a href="blog/index.html" class="hidden sm:inline text-sm font-semibold text-indigo-600">View all articles →</a>
+      </div>
+      <div class="mt-10 grid md:grid-cols-3 gap-5">
+        <a href="blog/dating-tips-for-professionals.html" class="mi-card block reveal">
+          <div class="text-xs font-bold uppercase tracking-wider text-indigo-600">Dating tips</div>
+          <h3 class="mt-2 font-semibold text-lg">How professionals date without burning weekends</h3>
+          <p class="mt-2 text-sm text-slate-500">Practical habits for busy calendars in Delhi, Bengaluru &amp; beyond.</p>
+        </a>
+        <a href="blog/conversation-starters.html" class="mi-card block reveal reveal-delay-1">
+          <div class="text-xs font-bold uppercase tracking-wider text-indigo-600">Conversation</div>
+          <h3 class="mt-2 font-semibold text-lg">Conversation starters that aren’t cringe</h3>
+          <p class="mt-2 text-sm text-slate-500">Openers that use shared ambition and profile prompts.</p>
+        </a>
+        <a href="blog/green-flags-red-flags.html" class="mi-card block reveal reveal-delay-2">
+          <div class="text-xs font-bold uppercase tracking-wider text-indigo-600">Green &amp; red flags</div>
+          <h3 class="mt-2 font-semibold text-lg">Green flags vs red flags for serious daters</h3>
+          <p class="mt-2 text-sm text-slate-500">What to notice early — and when to walk away.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13. Final CTA -->
+  <section id="download" class="py-20 md:py-28">
+    <div class="mx-auto max-w-site px-4 sm:px-6">
+      <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br from-indigo-600 via-indigo-600 to-violet-600 px-6 py-14 md:px-14 text-center text-white">
+        <div class="absolute inset-0 opacity-30" style="background:radial-gradient(circle at 20% 20%,#fff,transparent 40%),radial-gradient(circle at 80% 80%,#c4b5fd,transparent 35%);" aria-hidden="true"></div>
+        <div class="relative reveal">
+          <h2 class="font-display text-3xl sm:text-4xl md:text-5xl leading-tight">Ready to Meet Someone Meaningful?</h2>
+          <p class="mt-4 text-indigo-100 max-w-xl mx-auto">Download MatchedIn — the dating app for Indian professionals who want more than endless swipes.</p>
+          <div class="mt-8 flex flex-wrap justify-center gap-3">
+            <a data-play-store class="store-badge !bg-white !text-navy" href="https://play.google.com/store/apps/details?id=com.linkedup.mobile">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3.6 2.2 14.3 12 3.6 21.8A1.5 1.5 0 0 1 3 20.6V3.4a1.5 1.5 0 0 1 .6-1.2Zm12.1 9.1 2.4-1.4 3.2 1.8c.7.4.7 1.4 0 1.8l-3.2 1.8-2.4-1.4L13.5 12l2.2-.7ZM4.7 22.7l8.2-8.2 2.5 2.5-9.3 5.3a1.5 1.5 0 0 1-1.4.1Zm0-21.4a1.5 1.5 0 0 1 1.4.1l9.3 5.3-2.5 2.5L4.7 1.3Z"/></svg>
+              <span><span class="store-badge__label !opacity-60">DOWNLOAD ANDROID</span><br/><span class="store-badge__name">Google Play</span></span>
+            </a>
+            <span class="store-badge is-soon !bg-white/15 !text-white !opacity-100 border border-white/25">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 13.2c0-2.1 1.7-3.1 1.8-3.2-1-1.4-2.5-1.6-3-1.7-1.3-.1-2.5.8-3.1.8-.7 0-1.7-.8-2.8-.7-1.4 0-2.8.9-3.5 2.2-1.5 2.6-.4 6.5 1.1 8.6.7 1 1.6 2.2 2.7 2.1 1.1 0 1.5-.7 2.8-.7s1.6.7 2.8.7c1.2 0 1.9-1 2.6-2 .8-1.2 1.1-2.3 1.2-2.4-.3-.1-2-.8-2.1-3.7ZM14.5 6.6c.6-.7 1-1.7.9-2.6-.9 0-1.9.6-2.5 1.3-.6.6-1.1 1.6-.9 2.5 1 .1 1.9-.5 2.5-1.2Z"/></svg>
+              <span><span class="store-badge__label">DOWNLOAD IPHONE</span><br/><span class="store-badge__name">Coming soon</span></span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="border-t border-slate-100 bg-white">
+  <div class="mx-auto max-w-site px-4 sm:px-6 py-12 grid md:grid-cols-4 gap-8">
+    <div class="md:col-span-2">
+      <a href="index.html" class="brand-lockup brand-lockup--footer" aria-label="MatchedIn home">
+        <img class="brand-lockup__mark" src="assets/images/logo-heart.png" width="28" height="28" alt=""/>
+        <span class="brand-lockup__wordmark"><span class="brand-lockup__matched">MATCHED</span><span class="brand-lockup__in">IN</span></span>
+      </a>
+      <p class="mt-3 text-sm text-slate-500 max-w-sm">The professional dating app for India — meaningful relationships for engineers, doctors, consultants, founders &amp; more.</p>
+    </div>
+    <div>
+      <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Product</div>
+      <ul class="mt-3 space-y-2 text-sm font-medium text-slate-600">
+        <li><a class="hover:text-indigo-600" href="#why">Why MatchedIn</a></li>
+        <li><a class="hover:text-indigo-600" href="#features">Features</a></li>
+        <li><a class="hover:text-indigo-600" href="#download">Download</a></li>
+        <li><a class="hover:text-indigo-600" href="play-store-guide.html">Play Store guide</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="text-xs font-bold uppercase tracking-wider text-slate-400">Company</div>
+      <ul class="mt-3 space-y-2 text-sm font-medium text-slate-600">
+        <li><a class="hover:text-indigo-600" href="safety.html">Safety</a></li>
+        <li><a class="hover:text-indigo-600" href="privacy.html">Privacy</a></li>
+        <li><a class="hover:text-indigo-600" href="terms.html">Terms</a></li>
+        <li><a class="hover:text-indigo-600" href="faq.html">FAQ</a></li>
+        <li><a class="hover:text-indigo-600" href="contact.html">Contact</a></li>
+        <li><a class="hover:text-indigo-600" href="delete-account.html">Delete account</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="border-t border-slate-100">
+    <div class="mx-auto max-w-site px-4 sm:px-6 py-5 flex flex-col sm:flex-row gap-2 justify-between text-xs text-slate-400">
+      <span>© <span id="y"></span> MatchedIn. All rights reserved.</span>
+      <span>Indian dating app for professionals · Delhi · Gurgaon · Bengaluru · India</span>
+    </div>
+  </div>
+</footer>
+
+<div id="float-download" class="float-download" role="region" aria-label="Download MatchedIn">
+  <div class="min-w-0">
+    <div class="text-sm font-semibold truncate">MatchedIn</div>
+    <div class="text-xs text-slate-300 truncate">Dating for professionals</div>
+  </div>
+  <a data-play-store class="shrink-0 rounded-xl bg-white text-navy px-3 py-2 text-xs font-bold" href="https://play.google.com/store/apps/details?id=com.linkedup.mobile">Get app</a>
+</div>
+
+<script>document.getElementById('y').textContent = new Date().getFullYear();</script>
 <script src="assets/js/config.js"></script>
-<script src="assets/js/api.js"></script>
-<script src="assets/js/site.js"></script>
-</body></html>
+<script src="assets/js/landing.js"></script>
+</body>
+</html>

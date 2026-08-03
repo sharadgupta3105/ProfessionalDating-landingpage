@@ -13,6 +13,8 @@
     playStore: 'play-store-guide.html',
     /** Live listing — https://play.google.com/store/apps/details?id=com.linkedup.mobile */
     playStoreApp: 'https://play.google.com/store/apps/details?id=com.linkedup.mobile',
+    /** Set when App Store listing is live */
+    appStoreApp: '',
   };
 
   const NAV_ITEMS = [
