@@ -10,20 +10,26 @@
     return (site.apiBaseUrl || 'http://localhost:5001').replace(/\/$/, '');
   }
 
-  function getToken() {
+  function readStorage(key) {
     try {
-      return sessionStorage.getItem(TOKEN_KEY);
+      return localStorage.getItem(key) || sessionStorage.getItem(key);
     } catch (_) {
       return null;
     }
   }
 
+  function getToken() {
+    return readStorage(TOKEN_KEY);
+  }
+
   function setSession(token, admin) {
     try {
-      localStorage.removeItem(TOKEN_KEY);
-      localStorage.removeItem(USER_KEY);
-      if (token) sessionStorage.setItem(TOKEN_KEY, token);
-      if (admin) sessionStorage.setItem(USER_KEY, JSON.stringify(admin));
+      sessionStorage.removeItem(TOKEN_KEY);
+      sessionStorage.removeItem(USER_KEY);
+      if (token) localStorage.setItem(TOKEN_KEY, token);
+      else localStorage.removeItem(TOKEN_KEY);
+      if (admin) localStorage.setItem(USER_KEY, JSON.stringify(admin));
+      else localStorage.removeItem(USER_KEY);
     } catch (_) {
       /* ignore */
     }
@@ -42,7 +48,7 @@
 
   function getAdmin() {
     try {
-      const raw = sessionStorage.getItem(USER_KEY);
+      const raw = readStorage(USER_KEY);
       return raw ? JSON.parse(raw) : null;
     } catch (_) {
       return null;
@@ -72,10 +78,11 @@
     }
 
     if (!res.ok) {
-      if (res.status === 401 && path !== '/admin/login') clearSession();
       const err = new Error(data?.message || res.statusText || 'Request failed');
       err.status = res.status;
       err.data = data;
+      // Only drop the session on auth failure — not on 404/5xx/network blips.
+      if (res.status === 401 && path !== '/admin/login') clearSession();
       throw err;
     }
     return data;

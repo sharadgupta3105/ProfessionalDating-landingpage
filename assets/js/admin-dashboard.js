@@ -545,8 +545,19 @@
       showDash();
       const hash = (location.hash || '').replace('#', '');
       if (['overview', 'launch', 'users', 'notifications', 'pricing', 'safety'].includes(hash)) setTab(hash);
-      await refreshAll();
-      toast('Signed in');
+      try {
+        await refreshAll();
+        toast('Signed in');
+      } catch (loadErr) {
+        if (loadErr?.status === 401 || !api.getToken()) {
+          api.clearSession();
+          showLogin();
+          loginError.textContent = loadErr.message || 'Session expired';
+          loginError.classList.remove('hidden');
+          return;
+        }
+        toast(loadErr.message || 'Signed in, but some data failed to load');
+      }
     } catch (err) {
       loginError.textContent = err.message || 'Login failed';
       loginError.classList.remove('hidden');
@@ -887,15 +898,22 @@
     .catch(() => {});
 
   if (api.getToken()) {
+    // Migrate older sessionStorage sessions into localStorage.
+    const admin = api.getAdmin();
+    if (admin) api.setSession(api.getToken(), admin);
     showDash();
     const hash = (location.hash || '').replace('#', '');
     if (['overview', 'launch', 'users', 'notifications', 'pricing', 'safety'].includes(hash)) {
       setTab(hash);
     }
     refreshAll().catch((e) => {
-      toast(e.message || 'Session expired');
-      api.clearSession();
-      showLogin();
+      if (e?.status === 401 || !api.getToken()) {
+        toast(e.message || 'Session expired');
+        api.clearSession();
+        showLogin();
+        return;
+      }
+      toast(e.message || 'Failed to load dashboard data');
     });
   } else {
     showLogin();
