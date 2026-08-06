@@ -10,6 +10,11 @@
   let searchTimer = null;
   let premiumTargetId = null;
   let currentTab = 'overview';
+  let notifyPage = 1;
+  let notifyTotalPages = 1;
+  let notifySearchTimer = null;
+  let notifySelected = new Map();
+  let notifyPageUsers = [];
 
   const loginView = document.getElementById('login-view');
   const dashView = document.getElementById('dash-view');
@@ -131,6 +136,9 @@
       history.replaceState(null, '', `#${tab}`);
     } catch (_) {
       /* ignore */
+    }
+    if (tab === 'notifications') {
+      loadNotifyUsers().catch((e) => toast(e.message || 'Failed to load users'));
     }
   }
 
@@ -470,21 +478,97 @@
     notifyModal.classList.remove('open');
   }
 
-  function syncNotifyAudienceFields() {
-    const audience = document.getElementById('notify-audience').value;
-    document.getElementById('notify-user-wrap').classList.toggle('hidden', audience !== 'user');
-    document.getElementById('notify-users-wrap').classList.toggle('hidden', audience !== 'users');
+  function syncNotifyMode() {
+    const mode = document.getElementById('notify-mode').value;
+    document.getElementById('notify-pick-wrap').classList.toggle('hidden', mode !== 'selected');
+    document.getElementById('notify-group-wrap').classList.toggle('hidden', mode !== 'group');
   }
 
-  function parseUserIds(raw) {
-    return [
-      ...new Set(
-        String(raw || '')
-          .split(/[\s,;]+/)
-          .map((s) => s.trim())
-          .filter(Boolean),
-      ),
-    ];
+  function renderNotifySelected() {
+    const el = document.getElementById('notify-selected');
+    const users = [...notifySelected.values()];
+    if (!users.length) {
+      el.innerHTML = '<span class="text-xs text-stone-400">No one selected yet</span>';
+      return;
+    }
+    el.innerHTML = users
+      .map(
+        (u) => `<button type="button" class="badge ${u.has_push_token ? 'badge-ok' : 'badge-warn'}" data-notify-remove="${escapeHtml(u.id)}" title="Remove">
+          ${escapeHtml(u.name || u.email || u.id.slice(0, 8))}
+          ${u.has_push_token ? '' : ' · no push'}
+          ×
+        </button>`,
+      )
+      .join('');
+  }
+
+  function toggleNotifyUser(user, selected) {
+    if (!user?.id) return;
+    if (selected) {
+      notifySelected.set(user.id, {
+        id: user.id,
+        name: user.name || '',
+        email: user.email || '',
+        has_push_token: Boolean(user.has_push_token),
+      });
+    } else {
+      notifySelected.delete(user.id);
+    }
+    renderNotifySelected();
+  }
+
+  async function loadNotifyUsers() {
+    const q = document.getElementById('notify-q').value.trim();
+    const filter = document.getElementById('notify-filter').value;
+    const data = await api.users({ q, filter, page: notifyPage, limit: 20 });
+    notifyTotalPages = data.totalPages || 1;
+    notifyPageUsers = data.users || [];
+    document.getElementById('notify-pick-meta').textContent =
+      `${data.total || 0} matches · page ${data.page}/${notifyTotalPages} · ${notifySelected.size} selected`;
+    document.getElementById('btn-notify-prev').disabled = notifyPage <= 1;
+    document.getElementById('btn-notify-next').disabled = notifyPage >= notifyTotalPages;
+
+    const tbody = document.getElementById('notify-tbody');
+    if (!notifyPageUsers.length) {
+      tbody.innerHTML =
+        '<tr><td colspan="5" class="text-stone-400 py-8 text-center">No users found</td></tr>';
+      document.getElementById('notify-check-all').checked = false;
+      return;
+    }
+
+    tbody.innerHTML = notifyPageUsers
+      .map((u) => {
+        const checked = notifySelected.has(u.id) ? 'checked' : '';
+        const badges = [];
+        if (u.is_premium) badges.push('<span class="badge badge-ok">Premium</span>');
+        if (!u.onboarding_complete) badges.push('<span class="badge badge-warn">Incomplete</span>');
+        if (u.is_banned) badges.push('<span class="badge badge-bad">Banned</span>');
+        return `<tr data-id="${escapeHtml(u.id)}">
+          <td><input type="checkbox" data-notify-pick ${checked}/></td>
+          <td>
+            <div class="flex items-center gap-3">
+              ${avatarHtml(u.photo_url, u.name)}
+              <span class="min-w-0">
+                <div class="font-medium">${escapeHtml(u.name || '—')}</div>
+                <div class="text-xs text-stone-500 truncate">${escapeHtml(u.email || '')}</div>
+              </span>
+            </div>
+          </td>
+          <td>${escapeHtml(u.city || '—')}</td>
+          <td>${
+            u.has_push_token
+              ? '<span class="badge badge-ok">Push</span>'
+              : '<span class="badge badge-muted">None</span>'
+          }</td>
+          <td><div class="flex flex-wrap gap-1">${badges.join(' ') || '<span class="badge badge-muted">Active</span>'}</div></td>
+        </tr>`;
+      })
+      .join('');
+
+    const allOnPageSelected =
+      notifyPageUsers.length > 0 && notifyPageUsers.every((u) => notifySelected.has(u.id));
+    document.getElementById('notify-check-all').checked = allOnPageSelected;
+    renderNotifySelected();
   }
 
   async function loadReports() {
@@ -531,6 +615,9 @@
 
   async function refreshAll() {
     await Promise.all([loadStats(), loadPricing(), loadUsers(), loadReports(), loadLaunchPromo()]);
+    if (currentTab === 'notifications') {
+      await loadNotifyUsers();
+    }
   }
 
   loginForm.addEventListener('submit', async (e) => {
@@ -802,8 +889,9 @@
     }
   });
 
-  document.getElementById('notify-audience').addEventListener('change', syncNotifyAudienceFields);
-  syncNotifyAudienceFields();
+  document.getElementById('notify-mode').addEventListener('change', syncNotifyMode);
+  syncNotifyMode();
+  renderNotifySelected();
 
   document.getElementById('notify-body').addEventListener('input', () => {
     document.getElementById('notify-body-count').textContent = String(
@@ -811,35 +899,100 @@
     );
   });
 
+  document.getElementById('notify-q').addEventListener('input', () => {
+    clearTimeout(notifySearchTimer);
+    notifySearchTimer = setTimeout(() => {
+      notifyPage = 1;
+      loadNotifyUsers().catch((e) => toast(e.message));
+    }, 300);
+  });
+  document.getElementById('notify-filter').addEventListener('change', () => {
+    notifyPage = 1;
+    loadNotifyUsers().catch((e) => toast(e.message));
+  });
+  document.getElementById('btn-notify-search').addEventListener('click', () => {
+    notifyPage = 1;
+    loadNotifyUsers().catch((e) => toast(e.message));
+  });
+  document.getElementById('btn-notify-prev').addEventListener('click', () => {
+    if (notifyPage <= 1) return;
+    notifyPage -= 1;
+    loadNotifyUsers().catch((e) => toast(e.message));
+  });
+  document.getElementById('btn-notify-next').addEventListener('click', () => {
+    if (notifyPage >= notifyTotalPages) return;
+    notifyPage += 1;
+    loadNotifyUsers().catch((e) => toast(e.message));
+  });
+  document.getElementById('btn-notify-clear').addEventListener('click', () => {
+    notifySelected.clear();
+    renderNotifySelected();
+    loadNotifyUsers().catch((e) => toast(e.message));
+  });
+  document.getElementById('btn-notify-add-page').addEventListener('click', () => {
+    notifyPageUsers.forEach((u) => toggleNotifyUser(u, true));
+    loadNotifyUsers().catch((e) => toast(e.message));
+  });
+  document.getElementById('notify-check-all').addEventListener('change', (e) => {
+    const on = e.target.checked;
+    notifyPageUsers.forEach((u) => toggleNotifyUser(u, on));
+    loadNotifyUsers().catch((err) => toast(err.message));
+  });
+  document.getElementById('notify-tbody').addEventListener('change', (e) => {
+    const box = e.target.closest('[data-notify-pick]');
+    if (!box) return;
+    const row = box.closest('tr');
+    const id = row?.dataset?.id;
+    const user = notifyPageUsers.find((u) => u.id === id);
+    if (!user) return;
+    toggleNotifyUser(user, box.checked);
+    document.getElementById('notify-pick-meta').textContent = document
+      .getElementById('notify-pick-meta')
+      .textContent.replace(/· \d+ selected/, `· ${notifySelected.size} selected`);
+    const allOnPageSelected =
+      notifyPageUsers.length > 0 && notifyPageUsers.every((u) => notifySelected.has(u.id));
+    document.getElementById('notify-check-all').checked = allOnPageSelected;
+  });
+  document.getElementById('notify-selected').addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-notify-remove]');
+    if (!btn) return;
+    notifySelected.delete(btn.dataset.notifyRemove);
+    renderNotifySelected();
+    loadNotifyUsers().catch((err) => toast(err.message));
+  });
+
   document.getElementById('notify-form').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const audience = document.getElementById('notify-audience').value;
+    const mode = document.getElementById('notify-mode').value;
     const title = document.getElementById('notify-title').value.trim();
     const body = document.getElementById('notify-body').value.trim();
     const screen = document.getElementById('notify-screen').value;
     const resultEl = document.getElementById('notify-result');
     const btn = document.getElementById('btn-send-notify');
-    const payload = { audience, title, body, screen };
-    if (audience === 'user') {
-      payload.userId = document.getElementById('notify-user-id').value.trim();
-      if (!payload.userId) {
-        toast('Enter a user ID');
+    const payload = { title, body, screen };
+
+    if (mode === 'selected') {
+      const ids = [...notifySelected.keys()];
+      if (!ids.length) {
+        toast('Select at least one user');
+        return;
+      }
+      payload.audience = ids.length === 1 ? 'user' : 'users';
+      if (ids.length === 1) payload.userId = ids[0];
+      else payload.userIds = ids;
+      const noPush = [...notifySelected.values()].filter((u) => !u.has_push_token).length;
+      const confirmMsg =
+        noPush > 0
+          ? `Send to ${ids.length} user${ids.length === 1 ? '' : 's'}? (${noPush} have no push token and will be skipped)`
+          : `Send to ${ids.length} selected user${ids.length === 1 ? '' : 's'}?`;
+      if (!window.confirm(confirmMsg)) return;
+    } else {
+      payload.audience = document.getElementById('notify-audience').value;
+      if (!window.confirm(`Send this notification to the “${payload.audience}” group?`)) {
         return;
       }
     }
-    if (audience === 'users') {
-      payload.userIds = parseUserIds(document.getElementById('notify-user-ids').value);
-      if (!payload.userIds.length) {
-        toast('Enter at least one user ID');
-        return;
-      }
-    }
-    if (
-      ['all_push', 'premium', 'free', 'incomplete'].includes(audience) &&
-      !window.confirm(`Send this notification to the “${audience}” group?`)
-    ) {
-      return;
-    }
+
     try {
       btn.disabled = true;
       resultEl.textContent = 'Sending…';
