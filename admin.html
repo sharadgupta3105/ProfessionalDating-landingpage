@@ -32,7 +32,48 @@
   .btn-ghost { background: #fff; border-color: #d6d3d1; color: #1c1917; }
   .btn-danger { background: #fff; border-color: #fecaca; color: #b91c1c; }
   .btn-gold { background: #c9a227; color: #1c1917; }
-  input, select, textarea { border: 1px solid #d6d3d1; border-radius: 10px; padding: 10px 12px; background: #fff; }
+  /* Beat Tailwind preflight (padding: 0) on form controls */
+  input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]):not([type="submit"]):not([type="button"]),
+  select,
+  textarea {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    border: 1px solid #d6d3d1;
+    border-radius: 10px;
+    padding: 12px 14px;
+    background: #fff;
+    color: #1c1917;
+    font: inherit;
+    font-size: 15px;
+    line-height: 1.4;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+  input:not([type="checkbox"]):not([type="radio"]):not([type="hidden"]) {
+    min-height: 46px;
+  }
+  select {
+    min-height: 46px;
+    padding-right: 36px;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2378716c' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+  }
+  textarea {
+    min-height: 96px;
+    resize: vertical;
+  }
+  input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #1c1917;
+    box-shadow: 0 0 0 3px rgba(28, 25, 23, 0.08);
+  }
+  #user-q, #user-filter {
+    width: auto;
+    max-width: none;
+  }
   .nav-tab { padding: 8px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; color: #78716c; border: 1px solid transparent; }
   .nav-tab:hover { color: #1c1917; background: #f5f5f4; }
   .nav-tab.is-active { background: #1c1917; color: #fff; }
