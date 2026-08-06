@@ -5,6 +5,16 @@
   const api = window.MatchedInAdminApi;
   if (!api) return;
 
+  function el(id) {
+    return document.getElementById(id);
+  }
+
+  function onEl(target, event, handler) {
+    const node = typeof target === 'string' ? el(target) : target;
+    if (!node) return;
+    node.addEventListener(event, handler);
+  }
+
   let page = 1;
   let totalPages = 1;
   let searchTimer = null;
@@ -16,19 +26,26 @@
   let notifySelected = new Map();
   let notifyPageUsers = [];
 
-  const loginView = document.getElementById('login-view');
-  const dashView = document.getElementById('dash-view');
-  const loginForm = document.getElementById('login-form');
-  const loginError = document.getElementById('login-error');
-  const loginHint = document.getElementById('login-hint');
-  const toastEl = document.getElementById('toast');
-  const drawer = document.getElementById('user-drawer');
-  const drawerBackdrop = document.getElementById('drawer-backdrop');
-  const premiumModal = document.getElementById('premium-modal');
-  const notifyModal = document.getElementById('notify-modal');
-  const promoToggle = document.getElementById('promo-enabled');
+  const loginView = el('login-view');
+  const dashView = el('dash-view');
+  const loginForm = el('login-form');
+  const loginError = el('login-error');
+  const loginHint = el('login-hint');
+  const toastEl = el('toast');
+  const drawer = el('user-drawer');
+  const drawerBackdrop = el('drawer-backdrop');
+  const premiumModal = el('premium-modal');
+  const notifyModal = el('notify-modal');
+  const promoToggle = el('promo-enabled');
+
+  if (!loginView || !dashView || !loginForm) {
+    // eslint-disable-next-line no-console
+    console.error('[admin] Missing login markup — hard-refresh or redeploy admin.html');
+    return;
+  }
 
   function toast(msg) {
+    if (!toastEl) return;
     toastEl.textContent = msg;
     toastEl.style.display = 'block';
     clearTimeout(toastEl._t);
@@ -479,9 +496,9 @@
   }
 
   function syncNotifyMode() {
-    const mode = document.getElementById('notify-mode').value;
-    document.getElementById('notify-pick-wrap').classList.toggle('hidden', mode !== 'selected');
-    document.getElementById('notify-group-wrap').classList.toggle('hidden', mode !== 'group');
+    const mode = el('notify-mode')?.value || 'selected';
+    el('notify-pick-wrap')?.classList.toggle('hidden', mode !== 'selected');
+    el('notify-group-wrap')?.classList.toggle('hidden', mode !== 'group');
   }
 
   function renderNotifySelected() {
@@ -620,13 +637,13 @@
     }
   }
 
-  loginForm.addEventListener('submit', async (e) => {
+  onEl(loginForm, 'submit', async (e) => {
     e.preventDefault();
-    loginError.classList.add('hidden');
+    loginError?.classList.add('hidden');
     try {
       const data = await api.login(
-        document.getElementById('login-user').value.trim(),
-        document.getElementById('login-pass').value,
+        el('login-user').value.trim(),
+        el('login-pass').value,
       );
       api.setSession(data.token, data.admin);
       showDash();
@@ -639,19 +656,23 @@
         if (loadErr?.status === 401 || !api.getToken()) {
           api.clearSession();
           showLogin();
-          loginError.textContent = loadErr.message || 'Session expired';
-          loginError.classList.remove('hidden');
+          if (loginError) {
+            loginError.textContent = loadErr.message || 'Session expired';
+            loginError.classList.remove('hidden');
+          }
           return;
         }
         toast(loadErr.message || 'Signed in, but some data failed to load');
       }
     } catch (err) {
-      loginError.textContent = err.message || 'Login failed';
-      loginError.classList.remove('hidden');
+      if (loginError) {
+        loginError.textContent = err.message || 'Login failed';
+        loginError.classList.remove('hidden');
+      }
     }
   });
 
-  document.getElementById('btn-logout').addEventListener('click', async () => {
+  onEl('btn-logout', 'click', async () => {
     try {
       await api.logout();
     } catch (_) {
@@ -662,28 +683,29 @@
     }
   });
 
-  document.getElementById('dash-nav').addEventListener('click', (e) => {
+  onEl('dash-nav', 'click', (e) => {
     const btn = e.target.closest('[data-tab]');
     if (!btn) return;
     setTab(btn.dataset.tab);
   });
 
-  document.querySelectorAll('[data-goto]').forEach((el) => {
-    el.addEventListener('click', () => setTab(el.dataset.goto));
+  document.querySelectorAll('[data-goto]').forEach((node) => {
+    onEl(node, 'click', () => setTab(node.dataset.goto));
   });
-  document.getElementById('overview-promo-card').addEventListener('click', (e) => {
+  onEl('overview-promo-card', 'click', (e) => {
     const btn = e.target.closest('[data-goto]');
     if (btn) setTab(btn.dataset.goto);
   });
 
-  document.getElementById('btn-refresh-all').addEventListener('click', () => {
+  onEl('btn-refresh-all', 'click', () => {
     refreshAll().then(() => toast('Refreshed')).catch((e) => toast(e.message));
   });
-  document.getElementById('btn-refresh-users').addEventListener('click', () => {
+  onEl('btn-refresh-users', 'click', () => {
     loadUsers().then(() => toast('Users refreshed')).catch((e) => toast(e.message));
   });
 
-  promoToggle.addEventListener('click', () => {
+  onEl(promoToggle, 'click', () => {
+    if (!promoToggle) return;
     promoToggle.classList.toggle('on');
     promoToggle.setAttribute(
       'aria-pressed',
@@ -691,18 +713,18 @@
     );
   });
 
-  document.getElementById('btn-save-promo').addEventListener('click', async () => {
-    const start = fromLocalInput(document.getElementById('promo-start').value);
-    const end = fromLocalInput(document.getElementById('promo-end').value);
+  onEl('btn-save-promo', 'click', async () => {
+    const start = fromLocalInput(el('promo-start')?.value);
+    const end = fromLocalInput(el('promo-end')?.value);
     if (!start || !end) {
       toast('Set both start and end dates');
       return;
     }
-    const btn = document.getElementById('btn-save-promo');
+    const btn = el('btn-save-promo');
     try {
-      btn.disabled = true;
+      if (btn) btn.disabled = true;
       const data = await api.updateLaunchPromo({
-        enabled: promoToggle.classList.contains('on'),
+        enabled: promoToggle?.classList.contains('on'),
         start,
         end,
       });
@@ -712,18 +734,19 @@
     } catch (err) {
       toast(err.message || 'Could not save launch offer');
     } finally {
-      btn.disabled = false;
+      if (btn) btn.disabled = false;
     }
   });
 
-  document.getElementById('btn-view-promo-users').addEventListener('click', () => {
-    document.getElementById('user-filter').value = 'promo';
+  onEl('btn-view-promo-users', 'click', () => {
+    const filter = el('user-filter');
+    if (filter) filter.value = 'promo';
     page = 1;
     setTab('users');
     loadUsers().catch((e) => toast(e.message));
   });
 
-  document.getElementById('pricing-tbody').addEventListener('input', (e) => {
+  onEl('pricing-tbody', 'input', (e) => {
     const input = e.target.closest('[data-price-input]');
     if (!input) return;
     const preview = input.closest('tr')?.querySelector('[data-price-preview]');
@@ -734,45 +757,45 @@
     }
   });
 
-  document.getElementById('pricing-form').addEventListener('submit', async (e) => {
+  onEl('pricing-form', 'submit', async (e) => {
     e.preventDefault();
-    const button = document.getElementById('btn-save-pricing');
+    const button = el('btn-save-pricing');
     const plans = [...document.querySelectorAll('#pricing-tbody tr[data-plan-id]')].map((row) => ({
       id: row.dataset.planId,
       priceInr: Number(row.querySelector('[data-price-input]')?.value),
     }));
     try {
-      button.disabled = true;
+      if (button) button.disabled = true;
       await api.updatePricing(plans);
       await loadPricing();
       toast('Display prices updated');
     } catch (err) {
       toast(err.message || 'Could not update pricing');
     } finally {
-      button.disabled = false;
+      if (button) button.disabled = false;
     }
   });
 
-  document.getElementById('btn-reports').addEventListener('click', () => {
+  onEl('btn-reports', 'click', () => {
     loadReports().catch((e) => toast(e.message));
   });
-  document.getElementById('btn-prev').addEventListener('click', () => {
+  onEl('btn-prev', 'click', () => {
     if (page > 1) {
       page -= 1;
       loadUsers().catch((e) => toast(e.message));
     }
   });
-  document.getElementById('btn-next').addEventListener('click', () => {
+  onEl('btn-next', 'click', () => {
     if (page < totalPages) {
       page += 1;
       loadUsers().catch((e) => toast(e.message));
     }
   });
-  document.getElementById('user-filter').addEventListener('change', () => {
+  onEl('user-filter', 'change', () => {
     page = 1;
     loadUsers().catch((e) => toast(e.message));
   });
-  document.getElementById('user-q').addEventListener('input', () => {
+  onEl('user-q', 'input', () => {
     clearTimeout(searchTimer);
     searchTimer = setTimeout(() => {
       page = 1;
@@ -811,12 +834,12 @@
       closeDrawer();
     }
     await refreshAll();
-    if (drawer.classList.contains('open') && act !== 'delete') {
+    if (drawer?.classList.contains('open') && act !== 'delete') {
       await openUserDrawer(id);
     }
   }
 
-  document.getElementById('users-tbody').addEventListener('click', async (e) => {
+  onEl('users-tbody', 'click', async (e) => {
     const btn = e.target.closest('button[data-act]');
     if (!btn) return;
     const tr = btn.closest('tr[data-id]');
@@ -833,7 +856,7 @@
     }
   });
 
-  document.getElementById('user-drawer-body').addEventListener('click', async (e) => {
+  onEl('user-drawer-body', 'click', async (e) => {
     const btn = e.target.closest('button[data-act]');
     const wrap = e.target.closest('[data-drawer-actions]');
     if (!btn || !wrap) return;
@@ -847,7 +870,7 @@
     }
   });
 
-  document.getElementById('reports-tbody').addEventListener('click', async (e) => {
+  onEl('reports-tbody', 'click', async (e) => {
     const btn = e.target.closest('button[data-act]');
     if (!btn) return;
     const tr = btn.closest('tr[data-reported-id]');
@@ -863,82 +886,81 @@
     }
   });
 
-  document.getElementById('btn-close-drawer').addEventListener('click', closeDrawer);
-  drawerBackdrop.addEventListener('click', closeDrawer);
+  onEl('btn-close-drawer', 'click', closeDrawer);
+  onEl(drawerBackdrop, 'click', closeDrawer);
 
-  document.getElementById('btn-premium-cancel').addEventListener('click', closePremiumModal);
-  premiumModal.addEventListener('click', (e) => {
+  onEl('btn-premium-cancel', 'click', closePremiumModal);
+  onEl(premiumModal, 'click', (e) => {
     if (e.target === premiumModal) closePremiumModal();
   });
-  document.getElementById('btn-premium-confirm').addEventListener('click', async () => {
+  onEl('btn-premium-confirm', 'click', async () => {
     if (!premiumTargetId) return;
     const userId = premiumTargetId;
-    const plan = document.getElementById('premium-plan').value || 'month';
-    const btn = document.getElementById('btn-premium-confirm');
+    const plan = el('premium-plan')?.value || 'month';
+    const btn = el('btn-premium-confirm');
     try {
-      btn.disabled = true;
+      if (btn) btn.disabled = true;
       await api.grantPremium(userId, plan);
       toast('Premium granted');
       closePremiumModal();
       await refreshAll();
-      if (drawer.classList.contains('open')) await openUserDrawer(userId);
+      if (drawer?.classList.contains('open')) await openUserDrawer(userId);
     } catch (err) {
       toast(err.message || 'Grant failed');
     } finally {
-      btn.disabled = false;
+      if (btn) btn.disabled = false;
     }
   });
 
-  document.getElementById('notify-mode').addEventListener('change', syncNotifyMode);
+  onEl('notify-mode', 'change', syncNotifyMode);
   syncNotifyMode();
   renderNotifySelected();
 
-  document.getElementById('notify-body').addEventListener('input', () => {
-    document.getElementById('notify-body-count').textContent = String(
-      document.getElementById('notify-body').value.length,
-    );
+  onEl('notify-body', 'input', () => {
+    const count = el('notify-body-count');
+    if (count) count.textContent = String(el('notify-body')?.value.length || 0);
   });
 
-  document.getElementById('notify-q').addEventListener('input', () => {
+  onEl('notify-q', 'input', () => {
     clearTimeout(notifySearchTimer);
     notifySearchTimer = setTimeout(() => {
       notifyPage = 1;
       loadNotifyUsers().catch((e) => toast(e.message));
     }, 300);
   });
-  document.getElementById('notify-filter').addEventListener('change', () => {
+  onEl('notify-filter', 'change', () => {
     notifyPage = 1;
     loadNotifyUsers().catch((e) => toast(e.message));
   });
-  document.getElementById('btn-notify-search').addEventListener('click', () => {
+  onEl('btn-notify-search', 'click', () => {
     notifyPage = 1;
     loadNotifyUsers().catch((e) => toast(e.message));
   });
-  document.getElementById('btn-notify-prev').addEventListener('click', () => {
+  onEl('btn-notify-prev', 'click', () => {
     if (notifyPage <= 1) return;
     notifyPage -= 1;
     loadNotifyUsers().catch((e) => toast(e.message));
   });
-  document.getElementById('btn-notify-next').addEventListener('click', () => {
+  onEl('btn-notify-next', 'click', () => {
     if (notifyPage >= notifyTotalPages) return;
     notifyPage += 1;
     loadNotifyUsers().catch((e) => toast(e.message));
   });
-  document.getElementById('btn-notify-clear').addEventListener('click', () => {
+  onEl('btn-notify-clear', 'click', () => {
     notifySelected.clear();
     renderNotifySelected();
     loadNotifyUsers().catch((e) => toast(e.message));
   });
-  document.getElementById('btn-notify-add-page').addEventListener('click', () => {
+  onEl('btn-notify-add-page', 'click', () => {
     notifyPageUsers.forEach((u) => toggleNotifyUser(u, true));
     loadNotifyUsers().catch((e) => toast(e.message));
   });
-  document.getElementById('notify-check-all').addEventListener('change', (e) => {
-    const on = e.target.checked;
-    notifyPageUsers.forEach((u) => toggleNotifyUser(u, on));
+  onEl('notify-check-all', 'change', (e) => {
+    const checked = e.target.checked;
+    notifyPageUsers.forEach((u) => toggleNotifyUser(u, checked));
     loadNotifyUsers().catch((err) => toast(err.message));
   });
-  document.getElementById('notify-tbody').addEventListener('change', (e) => {
+  onEl('notify-tbody', 'change', (e) => {
     const box = e.target.closest('[data-notify-pick]');
     if (!box) return;
     const row = box.closest('tr');
@@ -946,14 +968,19 @@
     const user = notifyPageUsers.find((u) => u.id === id);
     if (!user) return;
     toggleNotifyUser(user, box.checked);
-    document.getElementById('notify-pick-meta').textContent = document
-      .getElementById('notify-pick-meta')
-      .textContent.replace(/· \d+ selected/, `· ${notifySelected.size} selected`);
+    const meta = el('notify-pick-meta');
+    if (meta) {
+      meta.textContent = meta.textContent.replace(
+        /· \d+ selected/,
+        `· ${notifySelected.size} selected`,
+      );
+    }
     const allOnPageSelected =
       notifyPageUsers.length > 0 && notifyPageUsers.every((u) => notifySelected.has(u.id));
-    document.getElementById('notify-check-all').checked = allOnPageSelected;
+    const checkAll = el('notify-check-all');
+    if (checkAll) checkAll.checked = allOnPageSelected;
   });
-  document.getElementById('notify-selected').addEventListener('click', (e) => {
+  onEl('notify-selected', 'click', (e) => {
     const btn = e.target.closest('[data-notify-remove]');
     if (!btn) return;
     notifySelected.delete(btn.dataset.notifyRemove);
@@ -961,14 +988,14 @@
     loadNotifyUsers().catch((err) => toast(err.message));
   });
 
-  document.getElementById('notify-form').addEventListener('submit', async (e) => {
+  onEl('notify-form', 'submit', async (e) => {
     e.preventDefault();
-    const mode = document.getElementById('notify-mode').value;
-    const title = document.getElementById('notify-title').value.trim();
-    const body = document.getElementById('notify-body').value.trim();
-    const screen = document.getElementById('notify-screen').value;
-    const resultEl = document.getElementById('notify-result');
-    const btn = document.getElementById('btn-send-notify');
+    const mode = el('notify-mode')?.value;
+    const title = el('notify-title')?.value.trim();
+    const body = el('notify-body')?.value.trim();
+    const screen = el('notify-screen')?.value;
+    const resultEl = el('notify-result');
+    const btn = el('btn-send-notify');
     const payload = { title, body, screen };
 
     if (mode === 'selected') {
@@ -987,44 +1014,46 @@
           : `Send to ${ids.length} selected user${ids.length === 1 ? '' : 's'}?`;
       if (!window.confirm(confirmMsg)) return;
     } else {
-      payload.audience = document.getElementById('notify-audience').value;
+      payload.audience = el('notify-audience')?.value;
       if (!window.confirm(`Send this notification to the “${payload.audience}” group?`)) {
         return;
       }
     }
 
     try {
-      btn.disabled = true;
-      resultEl.textContent = 'Sending…';
+      if (btn) btn.disabled = true;
+      if (resultEl) resultEl.textContent = 'Sending…';
       const data = await api.sendNotification(payload);
-      resultEl.textContent = `Sent ${data.sent || 0} · targeted ${data.targetedUsers || 0} users · ${
-        data.devicesQueued || 0
-      } devices`;
+      if (resultEl) {
+        resultEl.textContent = `Sent ${data.sent || 0} · targeted ${data.targetedUsers || 0} users · ${
+          data.devicesQueued || 0
+        } devices`;
+      }
       toast(data.hint || 'Notification queued');
     } catch (err) {
-      resultEl.textContent = '';
+      if (resultEl) resultEl.textContent = '';
       toast(err.message || 'Send failed');
     } finally {
-      btn.disabled = false;
+      if (btn) btn.disabled = false;
     }
   });
 
-  document.getElementById('btn-notify-cancel').addEventListener('click', closeNotifyModal);
-  notifyModal.addEventListener('click', (e) => {
+  onEl('btn-notify-cancel', 'click', closeNotifyModal);
+  onEl(notifyModal, 'click', (e) => {
     if (e.target === notifyModal) closeNotifyModal();
   });
-  document.getElementById('btn-notify-confirm').addEventListener('click', async () => {
-    const userId = document.getElementById('notify-modal-user-id').value.trim();
-    const title = document.getElementById('notify-modal-title-input').value.trim();
-    const body = document.getElementById('notify-modal-body').value.trim();
-    const screen = document.getElementById('notify-modal-screen').value;
-    const btn = document.getElementById('btn-notify-confirm');
+  onEl('btn-notify-confirm', 'click', async () => {
+    const userId = el('notify-modal-user-id')?.value.trim();
+    const title = el('notify-modal-title-input')?.value.trim();
+    const body = el('notify-modal-body')?.value.trim();
+    const screen = el('notify-modal-screen')?.value;
+    const btn = el('btn-notify-confirm');
     if (!userId || !title || !body) {
       toast('Title and message are required');
       return;
     }
     try {
-      btn.disabled = true;
+      if (btn) btn.disabled = true;
       const data = await api.sendNotification({
         audience: 'user',
         userId,
@@ -1037,7 +1066,7 @@
     } catch (err) {
       toast(err.message || 'Send failed');
     } finally {
-      btn.disabled = false;
+      if (btn) btn.disabled = false;
     }
   });
 
