@@ -99,6 +99,7 @@
         <button type="button" class="nav-tab is-active" data-tab="overview">Overview</button>
         <button type="button" class="nav-tab" data-tab="launch">Launch offer</button>
         <button type="button" class="nav-tab" data-tab="users">Users</button>
+        <button type="button" class="nav-tab" data-tab="notifications">Notifications</button>
         <button type="button" class="nav-tab" data-tab="pricing">Pricing</button>
         <button type="button" class="nav-tab" data-tab="safety">Safety</button>
       </nav>
@@ -228,6 +229,73 @@
       </div>
     </section>
 
+    <!-- Notifications -->
+    <section id="panel-notifications" class="panel-section space-y-6">
+      <div>
+        <h2 class="text-xl font-semibold">Push notifications</h2>
+        <p class="text-sm text-stone-500 mt-1">Send a custom lock-screen notification to one user, several IDs, or a group that has push enabled.</p>
+      </div>
+
+      <form id="notify-form" class="panel p-5 md:p-6 space-y-5">
+        <div class="grid md:grid-cols-2 gap-4">
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wide text-stone-500 mb-1" for="notify-audience">Audience</label>
+            <select id="notify-audience" class="w-full">
+              <option value="user">One user (by ID)</option>
+              <option value="users">Several users (IDs)</option>
+              <option value="all_push">Everyone with push token</option>
+              <option value="premium">Premium (with push)</option>
+              <option value="free">Free / non-premium (with push)</option>
+              <option value="incomplete">Incomplete onboarding (with push)</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold uppercase tracking-wide text-stone-500 mb-1" for="notify-screen">Open on tap</label>
+            <select id="notify-screen" class="w-full">
+              <option value="home">Discover / Home</option>
+              <option value="matches">Matches</option>
+              <option value="profile">Profile</option>
+              <option value="premium">Premium</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="notify-user-wrap">
+          <label class="block text-xs font-semibold uppercase tracking-wide text-stone-500 mb-1" for="notify-user-id">User ID</label>
+          <input id="notify-user-id" type="text" class="w-full font-mono text-sm" placeholder="Paste user UUID from Users tab"/>
+        </div>
+
+        <div id="notify-users-wrap" class="hidden">
+          <label class="block text-xs font-semibold uppercase tracking-wide text-stone-500 mb-1" for="notify-user-ids">User IDs (one per line or comma-separated)</label>
+          <textarea id="notify-user-ids" rows="4" class="w-full font-mono text-sm" placeholder="uuid-1&#10;uuid-2"></textarea>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wide text-stone-500 mb-1" for="notify-title">Title</label>
+          <input id="notify-title" type="text" maxlength="120" class="w-full" placeholder="MatchedIn" required/>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold uppercase tracking-wide text-stone-500 mb-1" for="notify-body">Message</label>
+          <textarea id="notify-body" rows="3" maxlength="200" class="w-full" placeholder="Your custom message (max 200 characters)" required></textarea>
+          <div class="text-xs text-stone-400 mt-1"><span id="notify-body-count">0</span>/200</div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-3">
+          <button type="submit" id="btn-send-notify" class="btn btn-primary px-4 py-2">Send notification</button>
+          <span id="notify-result" class="text-sm text-stone-500"></span>
+        </div>
+
+        <div class="text-xs text-stone-500 border-t border-stone-100 pt-4 space-y-1">
+          <div class="font-semibold text-stone-700">Notes</div>
+          <ul class="list-disc pl-4 space-y-1">
+            <li>Only devices with a registered Expo push token receive the message.</li>
+            <li>Group sends can take a few seconds for large audiences.</li>
+            <li>You can also open a user in <strong>Users</strong> and tap <em>Send notification</em>.</li>
+          </ul>
+        </div>
+      </form>
+    </section>
+
     <!-- Pricing -->
     <section id="panel-pricing" class="panel-section">
       <div class="panel">
@@ -321,6 +389,30 @@
     <div class="flex justify-end gap-2">
       <button type="button" id="btn-premium-cancel" class="btn btn-ghost">Cancel</button>
       <button type="button" id="btn-premium-confirm" class="btn btn-gold">Grant</button>
+    </div>
+  </div>
+</div>
+
+<!-- Quick notify one user (from drawer) -->
+<div id="notify-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="notify-modal-title">
+  <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
+    <h3 id="notify-modal-title" class="text-lg font-semibold mb-1">Send notification</h3>
+    <p id="notify-modal-user" class="text-sm text-stone-500 mb-4"></p>
+    <input type="hidden" id="notify-modal-user-id"/>
+    <label class="block text-xs font-semibold uppercase tracking-wide text-stone-500 mb-1" for="notify-modal-title-input">Title</label>
+    <input id="notify-modal-title-input" type="text" maxlength="120" class="w-full mb-3" value="MatchedIn"/>
+    <label class="block text-xs font-semibold uppercase tracking-wide text-stone-500 mb-1" for="notify-modal-body">Message</label>
+    <textarea id="notify-modal-body" rows="3" maxlength="200" class="w-full mb-3"></textarea>
+    <label class="block text-xs font-semibold uppercase tracking-wide text-stone-500 mb-1" for="notify-modal-screen">Open on tap</label>
+    <select id="notify-modal-screen" class="w-full mb-5">
+      <option value="home">Discover / Home</option>
+      <option value="matches">Matches</option>
+      <option value="profile">Profile</option>
+      <option value="premium">Premium</option>
+    </select>
+    <div class="flex justify-end gap-2">
+      <button type="button" id="btn-notify-cancel" class="btn btn-ghost">Cancel</button>
+      <button type="button" id="btn-notify-confirm" class="btn btn-primary">Send</button>
     </div>
   </div>
 </div>

@@ -126,5 +126,10 @@
         method: 'PUT',
         json: payload,
       }),
+    sendNotification: (payload) =>
+      request('/admin/notifications/send', {
+        method: 'POST',
+        json: payload,
+      }),
   };
 })(window);

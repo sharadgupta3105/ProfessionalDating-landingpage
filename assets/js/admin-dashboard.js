@@ -20,6 +20,7 @@
   const drawer = document.getElementById('user-drawer');
   const drawerBackdrop = document.getElementById('drawer-backdrop');
   const premiumModal = document.getElementById('premium-modal');
+  const notifyModal = document.getElementById('notify-modal');
   const promoToggle = document.getElementById('promo-enabled');
 
   function toast(msg) {
@@ -397,6 +398,16 @@
             <div><span class="text-stone-400">Age</span> · ${escapeHtml(u.age ?? '—')}</div>
             <div><span class="text-stone-400">Onboarded</span> · ${u.onboarding_complete ? 'Yes' : 'No'}</div>
             <div><span class="text-stone-400">LinkedIn</span> · ${u.linkedin_verified ? 'Verified' : 'No'}</div>
+            <div><span class="text-stone-400">Push token</span> · ${
+              u.has_push_token
+                ? `Yes${u.expo_push_token_saved_at ? ` · saved ${fmtDate(u.expo_push_token_saved_at)}` : ''}`
+                : 'No (won’t receive pushes)'
+            }</div>
+            ${
+              u.expo_push_token_preview
+                ? `<div class="text-xs text-stone-400 break-all">Token: ${escapeHtml(u.expo_push_token_preview)}</div>`
+                : ''
+            }
           </div>
           <div class="border-t border-stone-100 pt-4">
             <div class="font-semibold text-stone-800 mb-1">Subscription</div>
@@ -418,6 +429,9 @@
                 ? `<button type="button" class="btn btn-ghost" data-act="unban">Unban</button>`
                 : `<button type="button" class="btn btn-ghost" data-act="ban">Ban</button>`
             }
+            <button type="button" class="btn btn-primary" data-act="notify" ${
+              u.has_push_token ? '' : 'disabled title="No push token"'
+            }>Send notification</button>
           </div>
         </div>`;
     } catch (err) {
@@ -441,6 +455,36 @@
   function closePremiumModal() {
     premiumTargetId = null;
     premiumModal.classList.remove('open');
+  }
+
+  function openNotifyModal(id, label) {
+    document.getElementById('notify-modal-user-id').value = id || '';
+    document.getElementById('notify-modal-user').textContent = label || id || '';
+    document.getElementById('notify-modal-title-input').value = 'MatchedIn';
+    document.getElementById('notify-modal-body').value = '';
+    document.getElementById('notify-modal-screen').value = 'home';
+    notifyModal.classList.add('open');
+  }
+
+  function closeNotifyModal() {
+    notifyModal.classList.remove('open');
+  }
+
+  function syncNotifyAudienceFields() {
+    const audience = document.getElementById('notify-audience').value;
+    document.getElementById('notify-user-wrap').classList.toggle('hidden', audience !== 'user');
+    document.getElementById('notify-users-wrap').classList.toggle('hidden', audience !== 'users');
+  }
+
+  function parseUserIds(raw) {
+    return [
+      ...new Set(
+        String(raw || '')
+          .split(/[\s,;]+/)
+          .map((s) => s.trim())
+          .filter(Boolean),
+      ),
+    ];
   }
 
   async function loadReports() {
@@ -500,7 +544,7 @@
       api.setSession(data.token, data.admin);
       showDash();
       const hash = (location.hash || '').replace('#', '');
-      if (['overview', 'launch', 'users', 'pricing', 'safety'].includes(hash)) setTab(hash);
+      if (['overview', 'launch', 'users', 'notifications', 'pricing', 'safety'].includes(hash)) setTab(hash);
       await refreshAll();
       toast('Signed in');
     } catch (err) {
@@ -647,6 +691,10 @@
       openPremiumModal(id, label);
       return;
     }
+    if (act === 'notify') {
+      openNotifyModal(id, label);
+      return;
+    }
     if (act === 'revoke') {
       if (!window.confirm('Revoke Premium for this user?')) return;
       await api.revokePremium(id);
@@ -743,6 +791,92 @@
     }
   });
 
+  document.getElementById('notify-audience').addEventListener('change', syncNotifyAudienceFields);
+  syncNotifyAudienceFields();
+
+  document.getElementById('notify-body').addEventListener('input', () => {
+    document.getElementById('notify-body-count').textContent = String(
+      document.getElementById('notify-body').value.length,
+    );
+  });
+
+  document.getElementById('notify-form').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const audience = document.getElementById('notify-audience').value;
+    const title = document.getElementById('notify-title').value.trim();
+    const body = document.getElementById('notify-body').value.trim();
+    const screen = document.getElementById('notify-screen').value;
+    const resultEl = document.getElementById('notify-result');
+    const btn = document.getElementById('btn-send-notify');
+    const payload = { audience, title, body, screen };
+    if (audience === 'user') {
+      payload.userId = document.getElementById('notify-user-id').value.trim();
+      if (!payload.userId) {
+        toast('Enter a user ID');
+        return;
+      }
+    }
+    if (audience === 'users') {
+      payload.userIds = parseUserIds(document.getElementById('notify-user-ids').value);
+      if (!payload.userIds.length) {
+        toast('Enter at least one user ID');
+        return;
+      }
+    }
+    if (
+      ['all_push', 'premium', 'free', 'incomplete'].includes(audience) &&
+      !window.confirm(`Send this notification to the “${audience}” group?`)
+    ) {
+      return;
+    }
+    try {
+      btn.disabled = true;
+      resultEl.textContent = 'Sending…';
+      const data = await api.sendNotification(payload);
+      resultEl.textContent = `Sent ${data.sent || 0} · targeted ${data.targetedUsers || 0} users · ${
+        data.devicesQueued || 0
+      } devices`;
+      toast(data.hint || 'Notification queued');
+    } catch (err) {
+      resultEl.textContent = '';
+      toast(err.message || 'Send failed');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
+  document.getElementById('btn-notify-cancel').addEventListener('click', closeNotifyModal);
+  notifyModal.addEventListener('click', (e) => {
+    if (e.target === notifyModal) closeNotifyModal();
+  });
+  document.getElementById('btn-notify-confirm').addEventListener('click', async () => {
+    const userId = document.getElementById('notify-modal-user-id').value.trim();
+    const title = document.getElementById('notify-modal-title-input').value.trim();
+    const body = document.getElementById('notify-modal-body').value.trim();
+    const screen = document.getElementById('notify-modal-screen').value;
+    const btn = document.getElementById('btn-notify-confirm');
+    if (!userId || !title || !body) {
+      toast('Title and message are required');
+      return;
+    }
+    try {
+      btn.disabled = true;
+      const data = await api.sendNotification({
+        audience: 'user',
+        userId,
+        title,
+        body,
+        screen,
+      });
+      toast(`Sent (${data.sent || 0} device ticket${data.sent === 1 ? '' : 's'})`);
+      closeNotifyModal();
+    } catch (err) {
+      toast(err.message || 'Send failed');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+
   // Boot
   api
     .credentialsHint?.()
@@ -755,7 +889,9 @@
   if (api.getToken()) {
     showDash();
     const hash = (location.hash || '').replace('#', '');
-    if (['overview', 'launch', 'users', 'pricing', 'safety'].includes(hash)) setTab(hash);
+    if (['overview', 'launch', 'users', 'notifications', 'pricing', 'safety'].includes(hash)) {
+      setTab(hash);
+    }
     refreshAll().catch((e) => {
       toast(e.message || 'Session expired');
       api.clearSession();
